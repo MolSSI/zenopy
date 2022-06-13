@@ -74,3 +74,36 @@ status_code = {
     "notified and will be dealing with the problem ASAP.")
     },
 }
+
+class Error(object):
+    """A class for handling Zenodo error responses
+    
+    Attributes
+    ----------
+    response : dict
+        Error responses for 400 series errors (e.g. 400, 401, 403, ...)
+        are returned as a JSON object with two attributes 'message' and
+        'status' (HTTP status code), and possibly an attribute 'errors' 
+        with a list of more detailed errors.
+        See https://developers.zenodo.org/#errors
+    status : int
+        The HTTP status codes to indicate success or failure of a request.
+        See https://developers.zenodo.org/#http-status-codes
+    message : str
+        A human-readable explanation of the error.
+    errors : dict
+        The attribute 'errors', a JSON array of objects, each with the attributes
+        'message' (with a human-readable explanation of the error), and possibly 
+        'field' (with the “path” to field that contains the error).
+    """
+
+    def __init__(self, response: dict):
+        self._response = response
+
+    @property
+    def response(self):
+        return self._response
+
+    @response.setter
+    def response(self, value):
+        self._response = value
