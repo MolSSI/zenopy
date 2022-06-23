@@ -20,9 +20,14 @@ class Zenodo(object):
             if not Path(self._config_path).expanduser().exists():
                 logger.warning(
                     "Both token and config_path arguments are None.\n"
+                    f"The {self._config_path} does not exist.\n"
                     f"Creating a config_file in {self._config_path}."
                 )
                 self.create_config_file(self._config_path)
+            else:
+                logger.warning(
+                    f"The config file ({self._config_path}) is found."
+                )
         self._config_file = self.read_config_file(self._config_path)
         self._use_sandbox = use_sandbox
         if self._use_sandbox:
@@ -49,8 +54,22 @@ class Zenodo(object):
         self._token = token
     
     @property
-    def use_sandbox():
+    def use_sandbox(self):
         return self._use_sandbox
+    
+    @use_sandbox.setter
+    def use_sandbox(self, value):
+        self._use_sandbox = value
+
+    def update_config_file(self):
+        """Commits the current changes to the state of the 
+        self._config_file object to the config file located
+        at self._config_path
+        """
+        path = Path(self._config_path).expanduser()
+        if path.exists():
+            with open(path, 'w') as f:
+                self._config_file.write(f)
 
     def create_config_file(self, config_path=None):
         """Creates an empty config_file in file_path"""
@@ -86,7 +105,7 @@ class Zenodo(object):
 
     def list_sections(self):
         """List all sections in a config file"""
-        return [sec for sec, _ in self.config_file.items()]
+        return self.config_file.sections()
 
     def list_tokens(self, section=None):
         """List all tokens in a specific section"""
