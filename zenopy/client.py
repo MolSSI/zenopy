@@ -12,7 +12,6 @@ from xmlrpc.client import Boolean
 
 logger = logging.getLogger(__name__)
 
-
 class Zenodo(object):
     def __init__(
         self,

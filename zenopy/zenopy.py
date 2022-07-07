@@ -11,6 +11,9 @@ import logging
 from pathlib import Path
 import pprint
 import requests
+import datetime
+
+import errors
 
 logger = logging.getLogger(__name__)
 
@@ -26,7 +29,6 @@ upload_types = {
     "physicalobject": "Physical object",
     "other": "Other",
 }
-
 
 class Record(collections.abc.Mapping):
     """A class for handling uploading a record to Zenodo.
@@ -82,6 +84,17 @@ class Record(collections.abc.Mapping):
             return None
 
     @property
+    def created(self):
+        """UTC to ISO 8601 with TimeZone information in Python 3"""
+        return datetime.datetime.utcnow().replace(
+               tzinfo=datetime.timezone.utc
+               ).isoformat()
+
+    @created.setter
+    def created(self, value):
+        self.created = value
+
+    @property
     def creators(self):
         """The creators for the record."""
         if "creators" not in self.metadata:
@@ -109,6 +122,7 @@ class Record(collections.abc.Mapping):
 
     @description.setter
     def description(self, value):
+        """TODO: Check to see if it is empty before setting it"""
         self.metadata["description"] = value
 
     @property
@@ -116,8 +130,30 @@ class Record(collections.abc.Mapping):
         """The (prereserved) DOI."""
         if "doi" in self.data and self.data["doi"] != "":
             return self.data["doi"]
+        elif "doi" in self.data["metadata"] and self.data["metadata"]["doi"] != "":
+            return self.data["metadata"]["doi"]
         else:
             return self.data["metadata"]["prereserve_doi"]["doi"]
+    
+    @doi.setter
+    def doi(self, value):
+        if "doi" not in self.data and self.data["doi"] == "":
+            self.data["doi"] = value
+        elif "doi" not in self.data["metadata"] and self.data["metadata"]["doi"] == "":
+            self.data["metadata"]["doi"] = value
+        else:
+            self.data["metadata"]["prereserve_doi"]["doi"] = value
+
+    @property
+    def doi_url(self):
+        """Persistent link to the published deposition.
+        This field is only present for published depositions."""
+        if "doi_url" in self.data and self.data["doi_url"] != "":
+            return self.data["doi_url"]
+        elif "links" in self.data and self.data["links"]["doi"] != "":
+            return self.data["links"]["doi"]
+        else:
+            return 'https://doi.org/' + self.doi()
 
     @property
     def in_progress(self):
@@ -477,7 +513,7 @@ class Zenodo(object):
         path = Path(self.configfile).expanduser()
         if not path.exists:
             raise RuntimeError(
-                f"You need a {self.configurationfile} file to publish to Zenodo. "
+                f"You need a {self.configfile} file to publish to Zenodo. "
                 "See the documentation for more details."
             )
 
