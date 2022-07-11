@@ -23,9 +23,9 @@ class Zenodo(object):
         self._config_file_path = config_file_path
         self._use_sandbox = use_sandbox
         if self._use_sandbox:
-            self.base_url = "https://sandbox.zenodo.org/api"
+            self._base_url = "https://sandbox.zenodo.org/api"
         else:
-            self.base_url = "https://zenodo.org/api"
+            self._base_url = "https://zenodo.org/api"
         if self._token is None and (
             self._config_file_path is None or self._config_file_path == ""
         ):
