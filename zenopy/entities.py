@@ -1,10 +1,164 @@
-    def add_version(self, _id):
-        """Create a new record object for uploading a new version to Zenodo."""
-        headers = {
-            "Authorization": f"Bearer {self.token}",
+# -*- coding: utf-8 -*-
+
+"""Zenodo Entities
+
+"""
+
+import collections.abc
+import requests
+import logging
+from datetime import datetime, timezone
+
+from client import Zenodo
+import metadata
+
+logger = logging.getLogger(__name__)
+
+class Entity(Zenodo):
+    def __init__(self):
+        Zenodo.__init__(self)
+        self._data = {}
+        self._metadata = {}
+        self._headers = {
+            "Authorization": f"Bearer {self._token}",
             "Content-Type": "application/json",
         }
+        self._params = {}
+        self._params["access_token"] = self.token
 
+class Communities(Entity):
+    """Communities class offers APIs for searching 
+    the Zenodo communities."""
+    pass
+
+class Depositions(Entity):
+    """Deposit provides API for uploading and editing published outputs
+    on Zenodo as an alternative to the functionality provided by Zenodo's 
+    graphical user interface."""
+    def __init__(
+        self,
+        created: datetime = None,
+        doi: str = None,
+        doi_url: str = None,
+        files: list = None,
+        id_: int = None,
+        metadata: object = None,
+        modified: datetime = None,
+        owner: int = None,
+        record_url: str = None,
+        state: str = 'inprogress',
+        submitted: bool = False,
+        title: str = None
+    ) -> Deposit:
+        Entity.__init__(self)
+        self._base_deposit_url = self._base_url + "/deposit/depositions"
+        self._response = None
+
+        if created is None or created == "":
+            self._created = datetime.now(timezone.utc).isoformat()
+        self.doi = doi
+        self.doi_url = doi_url
+        self.files = files
+        self.id = id_
+        if metadata is None:
+
+        if modified is None or modified == "":
+            self._modified = datetime.now(timezone.utc).isoformat()
+        self.owner = owner
+        self.record_url = record_url
+        if state is in ["inprogress", "done", "error"]
+            self.state = state
+        else:
+            raise ValueError(
+                f"The given state ({state}) is not permitted.\n"
+                "The valid states are 'inprogress', 'done', 'error'."
+            )
+        self.submitted = submitted
+        self.title = title
+
+    def list_depositions(
+        self,
+        query: str = None,
+        status: str = "draft",
+        sort: str = "bestmatch",
+        page: int = 1,
+        size: int = 25,
+        all_versions: (int | bool) = False 
+    ) -> list:
+        """List all depositions available to the current user identified 
+        by the active authentication and match the query statement."""
+        payload = self._params.copy()
+        if query is not None or query != "":
+            tmp_params["q"] = query
+        else:
+            query = ""
+            
+        response = requests.get(self._base_deposit_url, params = tmp_params)
+        return response.json()
+
+class Files(Entity):
+    """Files provides APIs for (up|down)-loading the files."""
+    pass
+
+class Funders(Entity):
+    """Funders class offers APIs for searching research funders on 
+    Zenodo servers."""
+    pass
+
+class Grants(Entity):
+    """Grants class implements APIs for searching the Zenodo Grants"""
+    pass
+
+class Licenses(Entity):
+    """Licenses class provides APIs for searching licenses on Zenodo servers."""
+    pass
+
+class Record(collections.abc.MutableMapping, Entity):
+    """Zenodo Record mixin container class"""
+    def __init__(self, data: requests.models.Response = None):
+        Entity.__init__(self)
+        self.data = data
+        if self.data in None or self.data == {}:
+            logger.warning(
+                "WARNING: The initialized Record object is empty."
+            )
+
+    # Provide dict like access to the Record container (dictionary data)
+    def __getitem__(self, key: (int | slice)) -> dict:
+        """Allow access to data via indexing/slicing"""
+        return self.data[key]
+
+    def __setitem__(self, key: (int | slice), value) -> None:
+        """Manage assignments through indexing/slicing"""
+        self.data[key] = value
+
+    def __delitem__(self, key: (int | slice)) -> None:
+        """Deleting entri(es) from record data through indexing/slicing"""
+        del self.data[key]
+
+    def __iter__(self):
+        """Allow iteration over the object"""
+        return iter(self.data)
+
+    def __len__(self):
+        """The len() command"""
+        return len(self.data)
+
+    def __str__(self):
+        return pprint.pformat(self.data)
+
+class Records(Entity):
+    """Records class offers search capabilities for published records 
+    on Zenodo."""
+    def __init__(self, response: requests.models.Response = None):
+        Entity.__init__(self)
+
+        self._base_records_url = self._base_url + "/deposit/depositions"
+        if response is not None:
+            self._response = response.json()
+
+    def add_version(self, _id):
+        """Create a new record object for uploading a new version to Zenodo."""
         url = self.base_url + f"/deposit/depositions/{_id}/actions/newversion"
         response = requests.post(url, headers=headers)
 
@@ -32,17 +186,11 @@
 
     def create_record(self):
         """Create a new record object for uploading to Zenodo."""
-        headers = {
-            "Authorization": f"Bearer {self.token}",
-            "Content-Type": "application/json",
-        }
-
-        url = self.base_url + "/deposit/depositions"
-        response = requests.post(url, json={}, headers=headers)
+        response = requests.post(self._base_records_url, headers=self._headers)
 
         if response.status_code != 201:
             raise RuntimeError(
-                f"Error in create_record: code = {response.status_code}"
+                f"Error in create_record(): code = {response.status_code}"
                 f"\n\n{pprint.pformat(response.json())}"
             )
 
