@@ -45,6 +45,8 @@ class Zenodo(object):
 
     @property
     def config_obj(self) -> configparser.ConfigParser:
+        if self._config_obj is None:
+            return self.read_config_file(self._config_file_path)
         return self._config_obj
 
     @config_obj.setter
@@ -54,6 +56,10 @@ class Zenodo(object):
     @property
     def token(self) -> str:
         """Getter for the Zenodo class token attribute."""
+        if self._token is None or self._token == "":
+            section = "SANDBOX" if self._use_sandbox else "ZENODO"
+            # Fetch the first entry from ZENODO or SANDBOX sections
+            return self.list_tokens(section)[0][1]
         return self._token
 
     @token.setter
@@ -160,7 +166,8 @@ class Zenodo(object):
                 self._config_obj.set(section, key, token)
             else:
                 raise configparser.Error(
-                    f"The token ({key}) already exists in section [{section}]."
+                    f"The token ({key}) already exists in section [{section}].\n"
+                    "Set 'force_rewrite = True' if you want to overwrite the token."
                 )
         self._config_obj.set(section, key, token)
 
