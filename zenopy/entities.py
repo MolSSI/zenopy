@@ -4,13 +4,16 @@
 
 """
 
+from argparse import ArgumentError
 import collections.abc
 import requests
+import validators
 import logging
+import pprint
 from datetime import datetime, timezone
 
 from client import Zenodo
-import metadata
+# import metadata
 
 logger = logging.getLogger(__name__)
 
@@ -20,7 +23,7 @@ class Entity(Zenodo):
         self._data = {}
         self._metadata = {}
         self._headers = {
-            "Authorization": f"Bearer {self._token}",
+            "Authorization": f"Bearer {self.token}",
             "Content-Type": "application/json",
         }
         self._params = {}
@@ -49,7 +52,7 @@ class Depositions(Entity):
         state: str = 'inprogress',
         submitted: bool = False,
         title: str = None
-    ) -> Deposit:
+    ):
         Entity.__init__(self)
         self._base_deposit_url = self._base_url + "/deposit/depositions"
         self._response = None
@@ -60,13 +63,13 @@ class Depositions(Entity):
         self.doi_url = doi_url
         self.files = files
         self.id = id_
-        if metadata is None:
+        # if metadata is None:
 
         if modified is None or modified == "":
             self._modified = datetime.now(timezone.utc).isoformat()
         self.owner = owner
         self.record_url = record_url
-        if state is in ["inprogress", "done", "error"]
+        if state in ["inprogress", "done", "error"]:
             self.state = state
         else:
             raise ValueError(
@@ -96,8 +99,9 @@ class Depositions(Entity):
         response = requests.get(self._base_deposit_url, params = tmp_params)
         return response.json()
 
-class Files(Entity):
-    """Files provides APIs for (up|down)-loading the files."""
+class DepositionFiles(Entity):
+    """The Deposition file resource is used for uploading 
+    and editing files of a deposition on Zenodo."""
     pass
 
 class Funders(Entity):
@@ -115,12 +119,48 @@ class Licenses(Entity):
 
 class Record(collections.abc.MutableMapping, Entity):
     """Zenodo Record mixin container class"""
-    def __init__(self, data: requests.models.Response = None):
+    def __init__(self, id_: int = None, url: str = None, record: requests.models.Response = None):
         Entity.__init__(self)
-        self.data = data
-        if self.data in None or self.data == {}:
-            logger.warning(
-                "WARNING: The initialized Record object is empty."
+        if id_ is not None and isinstance(id_, int):
+            self.record_url = self._base_url + "/records/" + str(id_)
+            response = requests.get(self.record_url, params=self._params, headers=self._headers)
+            self.data = response.json() 
+        elif url is not None:
+            url = url.strip().rstrip("/")
+            is_valid = validators.url(url)
+            if is_valid:
+                self.record_url = url
+                response = requests.get(self.record_url, params=self._params, headers=self._headers)
+                self.data = response.json()
+            else:
+                raise ValueError(
+                    f"The provided URL ({url}) is invalid.\n"
+                    "Please enter a valid URL."
+                )
+        elif record is not None or record == {}:
+            if isinstance(record, Record):
+                self.data = record.data
+            elif isinstance(record, requests.models.Response):
+                self.data = record.json()
+            elif isinstance(record, dict):
+                self.data = record
+            else:
+                raise TypeError(
+                    f"The provided record type ({type(record)}) is invalid.\n"
+                    "Record type should be either \n"
+                    "(entities.Record | requests.models.Response | dict)."
+                )
+            if isinstance(self.data, list):
+                raise RuntimeError(
+                    "The provided data is a list of records. "
+                    "A single record must be provided."
+                )
+            key = "links" if "links" in self.data else "latest"
+            self.record_url = self.data[key]["self"]
+        else:
+            raise RuntimeError(
+                "Please provide a valid record URL, ID or object."
+
             )
 
     # Provide dict like access to the Record container (dictionary data)
@@ -147,12 +187,123 @@ class Record(collections.abc.MutableMapping, Entity):
     def __str__(self):
         return pprint.pformat(self.data)
 
+    @property
+    def created(self) -> str:
+        """Creation time of deposition (in ISO8601 format)."""
+        if "created" in self.data and self.data["created"] != "":
+            return self.data["created"]
+        else:
+            raise RuntimeError(
+                "The creation time of the record is not set."
+            )
+
+    @created.setter
+    def created(self, created: str = None):
+        """Setting the time of creation for the deposition/record."""
+        if created is not None and created != "":
+            if "created" in self.data and self.data["created"] != "":
+                logger.warning(
+                    "You are attempting to replace the creation time of the record."
+                )
+            self.data["created"] = created
+        else:
+            raise ValueError(
+                "The creation time for the record cannot be empty or None."
+            )
+
+    @property
+    def doi(self) -> str:
+        """Digital Object Identifier (DOI). When you publish your 
+        deposition, Zenodo registers a DOI in DataCite for your upload, 
+        unless you manually provided Zenodo with one. This field is only
+        present for published depositions."""
+        if "doi" in self.data and self.data["doi"] != "":
+            return self.data["doi"]
+        elif "doi" in self.data["metadata"] and self.data["metadata"]["doi"] != "":
+            return self.data["metadata"]["doi"]
+        else:
+            return self.data["metadata"]["prereserve_doi"]["doi"]
+    
+    @doi.setter
+    def doi(self, doi: str = None) -> None:
+        """Setting the Digital Object Identifier (DOI) in the 
+        record object."""
+        if doi is not None and doi != "":
+            self.data["doi"] = str(doi)
+            self.data["metadata"]["doi"] = str(doi)
+            self.data["metadata"]["prereserve_doi"]["doi"] = str(doi)
+        else:
+            raise ValueError(
+                "The DOI for the record cannot be empty or None."
+            )
+
+    @property
+    def doi_url(self):
+        """Persistent link to your published deposition. 
+        This field is only present for published depositions."""
+        if "doi_url" in self.data:
+            return self.data["doi_url"]
+        elif "links" in self.data and self.data["links"]["doi"] != "":
+            return self.data["links"]["doi"]
+        else:
+            return "https://doi.org/" + str(self.doi)
+    
+    @doi_url.setter
+    def doi_url(self, doi_url: str = None):
+        """Setting the Digital Object Identifier (DOI) URL in the 
+        record object."""
+        if doi_url is not None and doi_url != "":
+            self.data["doi_url"] = str(doi_url)
+            self.data["links"]["doi"] = str(doi_url)
+        else:
+            raise ValueError(
+                "The DOI URL for the record cannot be empty or None."
+            )
+
+    @property
+    def files(self) -> list:
+        """A list of deposition files resources."""
+        if "files" in self.data and self.data["files"] != []:
+            return self.data["files"]
+    
+    @property
+    def _id(self) -> int:
+        """Deposition identifier."""
+        if "id" in self.data and self.data["id"] != "":
+            return self.data["id"]
+        elif "record_id" in self.data and self.data["record_id"] != "":
+            return self.data["record_id"]
+        else:
+            raise RuntimeError(
+                "The (record-)id is not set or accessible."
+            )
+    
+    @_id.setter
+    def _id(self, idx: int = None) -> None:
+        if idx is not None and isinstance(idx, int):
+            self.data["id"] = int(idx)
+            self.data["record_id"] = int(idx)
+        else:
+            raise TypeError(
+                f"The record ID ({type(idx)}) is of invalid type."
+            )
+    
+    @property
+    def metadata(self) -> dict:
+        """A deposition metadata resource."""
+        if "metadata" in self.data and self.data["metadata"] != {}:
+            return self.data["metadata"]
+        else:
+            raise RuntimeError(
+                "The record metadata is not set or accessible."
+            )
+
+
 class Records(Entity):
     """Records class offers search capabilities for published records 
     on Zenodo."""
     def __init__(self, response: requests.models.Response = None):
         Entity.__init__(self)
-
         self._base_records_url = self._base_url + "/deposit/depositions"
         if response is not None:
             self._response = response.json()
