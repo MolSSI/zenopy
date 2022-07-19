@@ -8,7 +8,6 @@ import configparser
 import logging
 from pathlib import Path
 import pprint
-from xmlrpc.client import Boolean
 
 logger = logging.getLogger(__name__)
 
@@ -59,7 +58,7 @@ class Zenodo(object):
         if self._token is None or self._token == "":
             section = "SANDBOX" if self._use_sandbox else "ZENODO"
             # Fetch the first entry from ZENODO or SANDBOX sections
-            return self.list_tokens(section)[0][1]
+            self._token = self.list_tokens(section)[0][1]
         return self._token
 
     @token.setter
