@@ -4,6 +4,11 @@
 
 """
 
+import requests
+
+# For a more detailed version of the error codes see
+#     requests.codes.__dict__
+
 status_code = {
     200: {
     "name":"OK",
@@ -96,14 +101,17 @@ class Error(object):
         'message' (with a human-readable explanation of the error), and possibly 
         'field' (with the “path” to field that contains the error).
     """
-
-    def __init__(self, response: dict):
+    def __init__(self, response: requests.models.Response):
         self._response = response
+        self._status_code = status_code
 
     @property
     def response(self):
         return self._response
 
-    @response.setter
-    def response(self, value):
-        self._response = value
+    def raise_error(self, response: requests.models.Response = None):
+        if response is not None:
+            raise RuntimeError(
+                f"Error name and code: {self._status_code} - {self._status_code['name']}\n."
+                f"Description: {self._status_code['description']}."
+            )

@@ -4,7 +4,8 @@ A Python wrapper package for Zenodo API
 """
 
 # Add imports here
-from .zenopy import *
+import client
+import entities
 
 # Handle versioneer
 from ._version import get_versions
