@@ -12,25 +12,32 @@ import logging
 import pprint
 from datetime import datetime, timezone
 
-from client import Zenodo
 from entities.entity import Entity
 
 logger = logging.getLogger(__name__)
 
+
 class Record(collections.abc.MutableMapping, Entity):
     """Zenodo Record mixin container class"""
-    def __init__(self, id_: int = None, url: str = None, record: requests.models.Response = None):
+
+    def __init__(
+        self, id_: int = None, url: str = None, record: (requests.models.Response | dict) = None
+    ):
         Entity.__init__(self)
         if id_ is not None and isinstance(id_, int):
-            self.record_url = self._base_url + "/records/" + str(id_)
-            response = requests.get(self.record_url, params=self._params, headers=self._headers)
-            self.data = response.json() 
+            self._record_url = self._base_url + "/records/" + str(id_)
+            response = requests.get(
+                self._record_url, params=self._params, headers=self._headers
+            )
+            self.data = response.json()
         elif url is not None:
             url = url.strip().rstrip("/")
             is_valid = validators.url(url)
             if is_valid:
-                self.record_url = url
-                response = requests.get(self.record_url, params=self._params, headers=self._headers)
+                self._record_url = url
+                response = requests.get(
+                    self._record_url, params=self._params, headers=self._headers
+                )
                 self.data = response.json()
             else:
                 raise ValueError(
@@ -56,12 +63,9 @@ class Record(collections.abc.MutableMapping, Entity):
                     "A single record must be provided."
                 )
             key = "links" if "links" in self.data else "latest"
-            self.record_url = self.data[key]["self"]
+            self._record_url = self.data[key]["self"]
         else:
-            raise RuntimeError(
-                "Please provide a valid record URL, ID or object."
-
-            )
+            raise RuntimeError("Please provide a valid record URL, ID or object.")
 
     # Provide dict like access to the Record container (dictionary data)
     def __getitem__(self, key: (int | slice)) -> dict:
@@ -93,9 +97,7 @@ class Record(collections.abc.MutableMapping, Entity):
         if "created" in self.data and self.data["created"] != "":
             return self.data["created"]
         else:
-            raise RuntimeError(
-                "The creation time of the record is not set."
-            )
+            raise RuntimeError("The creation time of the record is not set.")
 
     @created.setter
     def created(self, created: str = None):
@@ -113,8 +115,8 @@ class Record(collections.abc.MutableMapping, Entity):
 
     @property
     def doi(self) -> str:
-        """Digital Object Identifier (DOI). When you publish your 
-        deposition, Zenodo registers a DOI in DataCite for your upload, 
+        """Digital Object Identifier (DOI). When you publish your
+        deposition, Zenodo registers a DOI in DataCite for your upload,
         unless you manually provided Zenodo with one. This field is only
         present for published depositions."""
         if "doi" in self.data and self.data["doi"] != "":
@@ -123,23 +125,21 @@ class Record(collections.abc.MutableMapping, Entity):
             return self.data["metadata"]["doi"]
         else:
             return self.data["metadata"]["prereserve_doi"]["doi"]
-    
+
     @doi.setter
     def doi(self, doi: str = None) -> None:
-        """Setting the Digital Object Identifier (DOI) in the 
+        """Setting the Digital Object Identifier (DOI) in the
         record object."""
         if doi is not None and doi != "":
             self.data["doi"] = str(doi)
             self.data["metadata"]["doi"] = str(doi)
             self.data["metadata"]["prereserve_doi"]["doi"] = str(doi)
         else:
-            raise ValueError(
-                "The DOI for the record cannot be empty or None."
-            )
+            raise ValueError("The DOI for the record cannot be empty or None.")
 
     @property
     def doi_url(self):
-        """Persistent link to your published deposition. 
+        """Persistent link to your published deposition.
         This field is only present for published depositions."""
         if "doi_url" in self.data:
             return self.data["doi_url"]
@@ -147,25 +147,23 @@ class Record(collections.abc.MutableMapping, Entity):
             return self.data["links"]["doi"]
         else:
             return "https://doi.org/" + str(self.doi)
-    
+
     @doi_url.setter
     def doi_url(self, doi_url: str = None):
-        """Setting the Digital Object Identifier (DOI) URL in the 
+        """Setting the Digital Object Identifier (DOI) URL in the
         record object."""
         if doi_url is not None and doi_url != "":
             self.data["doi_url"] = str(doi_url)
             self.data["links"]["doi"] = str(doi_url)
         else:
-            raise ValueError(
-                "The DOI URL for the record cannot be empty or None."
-            )
+            raise ValueError("The DOI URL for the record cannot be empty or None.")
 
     @property
     def files(self) -> list:
         """A list of deposition files resources."""
         if "files" in self.data and self.data["files"] != []:
             return self.data["files"]
-    
+
     @property
     def _id(self) -> int:
         """Deposition identifier."""
@@ -174,29 +172,23 @@ class Record(collections.abc.MutableMapping, Entity):
         elif "record_id" in self.data and self.data["record_id"] != "":
             return self.data["record_id"]
         else:
-            raise RuntimeError(
-                "The (record-)id is not set or accessible."
-            )
-    
+            raise RuntimeError("The (record-)id is not set or accessible.")
+
     @_id.setter
     def _id(self, idx: int = None) -> None:
         if idx is not None and isinstance(idx, int):
             self.data["id"] = int(idx)
             self.data["record_id"] = int(idx)
         else:
-            raise TypeError(
-                f"The record ID ({type(idx)}) is of invalid type."
-            )
-    
+            raise TypeError(f"The record ID ({type(idx)}) is of invalid type.")
+
     @property
     def metadata(self) -> dict:
         """A deposition metadata resource."""
         if "metadata" in self.data and self.data["metadata"] != {}:
             return self.data["metadata"]
         else:
-            raise RuntimeError(
-                "The record metadata is not set or accessible."
-            )
+            raise RuntimeError("The record metadata is not set or accessible.")
 
     @property
     def modified(self) -> str:
@@ -216,12 +208,17 @@ class Record(collections.abc.MutableMapping, Entity):
         """Setting the last modification time of the deposition/record."""
         if date_modified is not None and date_modified != "":
             if "modified" in self.data and self.data["modified"] != "":
-            self.data["modified"] = date_modified
+                self.data["modified"] = date_modified
+            else:
+                raise RuntimeError(
+                    "The modification time of the deposition/record is not set or "
+                    "accessible (unknown)."
+                )
         else:
             raise ValueError(
                 "The modification time for the record cannot be empty or None."
             )
-    
+
     @property
     def owner(self) -> (int | list[int]):
         """User identifier(s) of the owner(s) of the deposition."""
@@ -234,7 +231,7 @@ class Record(collections.abc.MutableMapping, Entity):
                 "The owner of the deposition/record is not set or "
                 "accessible (unknown)."
             )
-    
+
     @owner.setter
     def owner(self, owner_id: (int | list[int])) -> None:
         """User identifier(s) of the owner(s) of the deposition."""
@@ -263,31 +260,39 @@ class Record(collections.abc.MutableMapping, Entity):
 
         if "metadata" in self.data:
             if "prereserve_doi" in self.data["metadata"]:
-                if "recid" in self.data["metadata"]["prereserve_doi"] and self.data["metadata"]["prereserve_doi"]["recid"] != "":
+                if (
+                    "recid" in self.data["metadata"]["prereserve_doi"]
+                    and self.data["metadata"]["prereserve_doi"]["recid"] != ""
+                ):
                     return self.data["metadata"]["prereserve_doi"]["recid"]
         else:
-            raise RuntimeError(
-                "The deposition/record identifier is unknown."
-            )
+            raise RuntimeError("The deposition/record identifier is unknown.")
 
     @property
     def record_url(self):
-        """URL to public version of record for this deposition. This field is 
+        """URL to public version of record for this deposition. This field is
         only present for published depositions."""
         if "record_url" in self.data and self.data["record_url"] != "":
             return self.data["record_url"]
         elif "links" in self.data and self.data["links"] != "":
-            for key in ["self", "record", "record_html", "html", "latest", "latest_html"]:
+            for key in [
+                "record",
+                "record_html",
+                "html",
+                "latest",
+                "latest_html",
+                "self",
+            ]:
                 if key in self.data["links"] and self.data["links"][key] != "":
                     return self.data["links"][key]
         else:
             raise RuntimeError(
-            "The deposition/record URL is not accessible or unknown."
+                "The deposition/record URL is not accessible or unknown."
             )
 
     @property
     def state(self) -> str:
-        """Zenodo publication state, either: (i) inprogress, 
+        """Zenodo publication state, either: (i) inprogress,
         (ii) done or (iii) error."""
         if "state" in self.data and self.data["state"] != "":
             if self.data["state"] in ["inprogress", "done"]:
@@ -306,6 +311,17 @@ class Record(collections.abc.MutableMapping, Entity):
                 "The state of the deposition is not set, accessible or known."
             )
 
+    @property
+    def submitted(self) -> bool:
+        """A boolean value for submission state of the deposition:
+        True if deposition has been published, False otherwise."""
+        if "submitted" in self.data and self.data["submitted"] != "":
+            return self.data["submitted"]
+        else:
+            raise RuntimeError(
+                "The submission state of the deposition is not set, "
+                "accessible or known."
+            )
 
     @property
     def title(self) -> str:
@@ -314,12 +330,13 @@ class Record(collections.abc.MutableMapping, Entity):
         if "title" in self.data and self.data["title"] != "":
             return self.data["title"]
         elif "metadata" in self.data:
-            if "title" in self.data["metadata"] and self.data["metadata"]["title"] != "":
+            if (
+                "title" in self.data["metadata"]
+                and self.data["metadata"]["title"] != ""
+            ):
                 return self.data["metadata"]["title"]
         else:
-            raise RuntimeError(
-                "The deposition title is not set, accessible or known."
-            )
+            raise RuntimeError("The deposition title is not set, accessible or known.")
 
     @title.setter
     def title(self, title: str = "") -> None:
