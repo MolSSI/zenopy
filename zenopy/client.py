@@ -37,9 +37,11 @@ class Zenodo(object):
                 )
                 self.create_config_file(self._config_file_path)
             else:
-                logger.warning(
-                    f"WARNING: The config file ({self._config_file_path}) is found."
-                )
+                # if self.__class__.__name__ in ["Zenodo", "Entity"]:
+                if not issubclass(self.__class__, __class__):
+                    logger.warning(
+                        f"WARNING: The config file ({self._config_file_path}) is found."
+                    )
         self._config_obj = self.read_config_file(self._config_file_path)
 
     @property
