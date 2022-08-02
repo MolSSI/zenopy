@@ -30,14 +30,15 @@ class Zenodo(object):
         ):
             self._config_file_path = "~/.zenodorc"
             if not Path(self._config_file_path).expanduser().exists():
-                logger.warning(
-                    "WARNING: Both token and config_file_path arguments are None.\n"
-                    f"The {self._config_file_path} does not exist.\n"
-                    f"Creating a config_file in {self._config_file_path}."
-                )
+                # Print the warning only from Zenodo class
+                if not issubclass(self.__class__, __class__):
+                    logger.warning(
+                        "WARNING: Both token and config_file_path arguments are None.\n"
+                        f"The {self._config_file_path} does not exist.\n"
+                        f"Creating a config_file in {self._config_file_path}."
+                    )
                 self.create_config_file(self._config_file_path)
             else:
-                # if self.__class__.__name__ in ["Zenodo", "Entity"]:
                 if not issubclass(self.__class__, __class__):
                     logger.warning(
                         f"WARNING: The config file ({self._config_file_path}) is found."
