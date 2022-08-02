@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-"""HTTP Status Codes
+"""HTTP status codes
 
 """
 
