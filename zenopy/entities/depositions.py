@@ -22,7 +22,6 @@ from utils import disable_method
 
 deposition_form = {}
 
-
 class Depositions(Entity):
     """Deposit provides API for uploading and editing published outputs
     on Zenodo as an alternative to the functionality provided by Zenodo's
@@ -30,7 +29,7 @@ class Depositions(Entity):
 
     def __init__(self):
         Entity.__init__(self)
-        self._deposits_url = self._base_url + "/deposit/depositions"
+        self._deposits_url = self._base_url + "/deposit/depositions/"
         self.data = {}
 
     def create_config_file(self, config_file_path: str = None) -> None:
@@ -43,19 +42,19 @@ class Depositions(Entity):
         # r = requests.post(url=url, json={}, params=params)
         # r = requests.post(url=url, json={}, params=params, headers=headers)
         # r = requests.post(url=url, data="{}", params=params, headers=headers)
-        response = requests.post(url=self._deposits_url, json={}, params=self._params)
-
+        tmp_url = self._deposits_url.strip().rstrip("/")
+        response = requests.post(url=tmp_url, json={}, params=self._params)
         status_code = response.status_code
         if status_code != 201:
             zenodo_error(status_code)
-
         return Record(record=response)
 
     def delete_deposition(self, id_: int = None, url: str = None) -> None:
         """Delete an existing deposition resource.
         Note: only unpublished depositions may be deleted."""
         if id_ is not None and isinstance(id_, int):
-            tmp_url = self._deposits_url + "/" + str(id_)
+            # TODO: Take care of the url parsing with urllib.parse module
+            tmp_url = self._deposits_url + str(id_)
             response = requests.delete(url=tmp_url, params=self._params)
         elif url is not None:
             url = url.strip().rstrip("/")
@@ -121,6 +120,10 @@ class Depositions(Entity):
 
         response = requests.get(self._base_deposit_url, params=tmp_params)
         return response.json()
+
+    def retrieve_deposition(self, id_: int = None) -> Record:
+        """Retrieve a single deposition resource."""
+        return Record(id_= id_, url = None, record = None)
 
     def update_deposition(
         self,

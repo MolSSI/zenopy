@@ -3,6 +3,7 @@
 """Zenodo Records class.
 
 """
+from entities import entity
 
 class Records(Entity):
     """Records class offers search capabilities for published records 
