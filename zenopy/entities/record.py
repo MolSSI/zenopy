@@ -25,7 +25,10 @@ class Record(collections.abc.MutableMapping, Entity):
     ):
         Entity.__init__(self)
         if id_ is not None and isinstance(id_, int):
-            self._record_url = self._base_url + "/records/" + str(id_)
+            if self.__class__.__name__ == "Depositions":
+                self._record_url = self._base_url + "/deposit/depositions/" + str(id_)
+            else: # if self.__class__.__name__ == "Records":
+                self._record_url = self._base_url + "/records/" + str(id_)
             response = requests.get(
                 self._record_url, params=self._params, headers=self._headers
             )
