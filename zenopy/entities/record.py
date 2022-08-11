@@ -12,18 +12,14 @@ import logging
 import pprint
 from datetime import datetime, timezone
 
-from entities.entity import Entity
-
 logger = logging.getLogger(__name__)
 
-
-class Record(collections.abc.MutableMapping, Entity):
+class Record(collections.abc.MutableMapping):
     """Zenodo Record mixin container class"""
 
     def __init__(
         self, id_: int = None, url: str = None, record: (requests.models.Response | dict) = None
     ):
-        Entity.__init__(self)
         if id_ is not None and isinstance(id_, int):
             if self.__class__.__name__ == "Depositions":
                 self._record_url = self._base_url + "/deposit/depositions/" + str(id_)

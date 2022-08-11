@@ -14,7 +14,6 @@ import validators
 from datetime import datetime, timezone
 
 import entities
-from entities.entity import Entity
 from entities.record import Record
 from errors import zenodo_error
 
@@ -22,14 +21,14 @@ from utils import disable_method
 
 deposition_form = {}
 
-class Depositions(Entity):
+class _Depositions(object):
     """Deposit provides API for uploading and editing published outputs
     on Zenodo as an alternative to the functionality provided by Zenodo's
     graphical user interface."""
-
-    def __init__(self):
-        Entity.__init__(self)
-        self._deposits_url = self._base_url + "/deposit/depositions/"
+    def __init__(self, parent):
+        self._parent = parent
+        self._params = self._parent._params
+        self._deposits_url = self._parent._base_url + "/deposit/depositions/"
         self.data = {}
 
     def create_config_file(self, config_file_path: str = None) -> None:
@@ -117,7 +116,6 @@ class Depositions(Entity):
             tmp_params["q"] = query
         else:
             query = ""
-
         response = requests.get(self._base_deposit_url, params=tmp_params)
         return response.json()
 

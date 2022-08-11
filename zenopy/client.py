@@ -9,6 +9,8 @@ import logging
 from pathlib import Path
 import pprint
 
+from entities.depositions import _Depositions
+
 logger = logging.getLogger(__name__)
 
 class Zenodo(object):
@@ -30,20 +32,18 @@ class Zenodo(object):
         ):
             self._config_file_path = "~/.zenodorc"
             if not Path(self._config_file_path).expanduser().exists():
-                # Print the warning only from Zenodo class
-                if not issubclass(self.__class__, __class__):
-                    logger.warning(
-                        "WARNING: Both token and config_file_path arguments are None.\n"
-                        f"The {self._config_file_path} does not exist.\n"
-                        f"Creating a config_file in {self._config_file_path}."
-                    )
                 self.create_config_file(self._config_file_path)
             else:
-                if not issubclass(self.__class__, __class__):
-                    logger.warning(
-                        f"WARNING: The config file ({self._config_file_path}) is found."
-                    )
+                logger.warning(
+                    f"WARNING: The config file ({self._config_file_path}) is found."
+                )
         self._config_obj = self.read_config_file(self._config_file_path)
+        self._headers = {
+            "Authorization": f"Bearer {self.token}",
+            "Content-Type": "application/json",
+        }
+        self._params = {}
+        self._params["access_token"] = self.token
 
     @property
     def config_obj(self) -> configparser.ConfigParser:
@@ -77,18 +77,6 @@ class Zenodo(object):
     def use_sandbox(self, value) -> None:
         self._use_sandbox = value
 
-    def update_config_file(self) -> None:
-        """Commits the current changes to the state of the
-        self._config_obj object to the config file located
-        at self._config_file_path
-        """
-        path = Path(self._config_file_path).expanduser()
-        if path.exists():
-            with open(path, "w") as f:
-                self._config_obj.write(f)
-        else:
-            raise configparser.Error(f"No config file exists in '{path}'.")
-
     def create_config_file(self, config_file_path: str = None) -> None:
         """Creates an empty config_file in file_path"""
         if config_file_path is None or config_file_path == "":
@@ -107,6 +95,27 @@ class Zenodo(object):
                 config_obj.write(f)
         else:
             raise configparser.Error(f"A config file already exists in '{path}'.")
+
+    def init_deposition(self):
+        """Calls Deposition class' create_deposition()"""
+        return _Depositions(self)
+
+    def list_sections(self):
+        """List all sections in a config file"""
+        return self._config_obj.sections()
+
+    def list_tokens(self, section: str = None) -> list[tuple[str, str]]:
+        """List all tokens in a specific section"""
+        if section is None:
+            raise configparser.NoSectionError(
+                f"A section name is needed as an argument."
+            )
+        section = section.upper()
+        if section not in self._config_obj.sections():
+            raise configparser.NoSectionError(
+                f"Section [{section}] does not exist in {self._config_file_path}."
+            )
+        return list(self._config_obj[section].items())
 
     def read_config_file(
         self, config_file_path: str = None
@@ -127,22 +136,24 @@ class Zenodo(object):
         config_obj.read(path)
         return config_obj
 
-    def list_sections(self):
-        """List all sections in a config file"""
-        return self._config_obj.sections()
-
-    def list_tokens(self, section: str = None) -> list[tuple[str, str]]:
-        """List all tokens in a specific section"""
-        if section is None:
-            raise configparser.NoSectionError(
-                f"A section name is needed as an argument."
-            )
+    def read_token(self, section: str = None, key: str = None) -> str:
+        """Reading a specific token from a selected section."""
+        # Raises the configparser.NoSectionError/NoOptionError
+        # if the section/key does not exist in the config_file
         section = section.upper()
-        if section not in self._config_obj.sections():
-            raise configparser.NoSectionError(
-                f"Section [{section}] does not exist in {self._config_file_path}."
-            )
-        return list(self._config_obj[section].items())
+        return self._config_obj.get(section, key)
+
+    def update_config_file(self) -> None:
+        """Commits the current changes to the state of the
+        self._config_obj object to the config file located
+        at self._config_file_path
+        """
+        path = Path(self._config_file_path).expanduser()
+        if path.exists():
+            with open(path, "w") as f:
+                self._config_obj.write(f)
+        else:
+            raise configparser.Error(f"No config file exists in '{path}'.")
 
     def write_token(
         self,
@@ -172,10 +183,3 @@ class Zenodo(object):
                     "Set 'force_rewrite = True' if you want to overwrite the token."
                 )
         self._config_obj.set(section, key, token)
-
-    def read_token(self, section: str = None, key: str = None) -> str:
-        """Reading a specific token from a selected section."""
-        # Raises the configparser.NoSectionError/NoOptionError
-        # if the section/key does not exist in the config_file
-        section = section.upper()
-        return self._config_obj.get(section, key)
