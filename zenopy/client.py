@@ -10,6 +10,7 @@ from pathlib import Path
 import pprint
 
 from entities.depositions import _Depositions
+from entities.records import _Records
 
 logger = logging.getLogger(__name__)
 
@@ -99,6 +100,10 @@ class Zenodo(object):
     def init_deposition(self):
         """Calls Deposition class' create_deposition()"""
         return _Depositions(self)
+    
+    def init_records(self):
+        """Calls Deposition class' create_deposition()"""
+        return _Records(self)
 
     def list_sections(self):
         """List all sections in a config file"""
