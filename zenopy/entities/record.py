@@ -10,6 +10,7 @@ import requests
 import validators
 import logging
 import pprint
+import inspect
 from datetime import datetime, timezone
 
 logger = logging.getLogger(__name__)
@@ -18,12 +19,16 @@ class Record(collections.abc.MutableMapping):
     """Zenodo Record mixin container class"""
 
     def __init__(
-        self, id_: int = None, url: str = None, record: (requests.models.Response | dict) = None
+        self, client, id_: int = None, url: str = None, record: (requests.models.Response | dict) = None
     ):
+        self._base_url = client._base_url
+        self._headers = client._headers
+        self._params = client._params
         if id_ is not None and isinstance(id_, int):
-            if self.__class__.__name__ == "Depositions":
+            caller_class_name = str(inspect.currentframe().f_back.f_locals["self"])
+            if "_Depositions" in caller_class_name:
                 self._record_url = self._base_url + "/deposit/depositions/" + str(id_)
-            else: # if self.__class__.__name__ == "Records":
+            else: # "_Records" (or anything else) in caller_class_name:
                 self._record_url = self._base_url + "/records/" + str(id_)
             response = requests.get(
                 self._record_url, params=self._params, headers=self._headers
