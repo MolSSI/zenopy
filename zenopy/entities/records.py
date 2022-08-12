@@ -3,14 +3,17 @@
 """Zenodo Records class.
 
 """
-from entities import entity
 
-class Records(Entity):
+import requests
+
+class _Records():
     """Records class offers search capabilities for published records 
     on Zenodo."""
-    def __init__(self, response: requests.models.Response = None):
-        Entity.__init__(self)
-        self._base_records_url = self._base_url + "/deposit/depositions"
+    def __init__(self, client, response: requests.models.Response = None):
+        self._client = client
+        self._base_records_url = self._client._base_url + "/deposit/depositions"
+        self._headers = self._client._headers
+        self._params = self._client._params
         if response is not None:
             self._response = response.json()
 
