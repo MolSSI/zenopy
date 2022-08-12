@@ -25,10 +25,10 @@ class _Depositions(object):
     """Deposit provides API for uploading and editing published outputs
     on Zenodo as an alternative to the functionality provided by Zenodo's
     graphical user interface."""
-    def __init__(self, parent):
-        self._parent = parent
-        self._params = self._parent._params
-        self._deposits_url = self._parent._base_url + "/deposit/depositions/"
+    def __init__(self, client):
+        self._client = client
+        self._params = client._params
+        self._deposits_url = client._base_url + "/deposit/depositions/"
         self.data = {}
 
     def create_config_file(self, config_file_path: str = None) -> None:
@@ -46,7 +46,7 @@ class _Depositions(object):
         status_code = response.status_code
         if status_code != 201:
             zenodo_error(status_code)
-        return Record(record=response)
+        return Record(self._client, record=response)
 
     def delete_deposition(self, id_: int = None, url: str = None) -> None:
         """Delete an existing deposition resource.
@@ -102,7 +102,7 @@ class _Depositions(object):
 
     def list_depositions(
         self,
-        query: str = None,
+        query: (str | dict) = None,
         status: str = "draft",
         sort: str = "bestmatch",
         page: int = 1,
@@ -111,17 +111,80 @@ class _Depositions(object):
     ) -> list:
         """List all depositions available to the current user identified
         by the active authentication and match the query statement."""
-        payload = self._params.copy()
+        tmp_params = self._params.copy()
         if query is not None or query != "":
             tmp_params["q"] = query
         else:
             query = ""
-        response = requests.get(self._base_deposit_url, params=tmp_params)
-        return response.json()
+        if status is not None:
+            if status in ["draft", "published"]:
+                tmp_params["status"] = status
+            else:
+                raise ValueError(
+                    f"Invalid status argument value ({status}).\n"
+                    "The status argument can either be 'draft' or 'published.\n"
+                )
+        else:
+            logger.warning(
+                "The value of status argument is None.\n"
+                "ZenoPy will only list the published records."
+            )
+            status = "published"
+            tmp_params["status"] = status
+        if sort is not None:
+            if sort in ["bestmatch", "mostrecent", "-mostrecent"]:
+                tmp_params["status"] = status
+            else:
+                raise ValueError(
+                    f"Invalid sort argument value ({sort}).\n"
+                    "The sort argument can either be 'bestmatch', "
+                    "'mostrecent' (ascending), '-mostrecent' (descending)."
+                )
+        else:
+            logger.warning(
+                "The value of sort argument is None.\n"
+                "ZenoPy will prioritize the best matching records."
+            )
+            sort = "bestmatch"
+            tmp_params["sort"] = sort
+        if page is not None and isinstance(page, int):
+            tmp_params["page"] = page
+        else:
+            logger.warning(
+                "ZenoPy will use pagination of 25 for this search "
+                "because the 'page' argument used is either None or not an integer."
+            )
+            page = 25
+            tmp_params["page"] = page
+        if size is not None and isinstance(size, int):
+            tmp_params["size"] = size
+        else:
+            raise TypeError(
+                "ZenoPy will return 1 search result in this case "
+                "because the 'size' argument used is either None or not an integer."
+            )
+        if all_versions is not None and all_versions in [0, 1, False, True]:
+            tmp_params["all_versions"] = all_versions
+        else:
+            logger.warning(
+                "ZenoPy will return the latest version for this search "
+                "because the 'all_version' argument used is either None or "
+                "not a binary integer or boolean."
+            )
+        tmp_url = self._deposits_url.strip().rstrip("/")
+        response = requests.get(url=tmp_url, params=tmp_params)
+        search_result = response.json()
+        records_list = []
+        if isinstance(search_result, list):
+            for record in search_result:
+                records_list.append(Record(self._client, record=record))
+            return records_list
+        else:
+            return search_result
 
     def retrieve_deposition(self, id_: int = None) -> Record:
         """Retrieve a single deposition resource."""
-        return Record(id_= id_, url = None, record = None)
+        return Record(self._client, id_= id_, url = None, record = None)
 
     def update_deposition(
         self,
