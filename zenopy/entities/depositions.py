@@ -4,22 +4,26 @@
 
 """
 
+from distutils.command.upload import upload
+from multiprocessing.sharedctypes import Value
+import inspect
+from os import access
+from typing import Type
+import requests
+import validators
+import pprint
+import json
+from datetime import datetime, timezone
+from entities.record import Record
+from entities.metadata import ( 
+    upload_types, publication_types, image_types, creators_metadata,
+    access_rights,
+    )
+from errors import zenodo_error
+from utils import disable_method
 import logging
 
 logger = logging.getLogger(__name__)
-
-import requests
-import pprint
-import validators
-from datetime import datetime, timezone
-
-import entities
-from entities.record import Record
-from errors import zenodo_error
-
-from utils import disable_method
-
-deposition_form = {}
 
 class _Depositions(object):
     """Deposit provides API for uploading and editing published outputs
@@ -67,7 +71,7 @@ class _Depositions(object):
                     "Please enter a valid URL."
                 )
         else:
-            raise RuntimeError("Please provide a valid record URL, ID or object.")
+            raise RuntimeError("Please provide a valid record URL or ID.")
         status_code = response.status_code
         if status_code in [201, 204]:
             logger.warning(
@@ -108,10 +112,11 @@ class _Depositions(object):
         page: int = 1,
         size: int = 25,
         all_versions: (int | bool) = False,
-    ) -> list:
+    ) -> list[Record]:
         """List all depositions available to the current user identified
         by the active authentication and match the query statement."""
         tmp_params = self._params.copy()
+        # for how to search, see https://help.zenodo.org/guides/search/
         if query is not None or query != "":
             tmp_params["q"] = query
         else:
@@ -122,7 +127,7 @@ class _Depositions(object):
             else:
                 raise ValueError(
                     f"Invalid status argument value ({status}).\n"
-                    "The status argument can either be 'draft' or 'published.\n"
+                    "The status argument can either be 'draft' or 'published'."
                 )
         else:
             logger.warning(
@@ -173,6 +178,9 @@ class _Depositions(object):
             )
         tmp_url = self._deposits_url.strip().rstrip("/")
         response = requests.get(url=tmp_url, params=tmp_params)
+        status_code = response.status_code
+        if status_code != 200:
+            zenodo_error(status_code)
         search_result = response.json()
         records_list = []
         if isinstance(search_result, list):
@@ -188,39 +196,156 @@ class _Depositions(object):
 
     def update_deposition(
         self,
-        created: datetime = None,
-        doi: str = None,
-        doi_url: str = None,
-        files: list = None,
         id_: int = None,
-        metadata: dict = None,
-        modified: datetime = None,
-        owner: int = None,
-        record_url: str = None,
-        state: str = "unsubmitted",
-        submitted: bool = False,
+        url: str = None,
+        upload_type: str = None,
+        publication_type: str = None,
+        image_type: str = None,
+        publication_date: str = None,
         title: str = None,
-    ) -> None:
-        """Update an existing deposition resource."""
-        if created is None or created == "":
-            self.data["created"] = datetime.now(timezone.utc).isoformat()
-        self.data["doi"] = doi
-        self.data["doi_url"] = doi_url
-        self.data["files"] = files
-        self.data["id"] = id_
-        if metadata is None:
-            self.data["metadata"] = {}
-            self.data["metadata"]["title"] = title
-        if modified is None or modified == "":
-            self.data["modified"] = datetime.now(timezone.utc).isoformat()
-        self.data["owner"] = owner
-        self.data["record_url"] = record_url
-        if state in ["unsubmitted", "inprogress", "done", "error"]:
-            self.data["state"] = state
+        creators: list[dict] = None,
+        description: str = None,
+        access_right: str = "None",
+        license: str = None,
+        embargo_date: str = None,
+        access_conditions: str = None
+    ) -> Record:
+        """Update an existing deposition resource (deposition metadata)"""
+        tmp_params = self._params.copy()
+        tmp_metadata = {}
+        if id_ is not None and isinstance(id_, int):
+            deposit = self.retrieve_deposition(id_=id_)
+            if url is None or url == "":
+                tmp_url = deposit.record_url
+        elif url is not None:
+            url = url.strip().rstrip("/")
+            is_valid = validators.url(url)
+            is_valid = url.startswith(self._deposits_url)
+            if is_valid:
+                tmp_url = url
+                # Check to see if a given URL does actually exist
+                deposit = Record(self._client, url=tmp_url)
+            else:
+                raise ValueError(
+                    f"The provided URL ({url}) is invalid.\n"
+                    "Please enter a valid URL."
+                )
         else:
+            raise ValueError("Please provide a valid record URL or ID.")
+        # Retrieve the existing metadata to update
+        data = deposit.data
+        if data["metadata"] != {}:
+            tmp_metadata = data["metadata"].copy()
+
+        if upload_type not in upload_types.keys():
             raise ValueError(
-                f"The given state ({state}) is not permitted.\n"
-                "The valid states are 'unsubmitted', 'inprogress', 'done', or 'error'."
+                "The 'upload_type' value can take one of the following values:\n"
+                f"{json.dumps(list(upload_types.keys()), indent=4)}"
             )
-        self.data["submitted"] = submitted
-        self.data["title"] = title
+        else:
+            tmp_metadata["upload_type"] = upload_type
+            if upload_type == "publication":
+                if publication_type is not None or publication_type != "":
+                    if publication_type in publication_types.keys():
+                        tmp_metadata["publication_type"] = publication_type
+                    else:
+                        raise ValueError(
+                            "The 'publication_type' value can take one of the following values:\n"
+                            f"{json.dumps(list(publication_types.keys()), indent=4)}"
+                        )
+                else:
+                    raise ValueError(
+                        "The 'publication_type' argument cannot be None or empty."
+                    )
+            elif upload_type == "image":
+                if image_type is not None or image_type != "":
+                    if image_type in image_types.keys():
+                        tmp_metadata["image_type"] = image_type
+                    else:
+                        raise ValueError(
+                            "The 'image_type' value can take one of the following values:\n"
+                            f"{json.dumps(list(image_types.keys()), indent=4)}"
+                        )
+                else:
+                    raise ValueError(
+                        "The 'image_type' argument cannot be None or empty."
+                    )
+            
+            if publication_date is not None or publication_date != "":
+                tmp_metadata["publication_date"] = publication_date
+            else:
+                tmp_metadata["publication_date"] = datetime.now(timezone.utc).isoformat()
+            
+            if title is not None or title != "":
+                tmp_metadata["title"] = title
+            else:
+                raise ValueError(
+                    "The 'title' argument cannot be None or empty."
+                )
+            
+            if creators is not None and isinstance(creators, list):
+                for idx in creators:
+                    if isinstance(idx, dict):
+                        for dict_key in idx.keys():
+                            if dict_key not in creators_metadata.keys():
+                                raise ValueError(
+                                    "The elements of the 'creators' list are dictionaries "
+                                    "with the following allowed keys:\n"
+                                    f"{json.dumps(list(creators_metadata.keys()), indent=4)}"
+                                )
+                    else:
+                        raise TypeError(
+                            "Members of the creators list should be of dict type."
+                        )
+                tmp_metadata["creators"] = creators
+            else:
+                raise ValueError(
+                    "The 'creators' argument cannot be None or empty."
+                )
+            
+            if description is not None or description != "":
+                tmp_metadata["description"] = description
+            else:
+                raise ValueError(
+                    "The 'description' argument cannot be None or empty."
+                )
+
+            if access_right is not None or access_right != "":
+                if access_right in access_rights.keys():
+                    tmp_metadata["access_right"] = access_right
+                else:
+                    raise ValueError(
+                        "The 'access_right' value can take one of the following values:\n"
+                        f"{json.dumps(list(access_rights.keys()), indent=4)}"
+                    )
+                if access_right == "open" or access_right == "embargoed":
+                    tmp_metadata["license"] = license
+
+                if access_right == "embargoed":
+                    if embargo_date is not None or embargo_date != "":
+                        tmp_metadata["embargo_date"] = embargo_date
+                    else:
+                        logger.warning(
+                            "The 'embargo_date' argument cannot be None or empty...\n"
+                            "Setting the 'embargo_date' to the current date."
+                        )
+                        tmp_metadata["embargo_date"] = datetime.now(timezone.utc).date().isoformat()
+            else:
+                logger.warning(
+                    "The 'access_right' argument cannot be None or empty...\n"
+                    "Setting the 'access_right' to 'open'."
+                )
+                tmp_metadata["access_right"] = "open"
+
+
+        # fxn_params_list = list(
+        #     set(inspect.signature(self.update_deposition).parameters) - set(['id_', 'url'])
+        # )
+        # for idx in fxn_params_list:
+        #     tmp_metadata[idx] = upload_type
+
+        response = requests.put(url=tmp_url, json=tmp_metadata, params=tmp_params)
+        status_code = response.status_code
+        if status_code != 200:
+            zenodo_error(status_code)
+        return Record(self._client, record=response)
