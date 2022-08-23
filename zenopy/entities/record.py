@@ -5,7 +5,7 @@
 """
 
 from argparse import ArgumentError
-import collections.abc
+from collections.abc import MutableMapping
 import requests
 import validators
 import logging
@@ -15,7 +15,7 @@ from datetime import datetime, timezone
 
 logger = logging.getLogger(__name__)
 
-class Record(collections.abc.MutableMapping):
+class Record(MutableMapping):
     """Zenodo Record mixin container class"""
 
     def __init__(
@@ -280,12 +280,12 @@ class Record(collections.abc.MutableMapping):
             return self.data["record_url"]
         elif "links" in self.data and self.data["links"] != "":
             for key in [
+                "self",
                 "record",
                 "record_html",
                 "html",
                 "latest",
                 "latest_html",
-                "self",
             ]:
                 if key in self.data["links"] and self.data["links"][key] != "":
                     return self.data["links"][key]
