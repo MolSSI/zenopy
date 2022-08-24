@@ -29,16 +29,12 @@ class _Depositions(object):
         self._deposits_url = client._base_url + "/deposit/depositions/"
         self.data = {}
 
-    def create_config_file(self, config_file_path: str = None) -> None:
-        disable_method(
-            "The 'create_config_file()' must be called from Zenodo superclass."
-        )
-
     def create_deposition(self):
         """Create a new deposition/record object for uploading to Zenodo."""
         # r = requests.post(url=url, json={}, params=params)
         # r = requests.post(url=url, json={}, params=params, headers=headers)
         # r = requests.post(url=url, data="{}", params=params, headers=headers)
+        # TODO: allow metadata to be passed instead of an empty deposition
         tmp_url = self._deposits_url.strip().rstrip("/")
         response = requests.post(url=tmp_url, json={}, params=self._params)
         status_code = response.status_code
