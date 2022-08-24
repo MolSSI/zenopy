@@ -6,7 +6,6 @@ controlled vocabulary
 """
 import pprint
 from collections.abc import MutableMapping
-from datetime import datetime, timezone
 from collections import UserDict
 
 access_rights = {
