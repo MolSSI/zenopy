@@ -4,14 +4,8 @@
 
 """
 
-from distutils.command.upload import upload
-from multiprocessing.sharedctypes import Value
-import inspect
-from os import access
-from typing import Type
 import requests
 import validators
-import pprint
 import json
 from datetime import datetime, timezone
 from entities.record import Record
@@ -19,7 +13,7 @@ from entities.metadata import (
     upload_types, publication_types, image_types, creators_metadata,
     access_rights,
     )
-from errors import zenodo_error
+from errors import zenodo_error, request_error
 from utils import disable_method
 import logging
 
@@ -205,7 +199,7 @@ class _Depositions(object):
         title: str = None,
         creators: list[dict] = None,
         description: str = None,
-        access_right: str = "None",
+        access_right: str = None,
         license: str = None,
         embargo_date: str = None,
         access_conditions: str = None
@@ -234,118 +228,147 @@ class _Depositions(object):
             raise ValueError("Please provide a valid record URL or ID.")
         # Retrieve the existing metadata to update
         data = deposit.data
-        if data["metadata"] != {}:
+        if any(data["metadata"]):
             tmp_metadata = data["metadata"].copy()
 
-        if upload_type not in upload_types.keys():
-            raise ValueError(
-                "The 'upload_type' value can take one of the following values:\n"
-                f"{json.dumps(list(upload_types.keys()), indent=4)}"
-            )
+        if upload_type is not None and upload_type != "":
+            if upload_type not in upload_types.keys():
+                raise ValueError(
+                    "The 'upload_type' argument can take one of the following values:\n"
+                    f"{json.dumps(list(upload_types.keys()), indent=4)}"
+                )
+            else:
+                tmp_metadata["upload_type"] = upload_type
         else:
-            tmp_metadata["upload_type"] = upload_type
-            if upload_type == "publication":
-                if publication_type is not None or publication_type != "":
-                    if publication_type in publication_types.keys():
-                        tmp_metadata["publication_type"] = publication_type
-                    else:
-                        raise ValueError(
-                            "The 'publication_type' value can take one of the following values:\n"
-                            f"{json.dumps(list(publication_types.keys()), indent=4)}"
-                        )
+            raise ValueError(
+                "The 'upload_type' argument cannot be None or empty."
+            )            
+        
+        if upload_type == "publication":
+            if publication_type is not None and publication_type != "":
+                if publication_type in publication_types.keys():
+                    tmp_metadata["publication_type"] = publication_type
                 else:
                     raise ValueError(
-                        "The 'publication_type' argument cannot be None or empty."
+                        "The 'publication_type' value can take one of the following values:\n"
+                        f"{json.dumps(list(publication_types.keys()), indent=4)}"
                     )
-            elif upload_type == "image":
-                if image_type is not None or image_type != "":
-                    if image_type in image_types.keys():
-                        tmp_metadata["image_type"] = image_type
-                    else:
-                        raise ValueError(
-                            "The 'image_type' value can take one of the following values:\n"
-                            f"{json.dumps(list(image_types.keys()), indent=4)}"
-                        )
+            else:
+                raise ValueError(
+                    "The 'publication_type' argument cannot be None or empty."
+                )
+        elif upload_type == "image":
+            if image_type is not None and image_type != "":
+                if image_type in image_types.keys():
+                    tmp_metadata["image_type"] = image_type
                 else:
                     raise ValueError(
-                        "The 'image_type' argument cannot be None or empty."
+                        "The 'image_type' value can take one of the following values:\n"
+                        f"{json.dumps(list(image_types.keys()), indent=4)}"
                     )
-            
-            if publication_date is not None or publication_date != "":
-                tmp_metadata["publication_date"] = publication_date
-            else:
-                tmp_metadata["publication_date"] = datetime.now(timezone.utc).isoformat()
-            
-            if title is not None or title != "":
-                tmp_metadata["title"] = title
             else:
                 raise ValueError(
-                    "The 'title' argument cannot be None or empty."
+                    "The 'image_type' argument cannot be None or empty."
                 )
             
-            if creators is not None and isinstance(creators, list):
-                for idx in creators:
-                    if isinstance(idx, dict):
-                        for dict_key in idx.keys():
-                            if dict_key not in creators_metadata.keys():
-                                raise ValueError(
-                                    "The elements of the 'creators' list are dictionaries "
-                                    "with the following allowed keys:\n"
-                                    f"{json.dumps(list(creators_metadata.keys()), indent=4)}"
-                                )
-                    else:
-                        raise TypeError(
-                            "Members of the creators list should be of dict type."
-                        )
-                tmp_metadata["creators"] = creators
-            else:
-                raise ValueError(
-                    "The 'creators' argument cannot be None or empty."
-                )
+        if publication_date is not None and publication_date != "":
+            tmp_metadata["publication_date"] = publication_date
+        else:
+            tmp_metadata["publication_date"] = datetime.now(timezone.utc).isoformat()
+        
+        if title is not None and title != "":
+            tmp_metadata["title"] = title
+        else:
+            raise ValueError(
+                "The 'title' argument cannot be None or empty."
+            )
             
-            if description is not None or description != "":
-                tmp_metadata["description"] = description
-            else:
-                raise ValueError(
-                    "The 'description' argument cannot be None or empty."
-                )
+        if creators is not None and isinstance(creators, list):
+            for idx in creators:
+                if isinstance(idx, dict):
+                    for dict_key in idx.keys():
+                        if dict_key not in creators_metadata.keys():
+                            raise ValueError(
+                                "The elements of the 'creators' list are dictionaries "
+                                "with the following allowed keys:\n"
+                                f"{json.dumps(list(creators_metadata.keys()), indent=4)}"
+                            )
+                else:
+                    raise TypeError(
+                        "Members of the creators list should be of dict type."
+                    )
+            tmp_metadata["creators"] = creators
+        else:
+            raise ValueError(
+                "The 'creators' argument cannot be None and should be a list."
+            )
+        
+        if description is not None and description != "":
+            tmp_metadata["description"] = description
+        else:
+            raise ValueError(
+                "The 'description' argument cannot be None or empty."
+            )
 
-            if access_right is not None or access_right != "":
-                if access_right in access_rights.keys():
-                    tmp_metadata["access_right"] = access_right
-                else:
-                    raise ValueError(
-                        "The 'access_right' value can take one of the following values:\n"
-                        f"{json.dumps(list(access_rights.keys()), indent=4)}"
-                    )
-                if access_right == "open" or access_right == "embargoed":
+        if access_right is not None and access_right != "":
+            if access_right in access_rights.keys():
+                tmp_metadata["access_right"] = access_right
+            else:
+               raise ValueError(
+                    "The 'access_right' value can take one of the following values:\n"
+                    f"{json.dumps(list(access_rights.keys()), indent=4)}"
+                )
+            
+            if access_right == "open" or access_right == "embargoed":
+                if license is not None and license != "":
                     tmp_metadata["license"] = license
-
-                if access_right == "embargoed":
-                    if embargo_date is not None or embargo_date != "":
-                        tmp_metadata["embargo_date"] = embargo_date
-                    else:
-                        logger.warning(
-                            "The 'embargo_date' argument cannot be None or empty...\n"
-                            "Setting the 'embargo_date' to the current date."
-                        )
-                        tmp_metadata["embargo_date"] = datetime.now(timezone.utc).date().isoformat()
+                else:
+                    raise ValueError(
+                        "The 'license argument cannot be None or empty if "
+                        "'access_right' is 'open' or 'embargoed'."
+                    )
+                
+            if access_right == "embargoed":
+                if embargo_date is not None and embargo_date != "":
+                    tmp_metadata["embargo_date"] = embargo_date
+                else:
+                    logger.warning(
+                        "The 'embargo_date' argument cannot be None or empty...\n"
+                        "Setting the 'embargo_date' to the current date."
+                    )
+                    tmp_metadata["embargo_date"] = datetime.now(timezone.utc).date().isoformat()
+            elif access_right == "restricted":
+                if access_conditions is not None and access_conditions != "":
+                    tmp_metadata["access_conditions"] = access_conditions
+                else:
+                    raise ValueError(
+                        "The 'access_conditions' argument cannot be None or empty."
+                    )
+        else:
+            logger.warning(
+                "The 'access_right' argument cannot be None or empty...\n"
+                "Setting the 'access_right' to 'open'.\n"
+            )
+            tmp_metadata["access_right"] = "open"
+            if upload_type == "dataset":
+                logger.warning(
+                    "The 'upload_type' == 'dataset'...\n"
+                    "Setting the 'license' to 'cc-zero' (default).\n"
+                )
+                tmp_metadata["license"] = "cc-zero"
             else:
                 logger.warning(
-                    "The 'access_right' argument cannot be None or empty...\n"
-                    "Setting the 'access_right' to 'open'."
+                    "The 'upload_type' != 'dataset'...\n"
+                    "Setting the 'license' to 'cc-by' (default).\n"
                 )
-                tmp_metadata["access_right"] = "open"
+                tmp_metadata["license"] = "cc-by"
 
-
-        # fxn_params_list = list(
-        #     set(inspect.signature(self.update_deposition).parameters) - set(['id_', 'url'])
-        # )
-        # for idx in fxn_params_list:
-        #     tmp_metadata[idx] = upload_type
-
-        response = requests.put(url=tmp_url, json=tmp_metadata, params=tmp_params)
+        tmp_data = {
+            "metadata": tmp_metadata
+        }
+        response = requests.put(url=tmp_url, json=tmp_data, params=tmp_params)
         status_code = response.status_code
         if status_code != 200:
-            zenodo_error(status_code)
+            # zenodo_error(status_code)
+            request_error(response)
         return Record(self._client, record=response)
