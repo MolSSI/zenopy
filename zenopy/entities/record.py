@@ -28,6 +28,8 @@ class Record(MutableMapping):
             caller_class_name = str(inspect.currentframe().f_back.f_locals["self"])
             if "_Depositions" in caller_class_name:
                 self._record_url = self._base_url + "/deposit/depositions/" + str(id_)
+            elif "_DepositionFiles" in caller_class_name:
+                self._record_url = self._base_url + "/deposit/depositions/" + str(id_) + "/files"
             else: # "_Records" (or anything else) in caller_class_name:
                 self._record_url = self._base_url + "/records/" + str(id_)
             response = requests.get(
