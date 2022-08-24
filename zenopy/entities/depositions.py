@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-"""Zenodo Depositions class
+"""Zenodo _Depositions class
 
 """
 
@@ -14,7 +14,6 @@ from entities.metadata import (
     access_rights,
     )
 from errors import zenodo_error, request_error
-from utils import disable_method
 import logging
 
 logger = logging.getLogger(__name__)
