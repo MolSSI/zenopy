@@ -10,6 +10,7 @@ from pathlib import Path
 import pprint
 
 from entities.depositions import _Depositions
+from entities.deposition_files import _DepositionFiles
 from entities.records import _Records
 
 logger = logging.getLogger(__name__)
@@ -98,11 +99,15 @@ class Zenodo(object):
             raise configparser.Error(f"A config file already exists in '{path}'.")
 
     def init_deposition(self):
-        """Calls Deposition class' create_deposition()"""
+        """Creates an instance of the _Depositions class"""
         return _Depositions(self)
+
+    def init_deposition_file(self):
+        """Creates an instance of the _DepositionFiles class"""
+        return _DepositionFiles(self)
     
     def init_records(self):
-        """Calls Deposition class' create_deposition()"""
+        """Creates an instance of the _Records class"""
         return _Records(self)
 
     def list_sections(self):
