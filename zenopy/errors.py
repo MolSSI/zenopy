@@ -4,7 +4,9 @@
 
 """
 
+from textwrap import indent
 import requests
+import json
 
 status_code_dict = {
     200: {
@@ -122,3 +124,14 @@ def zenodo_error(status_code: int) -> None:
                 )
     else:
         raise ValueError("The status code cannot be None.")
+
+def request_error(response: requests.models.Response = None) -> None:
+    if response is not None:
+        status_code = response.status_code
+        if status_code not in [200, 201, 202, 204]:
+            raise RuntimeError(
+                "The server request has resulted in an error with the following details:\n"
+                f"{json.dumps(response.json(), indent=4)}\n"
+            )
+    else:
+        raise ValueError("The response argument cannot be None.")
