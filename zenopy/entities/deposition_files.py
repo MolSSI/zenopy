@@ -45,7 +45,6 @@ class _DepositionFiles(object):
                     tmp_url = bucket_url.strip().rstrip("/")
                 elif record is not None and isinstance(record, Record):
                     tmp_url = record.data["links"]["bucket"]
-                    print(tmp_url)
                 else:
                     raise ValueError(
                         "Both 'bucket_url' and 'record' are of None or wrong type."
