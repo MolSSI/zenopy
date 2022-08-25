@@ -181,7 +181,12 @@ class _Depositions(object):
 
     def retrieve_deposition(self, id_: int = None) -> Record:
         """Retrieve a single deposition resource."""
-        return Record(self._client, id_= id_, url = None, record = None)
+        if id_ is not None and isinstance (id_, int):
+            return Record(self._client, id_= id_, url = None, record = None)
+        else:
+            raise ValueError(
+                "The deposition ID cannot be None and must be an integer."
+            )
 
     def update_deposition(
         self,
