@@ -132,6 +132,41 @@ class _DepositionFiles(object):
             )
         return Record(self._client, id_= None, url = tmp_url, record = None)
     
+    def sort_deposition_files(self, id_: int = None, id_list: list[str] = None) -> list[Record]:
+        """Sort the files for a deposition. By default, the first 
+        file is shown in the file preview."""
+        if id_ is not None and isinstance (id_, int):
+            tmp_url = self._deposits_url.strip().replace("@id", str(id_))
+        else:
+            raise ValueError(
+                "The deposition ID cannot be None and must be an integer."
+            )
+        if id_list is not None and isinstance (id_list, list):
+            tmp_data = []
+            for fid in id_list:
+                if isinstance(fid, str):
+                    tmp_data.append({"id": fid})
+                else:
+                    raise TypeError(
+                        "The elements of the 'id_list' must be file IDs of str type."
+                    )
+        else:
+            raise ValueError(
+                "The 'id_list' cannot be None and must be a list of strings."
+            )
+        response = requests.put(url=tmp_url, json=tmp_data, params=self._params)
+        status_code = response.status_code
+        if status_code != 200:
+            zenodo_error(status_code)
+        search_result = response.json()
+        records_list = []
+        if isinstance(search_result, list):
+            for record in search_result:
+                records_list.append(Record(self._client, record=record))
+            return records_list
+        else:
+            return search_result
+
     def update_deposition_file(self) -> Record:
         """Update a deposition file resource. Currently the only use is 
         renaming an already uploaded file. If you one to replace the 
