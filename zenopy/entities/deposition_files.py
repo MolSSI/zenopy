@@ -70,6 +70,30 @@ class _DepositionFiles(object):
             ValueError(
                 "The 'file_path' argument cannot be None or empty."
             )
+    def delete_deposition_file(self, id_: int = None, file_id: str =  None) -> None:
+        """Delete an existing deposition file resource. Note, only 
+        deposition files for unpublished depositions may be deleted."""
+        if id_ is not None and isinstance (id_, int):
+            if file_id is not None and file_id != "":
+                tmp_url = self._deposits_url.strip().replace("@id", str(id_))
+                tmp_url += f"/{file_id}"
+            else:
+                raise ValueError(
+                    "The deposition file ID cannot be None or empty."
+                )
+        else:
+            raise ValueError(
+                "The deposition ID cannot be None and must be an integer."
+            )
+        response = requests.delete(url=tmp_url, params=self._params)
+        status_code = response.status_code
+        if status_code in [200, 204]:
+            logger.warning(
+                "The deposition file at the following address has been deleted:\n"
+                f"{tmp_url}"
+            )
+        else:
+            zenodo_error(status_code)
 
     def list_deposition_files(self, id_: int = None) -> list[Record]:
         """List all deposition files for a given deposition"""
@@ -107,3 +131,9 @@ class _DepositionFiles(object):
                 "The deposition ID cannot be None and must be an integer."
             )
         return Record(self._client, id_= None, url = tmp_url, record = None)
+    
+    def update_deposition_file(self) -> Record:
+        """Update a deposition file resource. Currently the only use is 
+        renaming an already uploaded file. If you one to replace the 
+        actual file, please delete the file and upload a new file."""
+        pass
