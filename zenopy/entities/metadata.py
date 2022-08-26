@@ -22,6 +22,26 @@ creators_metadata = {
     "gnd": "GND identifier of creator (optional)",
 }
 
+deposition_actions = {
+    "publish": ("Publish a deposition. Note, once a deposition is published, "
+    "you can no longer delete it."),
+    "edit": "Unlock already submitted deposition for editing.",
+    "discard": "Discard changes in the current editing session.",
+    "new_version": ("Create a new version of a deposition.\n\nThis action will "
+    "create a new deposit, which will be a snapshot of the current resouce, "
+    "inheriting the metadata as well as snapshot of files. The new version deposit "
+    "will have a state similar to a new, unpublished deposit, most importantly its "
+    "files will be modifiable as for a new deposit.\n\nOnly one unpublished new "
+    "version deposit can be available at any moment, i.e.: calling new version action "
+    "multiple times will have no effect, as long as the resulting new version deposit "
+    "from the first call is not published or deleted.\n\nNOTES: - The response body of "
+    "this action is NOT the new version deposit, but the original resource. The new "
+    "version deposition can be accessed through the 'latest_draft' under 'links' in "
+    "the response body. - The id used to create this new version has to be the id of "
+    "the latest version. It is not possible to use the global id that references all "
+    "the versions."),
+}
+
 funder_dois = {
     "Australian Research Council": "10.13039/501100000923",
     "Austrian Science Fund": "10.13039/501100002428",
