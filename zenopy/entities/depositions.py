@@ -30,9 +30,6 @@ class _Depositions(object):
 
     def create_deposition(self):
         """Create a new deposition/record object for uploading to Zenodo."""
-        # r = requests.post(url=url, json={}, params=params)
-        # r = requests.post(url=url, json={}, params=params, headers=headers)
-        # r = requests.post(url=url, data="{}", params=params, headers=headers)
         # TODO: allow metadata to be passed instead of an empty deposition
         tmp_url = self._deposits_url.strip().rstrip("/")
         response = requests.post(url=tmp_url, json={}, params=self._params)
@@ -106,7 +103,7 @@ class _Depositions(object):
         by the active authentication and match the query statement."""
         tmp_params = self._params.copy()
         # for how to search, see https://help.zenodo.org/guides/search/
-        if query is not None or query != "":
+        if query is not None and query != "":
             tmp_params["q"] = query
         else:
             query = ""
@@ -242,8 +239,8 @@ class _Depositions(object):
         else:
             raise ValueError(
                 "The 'upload_type' argument cannot be None or empty."
-            )            
-        
+            )
+
         if upload_type == "publication":
             if publication_type is not None and publication_type != "":
                 if publication_type in publication_types.keys():
