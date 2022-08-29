@@ -4,18 +4,12 @@
 
 """
 
-from xml.dom import ValidationErr
 import requests
 import validators
-# import json
-# from datetime import datetime, timezone
+
 from entities.record import Record
 from pathlib import Path
-# from entities.metadata import ( 
-#     upload_types, publication_types, image_types, creators_metadata,
-#     access_rights,
-#     )
-from errors import zenodo_error, request_error
+from errors import zenodo_error
 import logging
 
 logger = logging.getLogger(__name__)
