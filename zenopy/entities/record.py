@@ -30,13 +30,15 @@ class Record(MutableMapping):
                 self._record_url = self._base_url + "/deposit/depositions/" + str(id_)
             elif "_DepositionFiles" in caller_class_name:
                 self._record_url = self._base_url + "/deposit/depositions/" + str(id_) + "/files"
+            # elif "_DepositionActions" in caller_class_name:
+                # self._record_url = self._base_url + "/deposit/" + str(id_)
             else: # "_Records" (or anything else) in caller_class_name:
                 self._record_url = self._base_url + "/records/" + str(id_)
             response = requests.get(
                 self._record_url, params=self._params, headers=self._headers
             )
             self.data = response.json()
-        elif url is not None:
+        elif url is not None and url != "":
             url = url.strip().rstrip("/")
             is_valid = validators.url(url)
             if is_valid:
@@ -50,7 +52,7 @@ class Record(MutableMapping):
                     f"The provided URL ({url}) is invalid.\n"
                     "Please enter a valid URL."
                 )
-        elif record is not None or record == {}:
+        elif record is not None and record != {}:
             if isinstance(record, Record):
                 self.data = record.data
             elif isinstance(record, requests.models.Response):
@@ -69,7 +71,12 @@ class Record(MutableMapping):
                     "A single record must be provided."
                 )
             key = "links" if "links" in self.data else "latest"
-            self._record_url = self.data[key]["self"]
+            # Fetch the data whatever its nature or origin is (Deposit | Record)
+            # The data comes either from "self" or "latest" in the "links" key
+            if "self" in self.data[key].keys():
+                self._record_url = self.data[key]["self"]
+            else:
+                self.data[key]["latest"]
         else:
             raise RuntimeError("Please provide a valid record URL, ID or object.")
 
