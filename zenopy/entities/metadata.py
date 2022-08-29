@@ -27,7 +27,7 @@ deposition_actions = {
     "you can no longer delete it."),
     "edit": "Unlock already submitted deposition for editing.",
     "discard": "Discard changes in the current editing session.",
-    "new_version": ("Create a new version of a deposition.\n\nThis action will "
+    "newversion": ("Create a new version of a deposition.\n\nThis action will "
     "create a new deposit, which will be a snapshot of the current resouce, "
     "inheriting the metadata as well as snapshot of files. The new version deposit "
     "will have a state similar to a new, unpublished deposit, most importantly its "
