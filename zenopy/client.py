@@ -11,6 +11,7 @@ import pprint
 
 from entities.depositions import _Depositions
 from entities.deposition_files import _DepositionFiles
+from entities.deposition_actions import _DepositionActions
 from entities.records import _Records
 
 logger = logging.getLogger(__name__)
@@ -101,6 +102,10 @@ class Zenodo(object):
     def init_deposition(self):
         """Creates an instance of the _Depositions class"""
         return _Depositions(self)
+
+    def init_deposition_actions(self):
+        """Creates an instance of the _DepositionsActions class"""
+        return _DepositionActions(self)
 
     def init_deposition_file(self):
         """Creates an instance of the _DepositionFiles class"""
