@@ -22,7 +22,7 @@ class _DepositionActions(object):
         self._deposit_action_url = client._base_url + "/deposit/depositions/@id/actions"
         self.data = {}
 
-    def deposition_action(self, id_: int = None, action: str = None):
+    def deposition_action(self, id_: int = None, action: str = None, return_newversion: bool = True):
         """Performing actions on Zenodo depositions/records"""
         if id_ is not None and isinstance(id_, int):
             if action is not None and action != "":
@@ -35,7 +35,15 @@ class _DepositionActions(object):
                         request_error(response=response)
                     else:
                         record = response.json()
-                        return Record(self._client, record=record)
+                        if action == "newversion" and return_newversion:
+                            if "latest_draft" in record["links"].keys():
+                                return Record(self._client, url=record["links"]["latest_draft"])
+                            else:
+                                raise KeyError(
+                                    "The 'latest_draft' key does not exist in the deposit/record."
+                                )
+                        else:
+                            return Record(self._client, record=record)
                 else:
                     raise ValueError(
                         "The 'action' argument can take one of the following values:\n"
