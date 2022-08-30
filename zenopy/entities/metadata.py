@@ -4,9 +4,9 @@
 controlled vocabulary
 
 """
-import pprint
-from collections.abc import MutableMapping
-from collections import UserDict
+# import pprint
+# from collections.abc import MutableMapping
+# from collections import UserDict
 
 access_rights = {
     "open": "Open Access",
@@ -431,36 +431,36 @@ metadata = {
     },
 }
 
-class Forms(MutableMapping):
-    """Zenodo Forms mixin container class"""
-    def __init__(self):
-        self.data = {}
+# class Forms(MutableMapping):
+#     """Zenodo Forms mixin container class"""
+#     def __init__(self):
+#         self.data = {}
 
-    # Provide dict like access to different Forms (dictionary data)
-    def __getitem__(self, key: (int | slice)) -> dict:
-        """Allow access to data via indexing/slicing"""
-        return self.data[key]
+#     # Provide dict like access to different Forms (dictionary data)
+#     def __getitem__(self, key: (int | slice)) -> dict:
+#         """Allow access to data via indexing/slicing"""
+#         return self.data[key]
 
-    def __setitem__(self, key: (int | slice), value) -> None:
-        """Manage assignments through indexing/slicing"""
-        self.data[key] = value
+#     def __setitem__(self, key: (int | slice), value) -> None:
+#         """Manage assignments through indexing/slicing"""
+#         self.data[key] = value
 
-    def __delitem__(self, key: (int | slice)) -> None:
-        """Deleting entri(es) from record data through indexing/slicing"""
-        del self.data[key]
+#     def __delitem__(self, key: (int | slice)) -> None:
+#         """Deleting entri(es) from record data through indexing/slicing"""
+#         del self.data[key]
 
-    def __iter__(self):
-        """Allow iteration over the object"""
-        return iter(self.data)
+#     def __iter__(self):
+#         """Allow iteration over the object"""
+#         return iter(self.data)
 
-    def __len__(self):
-        """The len() command"""
-        return len(self.data)
+#     def __len__(self):
+#         """The len() command"""
+#         return len(self.data)
 
-    def __str__(self):
-        return pprint.pformat(self.data)
+#     def __str__(self):
+#         return pprint.pformat(self.data)
 
-    def init_deposition_form(self):
-        """Sample depositions dictionary form"""
+#     def init_deposition_form(self):
+#         """Sample depositions dictionary form"""
 
-        return UserDict(us)
+#         return UserDict(us)

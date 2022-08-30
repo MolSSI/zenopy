@@ -124,7 +124,7 @@ class _Depositions(object):
             tmp_params["status"] = status
         if sort is not None:
             if sort in ["bestmatch", "mostrecent", "-mostrecent"]:
-                tmp_params["status"] = status
+                tmp_params["sort"] = sort
             else:
                 raise ValueError(
                     f"Invalid sort argument value ({sort}).\n"
@@ -145,8 +145,7 @@ class _Depositions(object):
                 "ZenoPy will use pagination of 25 for this search "
                 "because the 'page' argument used is either None or not an integer."
             )
-            page = 25
-            tmp_params["page"] = page
+            tmp_params["page"] = 25
         if size is not None and isinstance(size, int):
             tmp_params["size"] = size
         else:
@@ -154,7 +153,7 @@ class _Depositions(object):
                 "ZenoPy will return 1 search result in this case "
                 "because the 'size' argument used is either None or not an integer."
             )
-        if all_versions is not None and all_versions in [0, 1, False, True]:
+        if all_versions in [0, 1, False, True]:
             tmp_params["all_versions"] = all_versions
         else:
             logger.warning(
