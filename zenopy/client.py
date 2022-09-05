@@ -12,6 +12,7 @@ from entities.depositions import _Depositions
 from entities.deposition_files import _DepositionFiles
 from entities.deposition_actions import _DepositionActions
 from entities.records import _Records
+from entities.licenses import _Licenses
 
 logger = logging.getLogger(__name__)
 
@@ -110,6 +111,10 @@ class Zenodo(object):
     def init_deposition_file(self):
         """Creates an instance of the _DepositionFiles class"""
         return _DepositionFiles(self)
+
+    def init_licenses(self):
+        """Creates an instance of the _Licenses class"""
+        return _Licenses(self)
 
     def init_records(self):
         """Creates an instance of the _Records class"""
