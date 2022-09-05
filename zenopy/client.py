@@ -15,6 +15,7 @@ from entities.records import _Records
 
 logger = logging.getLogger(__name__)
 
+
 class Zenodo(object):
     def __init__(
         self,
@@ -109,7 +110,7 @@ class Zenodo(object):
     def init_deposition_file(self):
         """Creates an instance of the _DepositionFiles class"""
         return _DepositionFiles(self)
-    
+
     def init_records(self):
         """Creates an instance of the _Records class"""
         return _Records(self)
