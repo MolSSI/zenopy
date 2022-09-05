@@ -7,7 +7,6 @@
 import configparser
 import logging
 from pathlib import Path
-import pprint
 
 from entities.depositions import _Depositions
 from entities.deposition_files import _DepositionFiles
