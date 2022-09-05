@@ -9,19 +9,24 @@ import validators
 import json
 from datetime import datetime, timezone
 from entities.record import Record
-from entities.metadata import ( 
-    upload_types, publication_types, image_types, creators_metadata,
+from entities.metadata import (
+    upload_types,
+    publication_types,
+    image_types,
+    creators_metadata,
     access_rights,
-    )
+)
 from errors import zenodo_error, request_error
 import logging
 
 logger = logging.getLogger(__name__)
 
+
 class _Depositions(object):
     """Deposit provides API for uploading and editing published outputs
     on Zenodo as an alternative to the functionality provided by Zenodo's
     graphical user interface."""
+
     def __init__(self, client):
         self._client = client
         self._params = client._params
@@ -30,7 +35,8 @@ class _Depositions(object):
 
     def create_deposition(self):
         """Create a new deposition/record object for uploading to Zenodo."""
-        # TODO: allow metadata to be passed instead of an empty deposition
+        # TODO: allow metadata to be passed for initialization instead of
+        # only an empty deposition
         tmp_url = self._deposits_url.strip().rstrip("/")
         response = requests.post(url=tmp_url, json={}, params=self._params)
         status_code = response.status_code
@@ -92,17 +98,17 @@ class _Depositions(object):
 
     def list_depositions(
         self,
-        query: (str | dict) = None,
-        status: str = "draft",
+        query: str = None,
+        status: str = "published",
         sort: str = "bestmatch",
         page: int = 1,
-        size: int = 25,
+        size: int = 20,
         all_versions: (int | bool) = False,
     ) -> list[Record]:
         """List all depositions available to the current user identified
         by the active authentication and match the query statement."""
         tmp_params = self._params.copy()
-        # for how to search, see https://help.zenodo.org/guides/search/
+        # For how to search, see https://help.zenodo.org/guides/search/
         if query is not None and query != "":
             tmp_params["q"] = query
         else:
@@ -142,10 +148,10 @@ class _Depositions(object):
             tmp_params["page"] = page
         else:
             logger.warning(
-                "ZenoPy will use pagination of 25 for this search "
+                "ZenoPy will use pagination of 20 for this search "
                 "because the 'page' argument used is either None or not an integer."
             )
-            tmp_params["page"] = 25
+            tmp_params["page"] = 20
         if size is not None and isinstance(size, int):
             tmp_params["size"] = size
         else:
@@ -159,8 +165,9 @@ class _Depositions(object):
             logger.warning(
                 "ZenoPy will return the latest version for this search "
                 "because the 'all_version' argument used is either None or "
-                "not a binary integer or boolean."
+                "non-(binary | boolean)."
             )
+            tmp_params["all_versions"] = False
         tmp_url = self._deposits_url.strip().rstrip("/")
         response = requests.get(url=tmp_url, params=tmp_params)
         status_code = response.status_code
@@ -177,12 +184,10 @@ class _Depositions(object):
 
     def retrieve_deposition(self, id_: int = None) -> Record:
         """Retrieve a single deposition resource."""
-        if id_ is not None and isinstance (id_, int):
-            return Record(self._client, id_= id_, url = None, record = None)
+        if id_ is not None and isinstance(id_, int):
+            return Record(self._client, id_=id_, url=None, record=None)
         else:
-            raise ValueError(
-                "The deposition ID cannot be None and must be an integer."
-            )
+            raise ValueError("The deposition ID cannot be None and must be an integer.")
 
     def update_deposition(
         self,
@@ -198,7 +203,7 @@ class _Depositions(object):
         access_right: str = None,
         license: str = None,
         embargo_date: str = None,
-        access_conditions: str = None
+        access_conditions: str = None,
     ) -> Record:
         """Update an existing deposition resource (deposition metadata)"""
         tmp_params = self._params.copy()
@@ -236,9 +241,7 @@ class _Depositions(object):
             else:
                 tmp_metadata["upload_type"] = upload_type
         else:
-            raise ValueError(
-                "The 'upload_type' argument cannot be None or empty."
-            )
+            raise ValueError("The 'upload_type' argument cannot be None or empty.")
 
         if upload_type == "publication":
             if publication_type is not None and publication_type != "":
@@ -263,22 +266,18 @@ class _Depositions(object):
                         f"{json.dumps(list(image_types.keys()), indent=4)}"
                     )
             else:
-                raise ValueError(
-                    "The 'image_type' argument cannot be None or empty."
-                )
-            
+                raise ValueError("The 'image_type' argument cannot be None or empty.")
+
         if publication_date is not None and publication_date != "":
             tmp_metadata["publication_date"] = publication_date
         else:
             tmp_metadata["publication_date"] = datetime.now(timezone.utc).isoformat()
-        
+
         if title is not None and title != "":
             tmp_metadata["title"] = title
         else:
-            raise ValueError(
-                "The 'title' argument cannot be None or empty."
-            )
-            
+            raise ValueError("The 'title' argument cannot be None or empty.")
+
         if creators is not None and isinstance(creators, list):
             for idx in creators:
                 if isinstance(idx, dict):
@@ -298,23 +297,21 @@ class _Depositions(object):
             raise ValueError(
                 "The 'creators' argument cannot be None and should be a list."
             )
-        
+
         if description is not None and description != "":
             tmp_metadata["description"] = description
         else:
-            raise ValueError(
-                "The 'description' argument cannot be None or empty."
-            )
+            raise ValueError("The 'description' argument cannot be None or empty.")
 
         if access_right is not None and access_right != "":
             if access_right in access_rights.keys():
                 tmp_metadata["access_right"] = access_right
             else:
-               raise ValueError(
+                raise ValueError(
                     "The 'access_right' value can take one of the following values:\n"
                     f"{json.dumps(list(access_rights.keys()), indent=4)}"
                 )
-            
+
             if access_right == "open" or access_right == "embargoed":
                 if license is not None and license != "":
                     tmp_metadata["license"] = license
@@ -323,7 +320,7 @@ class _Depositions(object):
                         "The 'license argument cannot be None or empty if "
                         "'access_right' is 'open' or 'embargoed'."
                     )
-                
+
             if access_right == "embargoed":
                 if embargo_date is not None and embargo_date != "":
                     tmp_metadata["embargo_date"] = embargo_date
@@ -332,7 +329,9 @@ class _Depositions(object):
                         "The 'embargo_date' argument cannot be None or empty...\n"
                         "Setting the 'embargo_date' to the current date."
                     )
-                    tmp_metadata["embargo_date"] = datetime.now(timezone.utc).date().isoformat()
+                    tmp_metadata["embargo_date"] = (
+                        datetime.now(timezone.utc).date().isoformat()
+                    )
             elif access_right == "restricted":
                 if access_conditions is not None and access_conditions != "":
                     tmp_metadata["access_conditions"] = access_conditions
@@ -359,9 +358,7 @@ class _Depositions(object):
                 )
                 tmp_metadata["license"] = "cc-by"
 
-        tmp_data = {
-            "metadata": tmp_metadata
-        }
+        tmp_data = {"metadata": tmp_metadata}
         response = requests.put(url=tmp_url, json=tmp_data, params=tmp_params)
         status_code = response.status_code
         if status_code != 200:
