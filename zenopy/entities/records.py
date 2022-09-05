@@ -1,175 +1,130 @@
 # -*- coding: utf-8 -*-
 
-"""Zenodo Records class.
+"""Zenodo _Records class
 
 """
 
 import requests
 
-class _Records():
-    """Records class offers search capabilities for published records 
+# import validators
+import inspect
+import json
+
+# from datetime import datetime, timezone
+from entities.record import Record
+from entities.metadata import records_search_headers
+from errors import zenodo_error
+import logging
+
+logger = logging.getLogger(__name__)
+
+
+class _Records:
+    """Records class offers search capabilities for published records
     on Zenodo."""
-    def __init__(self, client, response: requests.models.Response = None):
+
+    def __init__(self, client):
         self._client = client
-        self._base_records_url = self._client._base_url + "/deposit/depositions"
-        self._headers = self._client._headers
+        self._base_records_url = self._client._base_url + "/records/"
         self._params = self._client._params
-        if response is not None:
-            self._response = response.json()
+        self._headers = self._client._headers
 
-    def add_version(self, _id):
-        """Create a new record object for uploading a new version to Zenodo."""
-        url = self.base_url + f"/deposit/depositions/{_id}/actions/newversion"
-        response = requests.post(url, headers=headers)
-
-        if response.status_code != 201:
-            raise RuntimeError(
-                f"Error in add_version: code = {response.status_code}"
-                f"\n\n{pprint.pformat(response.json())}"
-            )
-
-        result = response.json()
-
-        # The result is for the original DOI, so get the data for the new one
-        url = result["links"]["latest_draft"]
-        response = requests.get(url, headers=headers)
-
-        if response.status_code != 200:
-            raise RuntimeError(
-                f"Error in add_version get latest draft: code = {response.status_code}"
-                f"\n\n{pprint.pformat(response.json())}"
-            )
-
-        result = response.json()
-
-        return Record(result, self.token)
-
-    def create_record(self):
-        """Create a new record object for uploading to Zenodo."""
-        response = requests.post(self._base_records_url, headers=self._headers)
-
-        if response.status_code != 201:
-            raise RuntimeError(
-                f"Error in create_record(): code = {response.status_code}"
-                f"\n\n{pprint.pformat(response.json())}"
-            )
-
-        result = response.json()
-
-        return Record(result, self.token)
-
-    def get_deposit_record(self, _id):
-        """Get an existing deposit record object from Zenodo."""
-        url = self.base_url + f"/deposit/depositions/{_id}"
-        try:
-            headers = {
-                "Authorization": f"Bearer {self.token}",
-                "Content-Type": "application/json",
-            }
-        except Exception:
-            token = None
-            response = requests.get(url, json={})
-        else:
-            token = self.token
-            response = requests.get(url, json={}, headers=headers)
-
-        if response.status_code != 200:
-            raise RuntimeError(
-                f"Error in get_deposit_record: code = {response.status_code}"
-                f"\n\n{pprint.pformat(response.json())}"
-            )
-
-        result = response.json()
-
-        return Record(result, token)
-
-    def get_record(self, _id):
-        """Get an existing record object from Zenodo."""
-        url = self.base_url + f"/api/records/{_id}"
-        try:
-            headers = {
-                "Authorization": f"Bearer {self.token}",
-                "Content-Type": "application/json",
-            }
-        except Exception:
-            response = requests.get(url, json={})
-        else:
-            response = requests.get(url, json={}, headers=headers)
-
-        if response.status_code != 200:
-            raise RuntimeError(
-                f"Error in get_record: code = {response.status_code}"
-                f"\n\n{pprint.pformat(response.json())}"
-            )
-
-        result = response.json()
-
-        return Record(result, None)
-
-    def search(
+    def list_records(
         self,
-        authors=None,
-        query="",
-        communities=None,
-        keywords=None,
-        title=None,
-        description=None,
-        all_versions=False,
-        size=25,
-        page=1,
-    ):
-        """Search for records in Zenodo."""
-        url = self.base_url + "/records/"
-
-        payload = {
-            "size": size,
-            "page": page,
-        }
-        if all_versions:
-            payload["all_versions"] = 1
-
-        if communities is not None:
-            for community in communities:
-                query += f' AND +communities:"{community}"'
-
-        if keywords is not None:
-            for keyword in keywords:
-                query += f' AND +keywords:"{keyword}"'
-
-        payload["q"] = query
-
-        logger.debug("Payload for query request:\n" + pprint.pformat(payload))
-
-        try:
-            headers = {
-                "Authorization": f"Bearer {self.token}",
-            }
-        except Exception:
-            response = requests.get(url, params=payload)
+        content_type: str = None,
+        query: str = None,
+        status: str = None,
+        sort: str = None,
+        page: int = None,
+        size: int = None,
+        all_versions: (int | bool) = False,
+        communities: str = None,
+        type_: str = None,
+        subtype: str = None,
+        bounds: str = None,
+        custom: str = None,
+    ) -> list[Record]:
+        """List all published open access records matching the
+        (elastic) search query statement. For further details
+        see https://help.zenodo.org/guides/search/"""
+        tmp_params = self._params.copy()
+        if content_type is not None and content_type != "":
+            if content_type in records_search_headers.keys():
+                self._headers["Content-Type"] = records_search_headers[content_type]
+            else:
+                raise ValueError(
+                    f"Invalid 'content_type' argument value ({content_type}).\n"
+                    "The following values are allowed for the content_type argument:\n"
+                    f"{json.dumps(list(records_search_headers.keys()), indent=4)}\n"
+                )
         else:
-            response = requests.get(url, headers=headers, params=payload)
-
-        if response.status_code != 200:
-            raise RuntimeError(
-                f"Error in search: code = {response.status_code}"
-                f"\n\n{pprint.pformat(response.json())}"
+            logger.warning(
+                "The value of 'content_type' argument is None.\n"
+                "ZenoPy will adopt JSON encoding.\n"
             )
-
-        result = response.json()
-
-        records = []
-        if "hits" in result:
-            hits = result["hits"]
-            n_hits = hits["total"]
-
-            logger.debug(f"{n_hits=}")
-
-            for record in hits["hits"]:
-                records.append(Record(record, None))
-
-            for record in records:
-                logger.debug(f"\t{record['id']}: {record['metadata']['title']}")
+            self._headers["Content-Type"] = records_search_headers["json"]
+        if status is not None:
+            if status in ["draft", "published"]:
+                tmp_params["status"] = status
+            else:
+                raise ValueError(
+                    f"Invalid status argument value ({status}).\n"
+                    "The status argument can either be 'draft' or 'published'.\n"
+                )
         else:
-            logger.debug("Query returned no hits!")
+            logger.warning(
+                "The value of 'status' argument is None.\n"
+                "ZenoPy will search for 'published' record.\n"
+            )
+        if sort is not None:
+            if sort in ["bestmatch", "mostrecent", "-mostrecent"]:
+                tmp_params["sort"] = sort
+            else:
+                raise ValueError(
+                    f"Invalid sort argument value ({sort}).\n"
+                    "The sort argument can either be 'bestmatch', "
+                    "'mostrecent' (ascending), '-mostrecent' (descending).\n"
+                )
+        else:
+            logger.warning(
+                "The value of 'sort' argument is None.\n"
+                "ZenoPy will sort the search results according to 'bestmatch' sort option.\n"
+            )
+        if all_versions is not None and all_versions in [0, 1, False, True]:
+            tmp_params["all_versions"] = all_versions
+        keys_list = [
+            "query",
+            "page",
+            "size",
+            "communities",
+            "type",
+            "subtype",
+            "bounds",
+            "custom",
+        ]
+        values_list = [query, page, size, communities, type_, subtype, bounds, custom]
+        for key, value in zip(keys_list, values_list):
+            if value is not None:
+                tmp_params[key] = value
 
-        return n_hits, records
+        tmp_url = self._base_records_url.strip().rstrip("/")
+        response = requests.get(url=tmp_url, params=tmp_params, headers=self._headers)
+        status_code = response.status_code
+        if status_code != 200:
+            zenodo_error(status_code)
+        search_result = response.json()
+        search_result_list = search_result["hits"]["hits"]
+        records_list = []
+        if isinstance(search_result_list, list) and search_result_list != []:
+            for record in search_result_list:
+                records_list.append(Record(self._client, record=record))
+            return records_list
+        else:
+            return search_result
+
+    def retrieve_record(self, id_: int = None) -> Record:
+        """Retrieve a single record."""
+        if id_ is not None and isinstance(id_, int):
+            return Record(self._client, id_=id_, url=None, record=None)
+        else:
+            raise ValueError("The record ID cannot be None and must be an integer.")
