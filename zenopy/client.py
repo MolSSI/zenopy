@@ -12,18 +12,33 @@ from entities.depositions import _Depositions
 from entities.deposition_files import _DepositionFiles
 from entities.deposition_actions import _DepositionActions
 from entities.records import _Records
-from entities.licenses import _Licenses
+from entities.licenses import _Resources
 
 logger = logging.getLogger(__name__)
 
 
 class Zenodo(object):
+    """ZenoPy Client Class"""
     def __init__(
         self,
         token: str = None,
         config_file_path: (str | Path) = None,
         use_sandbox: bool = False,
     ):
+        """ZenoPy Client Class Constructor
+
+        Parameters
+        ----------
+        token : str, optional
+            Token created through a personal Zenodo account, by default None
+        config_file_path : str  |  Path, optional
+            Path to the configuration file listing tokens for Zenodo 
+            (and Sandbox) account(s). This file is usually located at ~/.zenodorc,
+            by default None
+        use_sandbox : bool, optional
+            If True, the tokens will be read from the [SANDBOX] section of the
+            configuration file, by default False
+        """
         self._token = token
         self._config_file_path = config_file_path
         self._use_sandbox = use_sandbox
@@ -61,10 +76,16 @@ class Zenodo(object):
 
     @property
     def token(self) -> str:
-        """Getter for the Zenodo class token attribute."""
+        """Getter for the Zenodo class token attribute
+
+        Returns
+        -------
+        self._token : str
+            The first token from [ZENODO] or [SANDBOX] sections 
+            listed in the configuration file
+        """
         if self._token is None or self._token == "":
             section = "SANDBOX" if self._use_sandbox else "ZENODO"
-            # Fetch the first entry from ZENODO or SANDBOX sections
             self._token = self.list_tokens(section)[0][1]
         return self._token
 
@@ -112,13 +133,13 @@ class Zenodo(object):
         """Creates an instance of the _DepositionFiles class"""
         return _DepositionFiles(self)
 
-    def init_licenses(self):
-        """Creates an instance of the _Licenses class"""
-        return _Licenses(self)
-
     def init_records(self):
         """Creates an instance of the _Records class"""
         return _Records(self)
+
+    def init_resources(self, resource: str = None):
+        """Creates an instance of the _Resources class"""
+        return _Resources(self, resource=resource)
 
     def list_sections(self):
         """List all sections in a config file"""
