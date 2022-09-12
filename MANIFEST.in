@@ -1,7 +1,15 @@
+include AUTHORS.rst
+include CONTRIBUTING.rst
+include HISTORY.rst
 include LICENSE
-include MANIFEST.in
-include CODE_OF_CONDUCT.md
+include README.rst
+include requirements*
 include versioneer.py
 
 graft zenopy
+
+recursive-include tests *
+
+recursive-include docs *.rst conf.py Makefile make.bat *.jpg *.png *.gif
+
 global-exclude *.py[cod] __pycache__ *.so
