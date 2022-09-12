@@ -17,20 +17,16 @@ import os
 import sys
 sys.path.insert(0, os.path.abspath('..'))
 
-import zenopy
-
-
 # -- Project information -----------------------------------------------------
 
-project = 'ZenoPy'
-copyright = ("2022, Paul Saxe. Project structure based on the "
-             "Computational Molecular Science Python Cookiecutter version 1.5")
-author = 'Paul Saxe'
+project = "zenopy"
+copyright = "2022, Mohammad Mostafanejad"
+author = "Mohammad Mostafanejad"
 
-# The short X.Y version
-version = ''
-# The full version, including alpha/beta/rc tags
-release = ''
+# The full version, including alpha/beta/rc tags.
+release = os.getenv('DOC_VERSION', '1.0')
+# The short X.Y version.
+version = release
 
 
 # -- General configuration ---------------------------------------------------
@@ -74,7 +70,7 @@ master_doc = 'index'
 #
 # This is also used if you do content translation via gettext catalogs.
 # Usually you set "language" from the command line for these cases.
-language = None
+language = "English"
 
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
@@ -90,18 +86,45 @@ pygments_style = 'default'
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 #
-html_theme = 'sphinx_rtd_theme'
+# html_theme = 'sphinx_rtd_theme'
+html_theme = 'renku'
 
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the
 # documentation.
 #
 # html_theme_options = {}
+html_theme_options = {
+    'logo_only': True,
+    'display_version': True,
+    'prev_next_buttons_location': 'bottom',
+    'style_external_links': False,
+    # Toc options
+    'collapse_navigation': True,
+    'sticky_navigation': True,
+    'navigation_depth': 4,
+    'includehidden': True,
+    'titles_only': False
+}
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ['_static']
+
+# These paths are either relative to html_static_path
+# or fully qualified paths (eg. https://...)
+html_css_files = [
+    'css/custom.css',
+]
+
+# If true, "Created using Sphinx" is shown in the HTML footer.
+# Default is True.
+html_show_sphinx = False
+
+# If true, "(C) Copyright ..." is shown in the HTML footer.
+# Default is True.
+html_show_copyright = True
 
 # Custom sidebar templates, must be a dictionary that maps document names
 # to template names.
@@ -144,7 +167,7 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-    (master_doc, 'zenopy.tex', 'ZenoPy Documentation',
+    (master_doc, 'zenopy.tex', 'zenopy Documentation',
      'zenopy', 'manual'),
 ]
 
@@ -154,7 +177,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    (master_doc, 'zenopy', 'ZenoPy Documentation',
+    (master_doc, 'zenopy', 'zenopy Documentation',
      [author], 1)
 ]
 
@@ -165,7 +188,7 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-    (master_doc, 'zenopy', 'ZenoPy Documentation',
+    (master_doc, 'zenopy', 'zenopy Documentation',
      author, 'zenopy', 'A Python wrapper package for Zenodo API',
      'Miscellaneous'),
 ]

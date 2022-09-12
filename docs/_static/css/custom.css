@@ -1,0 +1,32 @@
+/* Make the page wider so e.g. the status table can be seen fully */
+.wy-nav-content {
+    max-width: 1200px !important;
+}
+.column_left {
+  display: table-cell;
+  width: 60px;
+  vertical-align: middle;
+}
+.column {
+  display: table-cell;
+}
+.column_right {
+  display: table-cell;
+  width: 60px;
+  vertical-align: middle;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Numbering equations */
+.math {
+    text-align: left;
+}
+.eqno {
+    float: right;
+}

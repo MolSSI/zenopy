@@ -36,6 +36,7 @@ if __name__ == "__main__":
                 "sphinx==1.2.3",
                 "sphinxcontrib-napoleon",
                 "sphinx_rtd_theme",
+                "renku-sphinx-theme",
                 "numpydoc",
             ],
             "tests": ["pytest", "pytest-cov"],
