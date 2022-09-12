@@ -8,16 +8,15 @@ import requests
 import validators
 import json
 from datetime import datetime, timezone
-from entities.record import Record
-from entities.metadata import (
+import logging
+from zenopy.metadata import (
     upload_types,
     publication_types,
     image_types,
     creators_metadata,
     access_rights,
 )
-from errors import zenodo_error, request_error
-import logging
+from zenopy.record import Record
 
 logger = logging.getLogger(__name__)
 

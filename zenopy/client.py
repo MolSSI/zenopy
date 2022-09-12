@@ -7,12 +7,11 @@
 import configparser
 import logging
 from pathlib import Path
-
-from entities.depositions import _Depositions
-from entities.deposition_files import _DepositionFiles
-from entities.deposition_actions import _DepositionActions
-from entities.records import _Records
-from entities.licenses import _Resources
+from zenopy.deposition_actions import _DepositionActions
+from zenopy.deposition_files import _DepositionFiles
+from zenopy.depositions import _Depositions
+from zenopy.records import _Records
+from zenopy.resources import _Resources
 
 logger = logging.getLogger(__name__)
 
@@ -29,13 +28,13 @@ class Zenodo(object):
 
         Parameters
         ----------
-        token : str, optional
+        _token : str, optional
             Token created through a personal Zenodo account, by default None
-        config_file_path : str  |  Path, optional
+        _config_file_path : str  |  Path, optional
             Path to the configuration file listing tokens for Zenodo 
             (and Sandbox) account(s). This file is usually located at ~/.zenodorc,
             by default None
-        use_sandbox : bool, optional
+        _use_sandbox : bool, optional
             If True, the tokens will be read from the [SANDBOX] section of the
             configuration file, by default False
         """
@@ -80,7 +79,7 @@ class Zenodo(object):
 
         Returns
         -------
-        self._token : str
+        _token : str
             The first token from [ZENODO] or [SANDBOX] sections 
             listed in the configuration file
         """
@@ -91,7 +90,14 @@ class Zenodo(object):
 
     @token.setter
     def token(self, token: str) -> None:
-        """Setter for the Zenodo class token attribute."""
+        """Setter for the Zenodo class token attribute
+
+        Parameters
+        ----------
+        token : str
+            User-defined token to be stored in the _token attribute
+            of the Zenodo client class
+        """
         self._token = token
 
     @property
@@ -103,11 +109,26 @@ class Zenodo(object):
         self._use_sandbox = value
 
     def create_config_file(self, config_file_path: str = None) -> None:
-        """Creates an empty config_file in file_path"""
+        """Creates an empty config file in the `config_file_path`
+
+        Parameters
+        ----------
+        config_file_path : str, optional
+            A valid address for creating the config file, by default None
+
+        Raises
+        ------
+        RuntimeError
+            If the provided config_file_path is None or an empty string
+        configparser.Error
+            If a config_file does already exist in the target address
+            provided by `config_file_path`
+        """        
+        """"""
         if config_file_path is None or config_file_path == "":
             raise RuntimeError(
                 "The file_path argument is None or empty. "
-                "Please provide a valid address for a config_file."
+                "Please provide a valid address for a config file."
             )
         path = Path(config_file_path).expanduser()
         if not path.exists():
@@ -142,7 +163,14 @@ class Zenodo(object):
         return _Resources(self, resource=resource)
 
     def list_sections(self):
-        """List all sections in a config file"""
+        """List all sections in a config file
+
+        Returns
+        -------
+        _config_obj.sections() : list[str]
+            A list of section titles in the instance's container 
+            config_obj
+        """
         return self._config_obj.sections()
 
     def list_tokens(self, section: str = None) -> list[tuple[str, str]]:

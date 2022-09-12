@@ -6,10 +6,9 @@
 
 import requests
 import json
-from entities.record import Record
-from entities.metadata import deposition_actions
-from errors import request_error
 import logging
+
+from zenopy.metadata import deposition_actions
 
 logger = logging.getLogger(__name__)
 
@@ -22,7 +21,7 @@ class _DepositionActions(object):
         self._deposit_action_url = client._base_url + "/deposit/depositions/@id/actions"
         self.data = {}
 
-    def deposition_action(self, id_: int = None, action: str = None, return_newversion: bool = True):
+    def deposition_action(self, id_: int = None, action: str = None, return_newversion: bool = True) -> "(None | Record)":
         """Performing actions on Zenodo depositions/records"""
         if id_ is not None and isinstance(id_, int):
             if action is not None and action != "":

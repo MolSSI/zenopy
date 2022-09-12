@@ -6,11 +6,10 @@
 
 import requests
 import validators
-
-from entities.record import Record
 from pathlib import Path
-from errors import zenodo_error
+from typing import Type
 import logging
+from zenopy.record import Record
 
 logger = logging.getLogger(__name__)
 
@@ -23,7 +22,7 @@ class _DepositionFiles(object):
         self._deposits_url = client._base_url + "/deposit/depositions/@id/files"
         self.data = {}
     
-    def create_deposition_file(self, file_path: (str | Path) = None, bucket_url: str = None, record: Record = None) -> Record:
+    def create_deposition_file(self, file_path: (str | Path) = None, bucket_url: str = None, record: Type[Record] = None) -> Record:
         """Upload a new file (into an existing deposition record)."""
         if file_path is not None and file_path != "":
             if isinstance(file_path, str):

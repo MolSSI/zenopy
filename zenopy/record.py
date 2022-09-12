@@ -4,14 +4,12 @@
 
 """
 
-from argparse import ArgumentError
 from collections.abc import MutableMapping
 import requests
 import validators
 import logging
 import pprint
 import inspect
-from datetime import datetime, timezone
 
 logger = logging.getLogger(__name__)
 

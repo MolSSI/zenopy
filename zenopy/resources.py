@@ -4,11 +4,9 @@
 
 """
 
-import re
 import requests
-from entities.record import Record
-from errors import zenodo_error
 import logging
+from zenopy.record import Record
 
 logger = logging.getLogger(__name__)
 

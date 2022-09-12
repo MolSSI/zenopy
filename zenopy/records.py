@@ -5,12 +5,9 @@
 """
 
 import requests
-
-# import validators
 import json
-from entities.record import Record
-from entities.metadata import records_search_headers
-from errors import zenodo_error
+from zenopy.record import Record
+from zenopy.metadata import records_search_headers
 import logging
 
 logger = logging.getLogger(__name__)
