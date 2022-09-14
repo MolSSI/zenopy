@@ -12,4 +12,4 @@ can be used in practice.
     :titlesonly:
     :glob:
        
-    .. user_guide_*
+    user_guide_*
