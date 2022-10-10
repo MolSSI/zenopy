@@ -4,7 +4,7 @@
 Tutorials
 *********
 
-In this section, we provide a series of tutorials to demonstrate how `zenopy`
+In this section, we provide a series of tutorials to demonstrate how ``zenopy``
 can be used in practice.
 
 .. toctree::

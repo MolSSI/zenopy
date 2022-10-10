@@ -10,6 +10,7 @@ from pathlib import Path
 from typing import Type
 import logging
 from zenopy.record import Record
+from zenopy.errors import zenodo_error
 
 logger = logging.getLogger(__name__)
 

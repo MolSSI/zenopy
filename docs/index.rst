@@ -10,11 +10,13 @@ of the `Zenodo <https://zenodo.org>`_ API to researchers and software developers
 This package is a part of data engineering infrastructure 
 
 .. toctree::
-    :maxdepth: 5
+    :maxdepth: 4
     :titlesonly:
     :numbered: 4
 
+    installation
     quick_start
+    howtos/index
     tutorials/index
     manual/index
     references

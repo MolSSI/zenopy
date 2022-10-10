@@ -4,8 +4,12 @@
 Quick Start
 ***********
 
-Here, we demonstrate how you can use ``zenopy`` in a few brief sections.
-For more detailed documentation, check out our :ref:`User Guide <user_guide>`.
+.. contents::
+   :local:
+   :depth: 2
+
+Let's get started by demonstrating how you can use ``zenopy`` in a 
+few brief sections. For more details, check out our :ref:`User Guide <user_guide>`.
 
 Access your Zenodo Account
 ==========================
@@ -143,13 +147,12 @@ its contents
  'submitted': False,
  'title': ''}
 
-
 As you can see, there are multiple deposition fields such as ``doi`` that Zenodo server has already
 minted for you. Other (meta)data fields such as ``title`` and ``files`` are for you to populate.
 Looking at the **Upload** tab in your Zenodo account, you should be able to verify that the
 deposition draft container is created for you
 
-.. figure:: images/quick_start_deposition_create.png
+.. figure:: images/quick_start/deposition_create.png
   :align: center
   :alt: Creating a deposition draft container figure
 
@@ -285,7 +288,7 @@ Output exceeds the size limit. Open the full output data in a text editor
 
 The changes are now reflected on the target deposition in our Zenodo account records as well
 
-.. figure:: images/quick_start_deposition_update.png
+.. figure:: images/quick_start/deposition_update.png
   :align: center
   :alt: Updating a deposition draft container figure
 
@@ -350,5 +353,5 @@ An unpublished deposition has been deleted at the following address:
 	https://sandbox.zenodo.org/api/deposit/depositions/
 
 Upon successful completion of this command, ``zenopy`` notifies you that
-the target deposition has been deleted from your account. You can verify
-it by checking your Zenodo account from your web browser.
+the deposition has been deleted from your account. You can verify
+it by checking your Zenodo account from the web browser.
