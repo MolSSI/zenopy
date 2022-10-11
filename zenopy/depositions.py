@@ -17,6 +17,7 @@ from zenopy.metadata import (
     access_rights,
 )
 from zenopy.record import Record
+from zenopy.errors import zenodo_error
 
 logger = logging.getLogger(__name__)
 

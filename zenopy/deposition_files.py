@@ -64,6 +64,7 @@ class _DepositionFiles(object):
             ValueError(
                 "The 'file_path' argument cannot be None or empty."
             )
+
     def delete_deposition_file(self, id_: int = None, file_id: str =  None) -> None:
         """Delete an existing deposition file resource. Note, only 
         deposition files for unpublished depositions may be deleted."""
