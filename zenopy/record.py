@@ -306,7 +306,7 @@ class Record(MutableMapping):
         """Zenodo publication state, either: (i) inprogress,
         (ii) done or (iii) error."""
         if "state" in self.data and self.data["state"] != "":
-            if self.data["state"] in ["inprogress", "done"]:
+            if self.data["state"] in ["inprogress", "done"] or self.data["state"] in ["unsubmitted", "draft"]:
                 return self.data["state"]
             elif self.data["state"] == "error":
                 raise RuntimeError(
