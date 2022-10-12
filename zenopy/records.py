@@ -6,8 +6,10 @@
 
 import requests
 import json
+from typing import Any
 from zenopy.record import Record
 from zenopy.metadata import records_search_headers
+from zenopy.errors import zenodo_error
 import logging
 
 logger = logging.getLogger(__name__)
@@ -26,7 +28,7 @@ class _Records:
     def list_records(
         self,
         content_type: str = None,
-        query: str = None,
+        query: Any = None,
         status: str = None,
         sort: str = None,
         page: int = None,
@@ -87,7 +89,7 @@ class _Records:
         if all_versions is not None and all_versions in [0, 1, False, True]:
             tmp_params["all_versions"] = all_versions
         keys_list = [
-            "query",
+            "q",
             "page",
             "size",
             "communities",
