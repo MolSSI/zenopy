@@ -35,8 +35,8 @@ the following
     [ZENODO]
     my_token = <token-generated-from-Zenodo-account>
 
-If you do not remember how to create a token from your Zenodo account,
-see :ref:`here <user_guide_client>`.
+If you do not know how to create a token from your Zenodo account,
+see :ref:`here <cli_token>`.
 
 Working with the Existing Depositions
 =====================================
@@ -233,17 +233,18 @@ refer to `Zenodo Documentation <https://developers.zenodo.org/#representation>`_
 Let's go ahead and update (commit) a few changes in the data field values in our 
 deposition container form on Zenodo
 
+.. code-block:: python
 
->>> draft_depo = depo.update_deposition(
-    id_=1104408,
-    upload_type="publication",
-    publication_type="technicalnote",
-    creators=[{"name":"Mostafanejad, Sina"}],
-    access_right="open",
-    license="cc-by",
-    title="Using zenopy is super easy!",
-    description="zenopy is a user-friendly tool for productivity."
-    )
+  >>>  draft_depo = depo.update_deposition(
+       id_=1104408,
+       upload_type="publication",
+       publication_type="technicalnote",
+       creators=[{"name":"Mostafanejad, Sina"}],
+       access_right="open",
+       license="cc-by",
+       title="Using zenopy is super easy!",
+       description="zenopy is a user-friendly tool for productivity."
+       )
 
 .. tip::
 
