@@ -27,4 +27,4 @@ create a config file for you.
 
 .. seealso::
 
-   :ref:`cli_config`
+   - :ref:`cli_config`

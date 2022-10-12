@@ -34,4 +34,5 @@ client constructor function ``zenopy.Zenodo()`` without passing the
 
 .. seealso::
 
-   :ref:`cli_client`
+   - :ref:`cli_token`
+   - :ref:`cli_client`

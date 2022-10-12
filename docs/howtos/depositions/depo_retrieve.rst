@@ -1,8 +1,8 @@
-.. _depo_create:
+.. _depo_retrieve:
 
-*********************************
-How to Create an Empty Deposition
-*********************************
+*****************************************************
+How to Retrieve a Deposition from your Zenodo Account
+*****************************************************
 
 .. note::
   
@@ -10,31 +10,16 @@ How to Create an Empty Deposition
   an instance of the ``_Deposition`` class, **depo_obj**, by reviewing 
   the :ref:`deposition_howtos` guide.
 
-In order to create an empty deposition form on our zenodo account,
-call the ``create_deposition()`` function on an instance of the
-``Deposition`` class (here, the instance is stored in the **depo_obj** 
-variable)
+An existing deposition can be retrieved from your zenodo account by passing
+its unique ID to the ``retrieve_deposition()`` function provided by 
+the ``_Deposition`` class
 
->>> my_depo = depo_obj.create_deposition()
+>>> depo = depo_obj.retrieve_deposition(id_=1112185)
 
-Running this command not only creates an empty untitled
-deposition form in your Zenodo account
+Here, we have fetched the deposition corresponding to the ``id_ = 1112185``.
+Let's make sure we have fetched the correct deposition
 
-.. figure:: ../../images/howtos/depo_create.png
-  :align: center
-  :alt: A freshly minted deposition form created by ``zenopy``
-
-but also generates a deposition object of ``_Depositions`` type
-
->>> my_depo
-<zenopy.depositions._Depositions at 0x7fe0da752bf0>
-
-that can be further modified and submitted to Zenodo. 
-
-You can directly access the contents of the **my_depo** deposition
-object through its ``data`` attribute
-
->>> my_depo.data
+>>> depo.data
 {'conceptrecid': '1112184',
  'created': '2022-10-09T19:38:15.289636+00:00',
  'files': [],
@@ -46,7 +31,9 @@ object through its ``data`` attribute
   'html': 'https://sandbox.zenodo.org/deposit/1112185',
   'latest_draft': 'https://sandbox.zenodo.org/api/deposit/depositions/1112185',
   'latest_draft_html': 'https://sandbox.zenodo.org/deposit/1112185',
+  'newversion': 'https://sandbox.zenodo.org/api/deposit/depositions/1112185/actions/newversion',
   'publish': 'https://sandbox.zenodo.org/api/deposit/depositions/1112185/actions/publish',
+  'registerconceptdoi': 'https://sandbox.zenodo.org/api/deposit/depositions/1112185/actions/registerconceptdoi',
   'self': 'https://sandbox.zenodo.org/api/deposit/depositions/1112185'},
  'metadata': {'prereserve_doi': {'doi': '10.5072/zenodo.1112185',
    'recid': 1112185}},
@@ -57,14 +44,13 @@ object through its ``data`` attribute
  'submitted': False,
  'title': ''}
 
-.. tip::
+You can find the pertinent ID in the **id** entry of the dictionary. You can also access it 
+through the ``_id`` attribute of the retrieved deposition object (**depo**)
 
-  Each deposition is created with a unique identifier which you can access 
-  through its ``_id`` attribute:
-
-  >>> mydepo._id
-  1112185
+>>> depo._id
+1112185
 
 .. seealso::
 
-   - :ref:`cli_client`
+  - :ref:`depo_create`
+  - :ref:`depo_list`

@@ -13,3 +13,37 @@ to focus on a specific tasks pertinent to the ``Depositon`` objects in ``zenopy`
     :glob:
     
     depo_*
+
+For almost all of the tutorials in this section, you will need to start from the
+following two steps:
+
+#. Create a ``zenopy`` client object (see :ref:`here <cli_client>`
+   for details)
+#. Construct a ``Deposition`` object
+
+The first step begins with importing the ``zenopy`` package,
+
+>>> import zenopy
+
+This enables you to call the ``Zenodo()`` constructor
+to get a handle to the client object 
+
+>>> cli = zenopy.Zenodo()
+WARNING: The config file (~/.zenodorc) is found.
+
+A warning will notify you that the ``zenopy`` client is now
+connected to your Zenodo account. 
+
+Next, you can now call the client object's ``init_deposition()`` function 
+to construct an instance of the ``Deposition`` class.
+
+>>> depo_obj = cli.init_deposition()
+
+The **depo_obj** object allows you to create, update, list, delete *etc.*
+the depositions on your Zenodo account as you will see in more details
+in the guidelines list.
+
+.. seealso::
+
+   - :ref:`cli_config`
+   - :ref:`cli_client`
