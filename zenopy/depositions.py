@@ -7,6 +7,7 @@
 import requests
 import validators
 import json
+from typing import Any
 from datetime import datetime, timezone
 import logging
 from zenopy.metadata import (
@@ -17,7 +18,7 @@ from zenopy.metadata import (
     access_rights,
 )
 from zenopy.record import Record
-from zenopy.errors import zenodo_error
+from zenopy.errors import zenodo_error, request_error
 
 logger = logging.getLogger(__name__)
 
@@ -98,7 +99,7 @@ class _Depositions(object):
 
     def list_depositions(
         self,
-        query: str = None,
+        query: Any = None,
         status: str = "published",
         sort: str = "bestmatch",
         page: int = 1,

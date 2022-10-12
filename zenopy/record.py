@@ -306,6 +306,7 @@ class Record(MutableMapping):
         """Zenodo publication state, either: (i) inprogress,
         (ii) done or (iii) error."""
         if "state" in self.data and self.data["state"] != "":
+            # NOTE: The second list is not part of the official documentation but is in use in Zenodo
             if self.data["state"] in ["inprogress", "done"] or self.data["state"] in ["unsubmitted", "draft"]:
                 return self.data["state"]
             elif self.data["state"] == "error":
