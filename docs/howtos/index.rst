@@ -13,5 +13,6 @@ of how the software works on the lower levels.
     :titlesonly:
     
     client/index
-    depositions/index
     records/index
+    depositions/index
+    actions/index

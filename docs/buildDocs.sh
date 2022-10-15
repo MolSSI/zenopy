@@ -7,9 +7,9 @@
 #            .github/workflows/*.yml
 #
 # Authors: Michael Altfield <michael@michaelaltfield.net>
-#          Paul Saxe <psaxe@vt.edu>
+#          Mohammad Mostafanejad <smostafanejad@vt.edu>
 # Created: 2020-07-17
-# Updated: 2020-12-12
+# Updated: 2022-10-12
 # Version: 0.3
 ################################################################################
  
@@ -116,10 +116,10 @@ cat > "${docroot}/dev/index.html" <<EOF
 <!DOCTYPE html>
 <html>
    <head>
-      <title>Documentation for MolSSI SEAMM</title>
+      <title>Documentation for MolSSI zenopy</title>
    </head>
    <body>
-      <h1>Documentation for MolSSI SEAMM</h1>
+      <h1>Documentation for MolSSI zenopy</h1>
       <h2>Branches</h2>
       <ul>
 EOF
@@ -128,7 +128,7 @@ cat > "${docroot}/dev/versions.html" <<EOF
 <!DOCTYPE html>
 <html>
    <head>
-      <title>Documentation for MolSSI SEAMM</title>
+      <title>Documentation for MolSSI zenopy</title>
    </head>
    <body>
       <ul>

@@ -7,12 +7,12 @@ How to Retrieve a Deposition from your Zenodo Account
 .. note::
   
   Before going through this document, make sure you know how to create 
-  an instance of the ``_Deposition`` class, **depo_obj**, by reviewing 
+  an instance of the ``_Depositions`` class, **depo_obj**, by reviewing 
   the :ref:`deposition_howtos` guide.
 
 An existing deposition can be retrieved from your zenodo account by passing
 its unique ID to the ``retrieve_deposition()`` function provided by 
-the ``_Deposition`` class
+the ``_Depositions`` class
 
 >>> depo = depo_obj.retrieve_deposition(id_=1112185)
 

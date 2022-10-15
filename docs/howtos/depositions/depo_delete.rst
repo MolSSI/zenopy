@@ -7,12 +7,12 @@ How to Delete an Unpublished Deposition
 .. note::
   
   Before going through this document, make sure you know how to create 
-  an instance of the ``_Deposition`` class, **depo_obj**, by reviewing 
+  an instance of the ``_Depositions`` class, **depo_obj**, by reviewing 
   the :ref:`deposition_howtos` guide.
 
 An **unpublished** deposition can be deleted from your Zenodo account
 by calling the ``delete_deposition()`` from an instance of the 
-``_Deposition`` class. Here, we plan to delete a deposition
+``_Depositions`` class. Here, we plan to delete a deposition
 with the ID value of **1112185** as shown below
 
 >>> depo_obj.delete_deposition(id_=1112185)

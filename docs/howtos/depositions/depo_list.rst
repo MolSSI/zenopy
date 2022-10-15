@@ -7,11 +7,11 @@ How to List the Zenodo Depositions
 .. note::
   
   Before going through this document, make sure you know how to create 
-  an instance of the ``_Deposition`` class, **depo_obj**, by reviewing 
+  an instance of the ``_Depositions`` class, **depo_obj**, by reviewing 
   the :ref:`deposition_howtos` guide.
 
 Listing all existing depositions in your Zenodo account
-is as simple as calling the ``_Deposition`` instance object's 
+is as simple as calling the ``_Depositions`` instance object's 
 ``list_deposition()`` function
 
 >>> depo_list = depo_obj.list_depositions()

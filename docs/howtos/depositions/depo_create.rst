@@ -7,12 +7,12 @@ How to Create an Empty Deposition
 .. note::
   
   Before going through this document, make sure you know how to create 
-  an instance of the ``_Deposition`` class, **depo_obj**, by reviewing 
+  an instance of the ``_Depositions`` class, **depo_obj**, by reviewing 
   the :ref:`deposition_howtos` guide.
 
 In order to create an empty deposition form on our zenodo account,
 call the ``create_deposition()`` function on an instance of the
-``Deposition`` class (here, the instance is stored in the **depo_obj** 
+``_Depositions`` class (here, the instance is stored in the **depo_obj** 
 variable)
 
 >>> my_depo = depo_obj.create_deposition()

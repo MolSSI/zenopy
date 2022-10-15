@@ -5,7 +5,8 @@ How to Work with Depositions
 ****************************
 
 This section lays out a list of brief interconnected recipes that allow users
-to focus on a specific tasks pertinent to the ``Deposition`` objects in ``zenopy``.
+to focus on a specific tasks pertinent to the ``_Depositions`` objects 
+in ``zenopy``.
 
 .. toctree::
     :maxdepth: 2
@@ -19,7 +20,7 @@ following two steps:
 
 #. Create a ``zenopy`` client object (see :ref:`here <cli_client>`
    for details)
-#. Construct a ``Deposition`` object
+#. Construct a ``_Depositions`` object
 
 The first step begins with importing the ``zenopy`` package,
 
@@ -35,7 +36,7 @@ A warning will notify you that the ``zenopy`` client is now
 connected to your Zenodo account. 
 
 Next, you can now call the client object's ``init_deposition()`` function 
-to construct an instance of the ``Deposition`` class.
+to construct an instance of the ``_Depositions`` class.
 
 >>> depo_obj = cli.init_deposition()
 

@@ -7,8 +7,8 @@
 import requests
 import json
 import logging
-from zenopy.errors import request_error
 
+from zenopy.errors import request_error
 from zenopy.metadata import deposition_actions
 from zenopy.record import Record
 

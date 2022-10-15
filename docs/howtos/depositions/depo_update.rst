@@ -7,7 +7,7 @@ How to Update an Existing Deposition That is not Published
 .. note::
   
   Before going through this document, make sure you know how to create 
-  an instance of the ``_Deposition`` class, **depo_obj**, by reviewing 
+  an instance of the ``_Depositions`` class, **depo_obj**, by reviewing 
   the :ref:`deposition_howtos` guide.
 
 Let's update the contents of an existing deposition in our Zenodo account. 
@@ -20,7 +20,7 @@ we want to publish on Zenodo
   :alt: An empty deposition form with the ID value of 1112185
 
 In order to update the contents of the deposition \#1112185,
-we call the ``_Deposition`` class' ``update_deposition`` function
+we call the ``_Depositions`` class' ``update_deposition`` function
 and pass the corresponding metadata as arguments
 
 .. code-block:: python
