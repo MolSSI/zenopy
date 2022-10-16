@@ -15,4 +15,5 @@ of how the software works on the lower levels.
     client/index
     records/index
     depositions/index
-    actions/index
+    deposition_actions/index
+    deposition_files/index

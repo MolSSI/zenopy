@@ -10,9 +10,11 @@ and help them to interact with the ``_DepositionActions`` objects in ``zenopy``
 .. toctree::
     :maxdepth: 2
     :titlesonly:
-    :glob:
     
-    act_*
+    act_edit
+    act_discard
+    act_newversion
+    act_publish
 
 For all tutorials in this section you will need to start from the
 following two steps:

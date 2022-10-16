@@ -1,14 +1,22 @@
-.. _act_edit:
+.. _act_publish:
 
-**********************************
-How to Edit a Submitted Deposition
-**********************************
+***************************
+How to Publish a Deposition
+***************************
 
 .. note::
   
   Before going through this document, make sure you know how to create 
   an instance of the ``_DepositionActions`` class, **depo_act_obj**,
   by reviewing the :ref:`actions_howtos` guide.
+
+.. danger::
+
+  Once a deposition is published, only minor changes in the metadata are allowed
+  but none of the record files can be touched. If you need to change some of the 
+  files in the record or modify their versions in the published deposition, 
+  you should either create a new version (which comes with a new DOI) or contact
+  the `Zenodo Support Team <https://zenodo.org/support>`_.
 
 Let's consider a mock deposition in a Zenodo Sandbox account that
 has been already published. A published deposition can be easily
@@ -44,9 +52,9 @@ The unlocked deposition, which can now be edited, is marked by a red upper-arrow
 The aforementioned change from **published** to **draft** state can be 
 programmatically performed in ``zenopy`` by calling the ``deposition_action()``
 function on an instance of the ``_DepositionActions`` class and passing
-``action = edit`` as an argument
+``action = 'edit'`` as an argument
 
->>> my_depo = depo_act.deposition_action(id_=1097408, action='edit')
+>>> my_depo = depo_act_obj.deposition_action(id_=1097408, action='edit')
 >>> my_depo
 <zenopy.record.Record at 0x7fd6f430ec20>
 

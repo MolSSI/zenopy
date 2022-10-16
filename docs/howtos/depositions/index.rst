@@ -9,11 +9,14 @@ to focus on a specific tasks pertinent to the ``_Depositions`` objects
 in ``zenopy``.
 
 .. toctree::
-    :maxdepth: 2
-    :titlesonly:
-    :glob:
+   :maxdepth: 2
+   :titlesonly:
     
-    depo_*
+   depo_list
+   depo_retrieve
+   depo_create
+   depo_update
+   depo_delete
 
 For almost all of the tutorials in this section, you will need to start from the
 following two steps:
