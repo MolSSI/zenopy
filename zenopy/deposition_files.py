@@ -57,11 +57,11 @@ class _DepositionFiles(object):
                             zenodo_error(status_code)
                         return Record(self._client, record=response)
                 else:
-                    RuntimeError(
+                    raise RuntimeError(
                         f"The provided path ({path}) is not valid."
                     )
         else:
-            ValueError(
+            raise ValueError(
                 "The 'file_path' argument cannot be None or empty."
             )
 
