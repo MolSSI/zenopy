@@ -39,7 +39,7 @@
 
 # ZenoPy
 
-A Python open-source library for Zenodo REST API
+An open-source Python library for Zenodo REST API
 
 ## OVERVIEW
 
