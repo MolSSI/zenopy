@@ -5,10 +5,11 @@ Installation
 ************
 
 .. tip::
-    Although not necessary, we recommend installing ``zenopy`` within an isolated
-    ``virtualenv`` or ``conda`` environment. In order to create a ``conda`` 
-    environment with Python 3.10 installed on it, run the following command
-    in a terminal
+
+    Although not necessary, we recommend installing ``zenopy`` and its dependencies
+    within an isolated ``virtualenv`` or ``conda`` environment. In order to 
+    create a ``conda`` environment with **Python 3.10** (or newer) installed on it,
+    run the following command in a terminal
 
     .. code-block:: bash
         
@@ -22,8 +23,9 @@ Installation
         
         conda activate <env-name>
     
-    Following the rest of this instruction will now result in the installation of
-    ``zenopy`` and its dependencies in an isolated ``conda`` environment.
+    Following the remaining part of this instruction will now result in the 
+    installation of ``zenopy`` and its dependencies in an isolated ``conda``
+    environment.
 
 The easiest way to install ``zenopy`` is through 
 `pypi <https://pypi.org/project/zenopy/>`_:
