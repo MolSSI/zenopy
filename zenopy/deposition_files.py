@@ -164,6 +164,6 @@ class _DepositionFiles(object):
 
     def update_deposition_file(self) -> Record:
         """Update a deposition file resource. Currently the only use is 
-        renaming an already uploaded file. If you one to replace the 
+        renaming an already uploaded file. If you want to replace the 
         actual file, please delete the file and upload a new file."""
         pass

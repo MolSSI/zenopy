@@ -14,9 +14,9 @@ in ``zenopy``.
     
    file_list
    file_retrieve
-   depo_create
-   depo_sort
-   depo_delete
+   file_create
+   file_sort
+   file_delete
 
 All tutorials in this section are based upon the following two steps:
 
