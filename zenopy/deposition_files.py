@@ -125,8 +125,7 @@ class _DepositionFiles(object):
             with open(outfile_path, "wb") as f:
                 for chunk in response.iter_content(chunk_size=128):
                     f.write(chunk)
-        else:
-            return record
+        return record
 
     def sort_deposition_files(
         self, id_: int = None, id_list: list[str] = None
