@@ -1,23 +1,24 @@
-.. zenopy documentation master file, created by
-   sphinx-quickstart on Thu Mar 15 13:55:56 2018.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
+********************
+zenopy Documentation
+********************
 
-Welcome to ZenoPy's documentation!
-=========================================================
+Welcome to ``zenopy's`` documentation.
+
+``zenopy`` is an open-source python library that exposes the all functionalities
+of the `Zenodo <https://zenodo.org>`_ API to researchers and software developers.
+
+This package is a part of data engineering infrastructure 
 
 .. toctree::
-   :maxdepth: 2
-   :caption: Contents:
+    :maxdepth: 4
+    :titlesonly:
+    :numbered: 4
 
-   getting_started
-   api
-
-
-
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
+    installation
+    quick_start
+    howtos/index
+    tutorials/index
+    manual/index
+    references
+    dev_team
+    acknowledgements
