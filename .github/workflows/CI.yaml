@@ -30,11 +30,6 @@ jobs:
     steps:
     - uses: actions/checkout@v3
 
-    - name: Install Python dependencies
-      uses: py-actions/py-dependency-install@v3
-      with:
-        path: "./requirements.txt"
-
     - name: Additional info about the build
       shell: bash
       run: |
@@ -55,7 +50,12 @@ jobs:
         auto-update-conda: false
         auto-activate-base: false
         show-channel-urls: true
-
+  
+    - name: Install Python dependencies
+      uses: py-actions/py-dependency-install@v3
+      with:
+        path: "./requirements.txt"
+  
     - name: Install package
 
       # conda setup requires this special shell
