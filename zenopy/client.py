@@ -17,26 +17,42 @@ logger = logging.getLogger(__name__)
 
 
 class Zenodo(object):
-    """ZenoPy Client Class"""
+    """zenopy client class
+
+    The Zenodo client class instance allows the users to connect to
+    their accounts on Zenodo server and communicate with it through
+    REST APIs.
+
+    Examples
+    --------
+    >>> import zenopy
+    >>> cli = zenopy.Zenodo()
+    WARNING: The config file (~/.zenodorc) is found.
+    """
     def __init__(
         self,
         token: str = None,
         config_file_path: (str | Path) = None,
         use_sandbox: bool = False,
     ):
-        """ZenoPy Client Class Constructor
+        """zenopy client class constructor
 
         Parameters
         ----------
-        _token : str, optional
+        token : str, optional
             Token created through a personal Zenodo account, by default None
-        _config_file_path : str  |  Path, optional
+        config_file_path : str  |  Path, optional
             Path to the configuration file listing tokens for Zenodo 
             (and Sandbox) account(s). This file is usually located at ~/.zenodorc,
             by default None
-        _use_sandbox : bool, optional
+        use_sandbox : bool, optional
             If True, the tokens will be read from the [SANDBOX] section of the
             configuration file, by default False
+        
+
+        See Also
+        --------
+        create_config_file
         """
         self._token = token
         self._config_file_path = config_file_path
