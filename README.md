@@ -37,13 +37,13 @@
 </table>
 -->
 
-# ZenoPy
+# zenopy
 
 An open-source Python library for Zenodo REST API
 
 ## OVERVIEW
 
-ZenoPy provides a comprehensive Python library for productivity
+zenopy provides a comprehensive Python library for productivity
 allowing scientists and engineers to publish their work on Zenodo
 in compliance with FAIR principles.
 
