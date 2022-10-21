@@ -48,7 +48,7 @@ class Zenodo(object):
         use_sandbox : bool, optional
             If True, the tokens will be read from the [SANDBOX] section of the
             configuration file, by default False
-        
+
 
         See Also
         --------
@@ -81,12 +81,28 @@ class Zenodo(object):
 
     @property
     def config_obj(self) -> configparser.ConfigParser:
+        """Getter for the client's active ConfigParser object
+
+        Returns
+        -------
+        _config_obj : configparser.ConfigParser
+            The client's active ``ConfigParser`` object which stores
+            all authentication tokens and credentials in memory.
+        """
         if self._config_obj is None:
             return self.read_config_file(self._config_file_path)
         return self._config_obj
 
     @config_obj.setter
     def config_obj(self, cfg_obj: configparser.ConfigParser) -> None:
+        """Setter for the client's active ConfigParser object
+
+        Parameters
+        ----------
+        cfg_obj : configparser.ConfigParser
+            An instance of the ``ConfigParser`` object to be stored in
+            client class' corresponding attribute.
+        """
         self._config_obj = cfg_obj
 
     @property
@@ -96,8 +112,9 @@ class Zenodo(object):
         Returns
         -------
         _token : str
-            The first token from [ZENODO] or [SANDBOX] sections 
-            listed in the configuration file
+            The first token from [ZENODO] (if ``_use_sandbox == False``) 
+            or [SANDBOX] (if ``_use_sandbox == True``) sections listed 
+            in the configuration file
         """
         if self._token is None or self._token == "":
             section = "SANDBOX" if self._use_sandbox else "ZENODO"
@@ -111,17 +128,33 @@ class Zenodo(object):
         Parameters
         ----------
         token : str
-            User-defined token to be stored in the _token attribute
+            User-defined token to be stored in the ``_token`` attribute
             of the Zenodo client class
         """
         self._token = token
 
     @property
     def use_sandbox(self) -> bool:
+        """Getter for the Zenodo class use_sandbox boolean attribute
+
+        Returns
+        -------
+        _use_sandbox : str
+            Boolean attribute for switching between the SANDBOX and
+            ZENODO accounts
+        """
         return self._use_sandbox
 
     @use_sandbox.setter
     def use_sandbox(self, value) -> None:
+        """Setter for the Zenodo class use_sandbox attribute
+
+        Parameters
+        ----------
+        value : str
+            True if client should connect to SANDBOX, False
+            otherwise.
+        """
         self._use_sandbox = value
 
     def create_config_file(self, config_file_path: str = None) -> None:
@@ -135,10 +168,10 @@ class Zenodo(object):
         Raises
         ------
         RuntimeError
-            If the provided config_file_path is None or an empty string
+            If the provided ``config_file_path`` is None or an empty string
         configparser.Error
-            If a config_file does already exist in the target address
-            provided by `config_file_path`
+            If a config file does already exist in the target address
+            provided by ``config_file_path``
         """        
         """"""
         if config_file_path is None or config_file_path == "":
@@ -159,23 +192,122 @@ class Zenodo(object):
             raise configparser.Error(f"A config file already exists in '{path}'.")
 
     def init_deposition(self):
-        """Creates an instance of the _Depositions class"""
+        """Creates an instance of the _Depositions class
+
+        The returned object exposes all functionalities
+        pertinent to the ``_Depositions`` class.
+        
+        Examples
+        --------
+        >>> import zenopy
+        >>> cli = zenopy.Zenodo()
+        WARNING: The config file (~/.zenodorc) is found.
+        >>> depo = cli.init_deposition()
+        >>> depo
+        <zenopy.depositions._Depositions at 0x7fad2e053790>
+
+        Returns
+        -------
+        : zenopy.depositions._Depositions
+            An instance of the ``zenopy.depositions._Depositions`` class
+        """
         return _Depositions(self)
 
     def init_deposition_actions(self):
-        """Creates an instance of the _DepositionsActions class"""
+        """Creates an instance of the _DepositionActions class
+
+        The returned object exposes all functionalities
+        pertinent to the ``_DepositionActions`` class such as
+        editing, publishing, creating a new version and discarding
+        ongoing changes on the deposition draft.
+        
+        Examples
+        --------
+        >>> import zenopy
+        >>> cli = zenopy.Zenodo()
+        WARNING: The config file (~/.zenodorc) is found.
+        >>> depo_act = cli.init_deposition_actions()
+        >>> depo_act
+        <zenopy.deposition_actions._DepositionActions at 0x7f2f77742a10>
+
+        Returns
+        -------
+        : zenopy.deposition_actions._DepositionActions
+            An instance of the ``zenopy.deposition_actions._DepositionActions``
+            class
+        """
         return _DepositionActions(self)
 
     def init_deposition_file(self):
-        """Creates an instance of the _DepositionFiles class"""
+        """Creates an instance of the _DepositionFiles class
+
+        The returned object exposes all functionalities
+        of the ``_DepositionFiles`` class such as creating, listing,
+        retrieving, sorting, etc. of files in a deposition draft.
+        
+        Examples
+        --------
+        >>> import zenopy
+        >>> cli = zenopy.Zenodo()
+        WARNING: The config file (~/.zenodorc) is found.
+        >>> depo_file = cli.init_deposition_file()
+        >>> depo_file
+        <zenopy.deposition_files._DepositionFiles at 0x7fad2e0533a0>
+
+        Returns
+        -------
+        : zenopy.deposition_files._DepositionFiles
+            An instance of the ``zenopy.deposition_files._DepositionFiles``
+            class
+        """
         return _DepositionFiles(self)
 
     def init_records(self):
-        """Creates an instance of the _Records class"""
+        """Creates an instance of the _Records class
+
+        The returned object exposes all functionalities
+        of the ``_Records`` class such as retrieving the records
+        and performing elastic search among them.
+        
+        Examples
+        --------
+        >>> import zenopy
+        >>> cli = zenopy.Zenodo()
+        WARNING: The config file (~/.zenodorc) is found.
+        >>> rec_obj = cli.init_records()
+        >>> rec_obj
+        <zenopy.records._Records at 0x7fb020d5b760>
+
+        Returns
+        -------
+        : zenopy.depositions._Records
+            An instance of the ``zenopy.records._Records`` class
+        """
         return _Records(self)
 
     def init_resources(self, resource: str = None):
-        """Creates an instance of the _Resources class"""
+        """Creates an instance of the _Resources class
+
+        The returned object provides users with search
+        capabilities through the created resources type
+        objects. The resource type can be ``communities``,
+        ``licenses``, ``grants``, or ``funders``.
+        
+        Examples
+        --------
+        >>> import zenopy
+        >>> cli = zenopy.Zenodo()
+        WARNING: The config file (~/.zenodorc) is found.
+        >>> resrc_obj = cli.init_resources(resource="communities")
+        >>> resrc_obj
+        <zenopy.resources._Resources at 0x7f51ad3e58d0>
+
+        Returns
+        -------
+        : zenopy.resources._Resources
+            An instance of the ``zenopy.resources._Resources``
+            class
+        """        
         return _Resources(self, resource=resource)
 
     def list_sections(self):
@@ -184,13 +316,39 @@ class Zenodo(object):
         Returns
         -------
         _config_obj.sections() : list[str]
-            A list of section titles in the instance's container 
-            config_obj
+            A list of section titles in the instance's active 
+            ``_config_obj`` attribute
+
+        Examples
+        --------
+        >>> import zenopy
+        >>> cli = zenopy.Zenodo()
+        WARNING: The config file (~/.zenodorc) is found.
+        # equivalent to `cli.config_obj.sections()`
+        >>> cli.list_sections()
+        ['ZENODO', 'SANDBOX']
         """
         return self._config_obj.sections()
 
     def list_tokens(self, section: str = None) -> list[tuple[str, str]]:
-        """List all tokens in a specific section"""
+        """List all tokens in a specific section
+        
+        Lists all tokens in a specific section in the client instance's
+        active ``_config_obj`` attribute.
+
+        Returns
+        -------
+        _config_obj[section].items() : list[tuple[str, str]]
+            A list of all available token labels and values
+            formatted as doubles (key-value pairs as tuples)
+
+        Raises
+        ------
+        configparser.NoSectionError
+            if the provided argument (section) is None or does not
+            exist in the client instance's active ``_config_obj``
+            attribute.
+        """
         if section is None:
             raise configparser.NoSectionError(
                 f"A section name is needed as an argument."
@@ -205,7 +363,25 @@ class Zenodo(object):
     def read_config_file(
         self, config_file_path: str = None
     ) -> configparser.ConfigParser:
-        """Returns the configfile"""
+        """Reads the config file from disk
+        
+        Reads the config file from a path pointed to by
+        the ``config_file_path`` argument and returns a
+        ``configparser.ConfigParser`` object constructed from
+        it.
+
+        Returns
+        -------
+        configparser.ConfigParser().read(path) : configparser.ConfigParser
+            a ``configparser.ConfigParser`` object the contents of which
+            is read from disk
+        
+        Raises
+        ------
+        RuntimeError
+            If ``config_file_path`` is None or refers to a non-existent config
+            file
+        """
         if config_file_path is None:
             raise RuntimeError(
                 "The file_path argument is None. "
@@ -222,16 +398,37 @@ class Zenodo(object):
         return config_obj
 
     def read_token(self, section: str = None, key: str = None) -> str:
-        """Reading a specific token from a selected section."""
-        # Raises the configparser.NoSectionError/NoOptionError
-        # if the section/key does not exist in the config_file
+        """Reading a specific token from a selected section
+        
+        Raises
+        ------
+        configparser.NoSectionError
+            If the section argument does not exist in the client
+            instance's active ``_config_obj`` attribute
+        configparser.NoOptionError
+            If the key argument does not exist in the client
+            instance's active ``_config_obj`` attribute
+        
+        Notes
+        -----
+        The ``read_token()`` is case insensitive with respect to the
+        entered section argument and automatically turns it to
+        upper case.
+        """
         section = section.upper()
         return self._config_obj.get(section, key)
 
     def update_config_file(self) -> None:
-        """Commits the current changes to the state of the
-        self._config_obj object to the config file located
-        at self._config_file_path
+        """Commit the current contents of the config object to config file on disk 
+        
+        Commits the current contents of the client instance's active ``_config_obj`` 
+        attribute to the config file located at ``_config_file_path`` on disk.
+
+        Raises
+        ------
+        configparser.Error
+            If the client instance's ``_config_file_path`` points to a non-existent
+            config file
         """
         path = Path(self._config_file_path).expanduser()
         if path.exists():
@@ -247,7 +444,27 @@ class Zenodo(object):
         token: str = None,
         force_rewrite: bool = False,
     ) -> None:
-        """Setting the appropriate token within a specific section."""
+        """Setting the appropriate token within a specific section
+
+        Setting the passed token-key pair arguments in the corresponding
+        designated config file section.
+
+        Raises
+        ------
+        configparser.NoSectionError
+            If the section argument does not exist in the client
+            instance's active ``_config_obj`` attribute
+        configparser.NoOptionError
+            If the key argument does not exist in the client
+            instance's active ``_config_obj`` attribute
+        configparser.Error
+            If the passed token already exists in the section selected by the user.
+        
+        Notes
+        -----
+        Set ``force_rewrite = True`` if you want to overwrite an existing token in 
+        a config file section
+        """
         if key is None:
             raise configparser.NoOptionError(f"A token name is needed as an argument.")
         section = section.upper()

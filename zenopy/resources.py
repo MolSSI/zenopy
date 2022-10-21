@@ -7,6 +7,7 @@
 import requests
 import logging
 from zenopy.record import Record
+from zenopy.errors import zenodo_error
 
 logger = logging.getLogger(__name__)
 
@@ -18,8 +19,8 @@ class _Resources(object):
 
     def __init__(self, client, resource: str = None):
         self._client = client
+        valid_resources = ["communities", "licenses", "grants", "funders"]
         if resource is not None and resource != "":
-            valid_resources = ["communities", "licenses", "grants", "funders"]
             if resource in valid_resources:
                 self._base_resources_url = self._client._base_url + f"/{resource}/"
             else:
@@ -44,7 +45,7 @@ class _Resources(object):
         and communities) matching the (elastic) search query statement.
         For further details see https://help.zenodo.org/guides/search"""
         tmp_params = self._params.copy()
-        keys_list = ["query", "page", "size"]
+        keys_list = ["q", "page", "size"]
         values_list = [query, page, size]
         for key, value in zip(keys_list, values_list):
             if value is not None:
