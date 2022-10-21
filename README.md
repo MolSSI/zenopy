@@ -43,13 +43,15 @@ An open-source Python library for Zenodo REST API
 
 ## OVERVIEW
 
-ZenoPy provides a comprehensive python library for communicating with Zenodo servers allowing scientists and engineers
-to publish their work on the familiar and well-established host in a free, open-source and accessible environment 
+ZenoPy provides a comprehensive Python library for productivity
+allowing scientists and engineers to publish their work on Zenodo
 in compliance with FAIR principles.
 
 ## INSTALLATION
 
-The installation procedure can be as easy as running the following command in a terminal
+The installation procedure can be as easy as running the following
+command in a terminal
 
 ```bash
 pip install zenopy
+```
