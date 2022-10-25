@@ -49,7 +49,7 @@ software ecosystem.
 .. Badge(s)
 .. |Slack| image:: https://upload.wikimedia.org/wikipedia/commons/b/b9/Slack_Technologies_Logo.svg
    :target: https://join.slack.com/t/zenopy/shared_invite/zt-1ifpoehxy-BRThIqLImB4sXUVKSYgOWQ
-   :alt: SEAMM Slack Channel
+   :alt: zenopy Slack Channel
    :width: 170
 
 .. |GitHub| image:: https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg
