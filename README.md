@@ -31,7 +31,8 @@
     <th align="left">Foundation</th>
     <th align="left">
       <a href="[https://opensource.org/licenses/BSD-3-Clause](https://opensource.org/licenses/LGPL-3.0)"><img alt="GitHub license" src="https://img.shields.io/badge/license-LGPL--3-blueviolet"></a>
-      <a href="https://www.linuxfoundation.org/"><img alt="GitHub license" src="https://img.shields.io/badge/Platforms-Linux-blue"></a>
+  <a href="CODE_OF_CONDUCT.md"><img alt="CodeOfConduct" src="https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg"></a>
+      <a href="https://www.linuxfoundation.org/"><img alt="Platforms" src="https://img.shields.io/badge/Platforms-Linux-blue"></a>
     </th>
   </tr>
 </table>
