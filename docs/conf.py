@@ -107,6 +107,9 @@ html_theme_options = {
     'titles_only': False
 }
 
+# Path to project's logo
+html_logo = "images/molssi-zenopy_white_bg.png"
+
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
