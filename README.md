@@ -1,5 +1,5 @@
 <p align="center">
-<img alt="zenopy logo" src="docs/images/molssi-zenopy.png" object-fit: contain'/> 
+<a href="https://molssi.github.io/zenopy"><img alt="zenopy logo" src="docs/images/molssi-zenopy.png" object-fit: contain'/></a>
 <br>
 </p>
 
@@ -15,9 +15,9 @@
   <tr>
     <th align="left">Code Coverage and Quality</th>
     <th align="left">
-    <a href="https://codecov.io/gh/MolSSI/ZenoPy" > 
+    <a href="https://codecov.io/gh/MolSSI/ZenoPy"> 
      <img src="https://codecov.io/gh/MolSSI/ZenoPy/branch/main/graph/badge.svg?token=VY7DG88slB"/></a>
-<a href="https://lgtm.com/projects/g/MolSSI/zenopy/alerts/"><img alt="Total alerts" src="https://img.shields.io/lgtm/alerts/g/MolSSI/zenopy.svg?logo=lgtm&logoWidth=18"/></a>
+<a href="https://lgtm.com/projects/g/MolSSI/zenopy/context:python"><img alt="Language grade: Python" src="https://img.shields.io/lgtm/grade/python/g/MolSSI/zenopy.svg?logo=lgtm&logoWidth=18"/></a>
 <a href="https://www.codefactor.io/repository/github/molssi/zenopy"><img src="https://www.codefactor.io/repository/github/molssi/zenopy/badge" alt="CodeFactor" /></a>
      </th>
   </tr>
