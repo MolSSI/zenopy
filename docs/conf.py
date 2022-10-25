@@ -17,14 +17,19 @@ import os
 import sys
 sys.path.insert(0, os.path.abspath('..'))
 
+from zenopy._version import get_versions
+revision = get_versions()['version']
+del get_versions
+
 # -- Project information -----------------------------------------------------
 
 project = "zenopy"
-copyright = "2022, Mohammad Mostafanejad"
+#copyright = "2022, Mohammad Mostafanejad"
 author = "Mohammad Mostafanejad"
 
 # The full version, including alpha/beta/rc tags.
-release = os.getenv('DOC_VERSION', '1.0')
+
+release = os.getenv('DOC_VERSION', revision)
 # The short X.Y version.
 version = release
 
@@ -127,7 +132,7 @@ html_show_sphinx = False
 
 # If true, "(C) Copyright ..." is shown in the HTML footer.
 # Default is True.
-html_show_copyright = True
+html_show_copyright = False
 
 # Custom sidebar templates, must be a dictionary that maps document names
 # to template names.
