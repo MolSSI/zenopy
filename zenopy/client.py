@@ -7,7 +7,6 @@
 import configparser
 import logging
 from pathlib import Path
-from traceback import format_exc
 from zenopy.deposition_actions import _DepositionActions
 from zenopy.deposition_files import _DepositionFiles
 from zenopy.depositions import _Depositions
