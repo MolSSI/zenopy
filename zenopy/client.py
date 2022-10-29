@@ -54,24 +54,34 @@ class Zenodo(object):
         --------
         create_config_file
         """
-        self._token = token
-        self._config_file_path = config_file_path
         self._use_sandbox = use_sandbox
         if self._use_sandbox:
             self._base_url = "https://sandbox.zenodo.org/api"
         else:
             self._base_url = "https://zenodo.org/api"
-        if self._token is None and (
-            self._config_file_path is None or self._config_file_path == ""
-        ):
+        if token is not None:
+            self._token = token
+        else:
+            self._token = ""
+        self._config_file_path = config_file_path
+        if self._config_file_path is None or self._config_file_path == "":
             self._config_file_path = "~/.zenodorc"
             if not Path(self._config_file_path).expanduser().exists():
                 self.create_config_file(self._config_file_path)
+                self._config_obj = self.read_config_file(self._config_file_path)
+                sec = "SANDBOX" if self._use_sandbox else "ZENODO"
+                self.write_token(section=sec, key="token", token=self._token, force_rewrite=True)
+                self.update_config_file()
+                logger.warning(
+                    f"WARNING: A new config file is automatically created in ({self._config_file_path})."
+                )
             else:
                 logger.warning(
                     f"WARNING: The config file ({self._config_file_path}) is found."
                 )
-        self._config_obj = self.read_config_file(self._config_file_path)
+            self._config_obj = self.read_config_file(self._config_file_path)
+        else:
+            self._config_obj = self.read_config_file(self._config_file_path)
         self._headers = {
             "Authorization": f"Bearer {self.token}",
             "Content-Type": "application/json",
@@ -118,7 +128,15 @@ class Zenodo(object):
         """
         if self._token is None or self._token == "":
             section = "SANDBOX" if self._use_sandbox else "ZENODO"
-            self._token = self.list_tokens(section)[0][1]
+            if section not in self._config_obj.sections():
+                raise configparser.NoSectionError(
+                    f"Section [{section}] does not exist in {self._config_file_path}."
+                )
+            # Check to see if the section is empty
+            if self.list_tokens(section):
+                self._token = self.list_tokens(section)[0][1]
+            else:
+                raise configparser.Error(f"The [{section}] of the config parser is empty.")
         return self._token
 
     @token.setter

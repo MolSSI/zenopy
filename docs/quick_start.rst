@@ -4,6 +4,15 @@
 Quick Start
 ***********
 
+.. |Binder| image:: https://mybinder.org/badge_logo.svg
+   :target: https://mybinder.org/v2/gh/MolSSI/zenopy/binder?labpath=docs%2Fnotebooks%2Fquick-start.ipynb
+   :alt: Quick-start Jupyter notebook on Binder
+   :width: 150
+
+.. note::
+
+  You can also execute this tutorial in |Binder|
+
 .. contents::
    :local:
    :depth: 2
