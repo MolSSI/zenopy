@@ -40,7 +40,7 @@ class Zenodo(object):
         Parameters
         ----------
         token : str, optional
-            Token created through a personal Zenodo account, by default None
+            Token created through a personal Zenodo account, by default empty
         config_file_path : str  |  Path, optional
             Path to the configuration file listing tokens for Zenodo 
             (and Sandbox) account(s). This file is usually located at ~/.zenodorc,
