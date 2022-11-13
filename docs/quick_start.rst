@@ -5,7 +5,7 @@ Quick Start
 ***********
 
 .. |Binder| image:: https://mybinder.org/badge_logo.svg
-   :target: https://mybinder.org/v2/gh/MolSSI/zenopy/binder?labpath=docs%2Fnotebooks%2Fquick-start.ipynb
+   :target: https://mybinder.org/v2/gh/MolSSI/zenopy/5a28d6babe6d197bfd3725f0b207065789fc0a9a?urlpath=lab%2Ftree%2Fdocs%2Fnotebooks%2Fquick-start.ipynb
    :alt: Quick-start Jupyter notebook on Binder
    :width: 150
 

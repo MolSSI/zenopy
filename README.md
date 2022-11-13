@@ -55,3 +55,7 @@ command in a terminal
 ```bash
 pip install zenopy
 ```
+
+## Quick Start
+
+Check out the quick-start tutorial on Binder ([![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/MolSSI/zenopy/5a28d6babe6d197bfd3725f0b207065789fc0a9a?urlpath=lab%2Ftree%2Fdocs%2Fnotebooks%2Fquick-start.ipynb)) after installation.
