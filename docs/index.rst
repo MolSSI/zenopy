@@ -25,6 +25,7 @@ software ecosystem.
     quick_start
     howtos/index
     tutorials/index
+    interactive
     manual/index
     api/index
     references
