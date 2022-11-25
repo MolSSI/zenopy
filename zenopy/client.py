@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-"""Zenodo client objects for credentials management
+"""Zenodo client for credentials management
 
 """
 
@@ -19,7 +19,7 @@ logger = logging.getLogger(__name__)
 class Zenodo(object):
     """zenopy client class
 
-    The Zenodo client class instance allows the users to connect to
+    The zenopy client class instance allows the users to connect to
     their accounts on Zenodo server and communicate with it through
     REST APIs.
 
@@ -42,9 +42,8 @@ class Zenodo(object):
         token : str, optional
             Token created through a personal Zenodo account, by default empty
         config_file_path : str  |  Path, optional
-            Path to the configuration file listing tokens for Zenodo 
-            (and Sandbox) account(s). This file is usually located at ~/.zenodorc,
-            by default None
+            Path to the configuration file listing Zenodo (and Sandbox) account(s)'
+            tokens. This file is usually located at ~/.zenodorc, by default None
         use_sandbox : bool, optional
             If True, the tokens will be read from the [SANDBOX] section of the
             configuration file, by default False
