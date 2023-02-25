@@ -1,3 +1,5 @@
 requests
 validators
-renku-sphinx-theme
+pydata-sphinx-theme
+sphinx-design
+sphinx-copybutton
