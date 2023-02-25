@@ -51,6 +51,8 @@ extensions = [
     'sphinx.ext.napoleon',
     'sphinx.ext.intersphinx',
     'sphinx.ext.extlinks',
+    'sphinx_design',
+    'sphinx_copybutton'
 ]
 
 autosummary_generate = True
@@ -91,25 +93,44 @@ pygments_style = 'default'
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 #
-# html_theme = 'sphinx_rtd_theme'
-html_theme = 'renku'
+html_theme = 'pydata_sphinx_theme'
 
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the
 # documentation.
 #
 # html_theme_options = {}
+# html_theme_options = {
+#     'logo_only': True,
+#     'display_version': True,
+#     'prev_next_buttons_location': 'bottom',
+#     'style_external_links': False,
+#     # Toc options
+#     'collapse_navigation': True,
+#     'sticky_navigation': True,
+#     'navigation_depth': 4,
+#     'includehidden': True,
+#     'titles_only': False
+# }
 html_theme_options = {
-    'logo_only': True,
-    'display_version': True,
-    'prev_next_buttons_location': 'bottom',
-    'style_external_links': False,
-    # Toc options
-    'collapse_navigation': True,
-    'sticky_navigation': True,
-    'navigation_depth': 4,
-    'includehidden': True,
-    'titles_only': False
+    "github_url": "https://github.com/MolSSI/zenopy",
+    "twitter_url": "https://twitter.com/MolSSI_NSF",
+
+    "logo": {
+    "image_light": "molssi-zenopy_white_bg.png",
+    "image_dark": "molssi-zenopy_white_bg.png",
+    "text": "",
+    "molssi_light": "molssi_main_logo.png",
+    "molssi_dark": "molssi_main_logo_inverted_white.png",
+    },
+    "show_toc_level": 2,
+    "header_links_before_dropdown": 4,
+    "external_links": [
+    {"name": "MolSSI", "url": "https://molssi.org"}
+],
+
+    "secondary_sidebar_items": ["page-toc", "sourcelink"],
+    "footer_items": [ "molssi_footer" ],
 }
 
 # Path to project's logo

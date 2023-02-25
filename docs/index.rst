@@ -15,11 +15,56 @@ of the `Zenodo <https://zenodo.org>`_ API to researchers and software developers
 This package is a part of the data engineering domain infrastructure in the Chem-AI
 software ecosystem.
 
+.. grid:: 1 1 2 2
+
+   .. grid-item-card:: Quick Start
+      :margin: 0 3 0 0
+
+      Jump right into using zenopy!
+
+      .. button-link:: ./quick_start.html
+        :color: primary
+        :expand:
+
+        Quick Start Guide
+
+   .. grid-item-card::  How-to Guides
+      :margin: 0 3 0 0
+
+      A collection of How-to Guides for busy users
+
+      .. button-link:: ./howtos/index.html
+        :color: primary
+        :expand:
+
+        How-to Guides
+
+   .. grid-item-card:: API Reference
+      :margin: 0 3 0 0
+
+      Application programming interface (API) references
+
+      .. button-link:: ./api/index.html
+        :color: primary
+        :expand:
+
+        API Reference
+
+   .. grid-item-card::  Developer Guide
+      :margin: 0 3 0 0
+
+      Deeper insights into zenopy infrastructure
+
+      .. button-link:: ./tutorials/index.html
+        :color: primary
+        :expand:
+
+        Developer Guide
+
 .. Table of Contents
 .. toctree::
-    :maxdepth: 2
+    :hidden:
     :titlesonly:
-    :numbered: 2
 
     installation
     quick_start
