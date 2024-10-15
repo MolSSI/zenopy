@@ -1,0 +1,991 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Quick Start &#8212; zenopy 2022.10.29-15-g4f93fcd documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="_static/css/custom.css?v=c224919a" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=68dfe5c2"></script>
+    <script src="_static/doctools.js?v=9bcbadda"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'quick_start';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="How-To Guides" href="howtos/index.html" />
+    <link rel="prev" title="Installation" href="installation.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/molssi-zenopy_white_bg.png" class="logo__image only-light" alt="zenopy 2022.10.29-15-g4f93fcd documentation - Home"/>
+    <script>document.write(`<img src="_static/molssi-zenopy_white_bg.png" class="logo__image only-dark" alt="zenopy 2022.10.29-15-g4f93fcd documentation - Home"/>`);</script>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="installation.html">
+    Installation
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="#">
+    Quick Start
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="howtos/index.html">
+    How-To Guides
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="tutorials/index.html">
+    Tutorials
+  </a>
+</li>
+
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="interactive.html">
+    Interactive Tutorials
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="manual/index.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="api/index.html">
+    API Reference
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="references.html">
+    References
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="dev_team.html">
+    zenopy Developers
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="acknowledgements.html">
+    Acknowledgements
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-external" href="https://molssi.org">
+    MolSSI
+  </a>
+</li>
+
+                </ul>
+            </li>
+            
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/MolSSI/zenopy" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://twitter.com/MolSSI_NSF" title="Twitter" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-twitter fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">Twitter</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="installation.html">
+    Installation
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="#">
+    Quick Start
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="howtos/index.html">
+    How-To Guides
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="tutorials/index.html">
+    Tutorials
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="interactive.html">
+    Interactive Tutorials
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="manual/index.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="api/index.html">
+    API Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="references.html">
+    References
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="dev_team.html">
+    zenopy Developers
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="acknowledgements.html">
+    Acknowledgements
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://molssi.org">
+    MolSSI
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/MolSSI/zenopy" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://twitter.com/MolSSI_NSF" title="Twitter" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-twitter fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">Twitter</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"></div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page">Quick Start</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="quick-start">
+<span id="id1"></span><h1>Quick Start<a class="headerlink" href="#quick-start" title="Link to this heading">#</a></h1>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>You can also execute this tutorial in <a class="reference external" href="https://mybinder.org/v2/gh/MolSSI/zenopy/5a28d6babe6d197bfd3725f0b207065789fc0a9a?urlpath=lab%2Ftree%2Fdocs%2Fnotebooks%2Fquick-start.ipynb"><img alt="Quick-start Jupyter notebook on Binder" src="https://mybinder.org/badge_logo.svg" style="width: 150px;" /></a></p>
+</div>
+<nav class="contents local" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#access-your-zenodo-account" id="id4">Access your Zenodo Account</a></p></li>
+<li><p><a class="reference internal" href="#working-with-the-existing-depositions" id="id5">Working with the Existing Depositions</a></p>
+<ul>
+<li><p><a class="reference internal" href="#listing-depositions" id="id6">Listing Depositions</a></p></li>
+<li><p><a class="reference internal" href="#creating-depositions" id="id7">Creating Depositions</a></p></li>
+<li><p><a class="reference internal" href="#updating-depositions" id="id8">Updating Depositions</a></p></li>
+<li><p><a class="reference internal" href="#retrieving-depositions" id="id9">Retrieving Depositions</a></p></li>
+<li><p><a class="reference internal" href="#deleting-depositions" id="id10">Deleting Depositions</a></p></li>
+</ul>
+</li>
+</ul>
+</nav>
+<p>Let’s get started by demonstrating how you can use <code class="docutils literal notranslate"><span class="pre">zenopy</span></code> in a
+few brief sections. For more details, check out our <a class="reference internal" href="manual/index.html#user-guide"><span class="std std-ref">User Guide</span></a>.</p>
+<section id="access-your-zenodo-account">
+<h2><a class="toc-backref" href="#id4" role="doc-backlink">Access your Zenodo Account</a><a class="headerlink" href="#access-your-zenodo-account" title="Link to this heading">#</a></h2>
+<p>The first step to start using <code class="docutils literal notranslate"><span class="pre">zenopy</span></code> is to import it</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">zenopy</span>
+</pre></div>
+</div>
+<p>In order to interact with Zenodo servers, we need to create a <code class="docutils literal notranslate"><span class="pre">zenopy</span></code>
+client object</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">cli</span> <span class="o">=</span> <span class="n">zenopy</span><span class="o">.</span><span class="n">Zenodo</span><span class="p">()</span>
+<span class="go">WARNING: The config file (~/.zenodorc) is found.</span>
+</pre></div>
+</div>
+<p>Upon successful construction of the client object, <code class="docutils literal notranslate"><span class="pre">zenopy</span></code> issues a
+warning stating that <code class="docutils literal notranslate"><span class="pre">zenopy</span></code> assumes you have a config file
+(called <strong>.zenodorc</strong>) in your home directory. This config file should
+store the token you generated from your Zenodo account and looks like
+the following</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">ZENODO</span><span class="p">]</span>
+<span class="n">my_token</span> <span class="o">=</span> <span class="o">&lt;</span><span class="n">token</span><span class="o">-</span><span class="n">generated</span><span class="o">-</span><span class="n">from</span><span class="o">-</span><span class="n">Zenodo</span><span class="o">-</span><span class="n">account</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>If you do not know how to create a token from your Zenodo account,
+see <a class="reference internal" href="howtos/client/cli_token.html#cli-token"><span class="std std-ref">here</span></a>.</p>
+</section>
+<section id="working-with-the-existing-depositions">
+<h2><a class="toc-backref" href="#id5" role="doc-backlink">Working with the Existing Depositions</a><a class="headerlink" href="#working-with-the-existing-depositions" title="Link to this heading">#</a></h2>
+<p>Once <code class="docutils literal notranslate"><span class="pre">zenopy</span></code>’s client instance is initialized with your token,
+it allows you to inspect the existing records corresponding to your
+Zenodo account. In order to access the existing depositions on your
+account, first call client’s member funtion <code class="docutils literal notranslate"><span class="pre">init_deposition()</span></code></p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">depo</span> <span class="o">=</span> <span class="n">cli</span><span class="o">.</span><span class="n">init_deposition</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>This command generates a <code class="docutils literal notranslate"><span class="pre">Deposition</span></code> class instance that allows you
+to perform operations that are pertinent to the
+Zenodo <a class="reference external" href="https://developers.zenodo.org/#depositions">Deposition</a>
+<a class="reference external" href="https://developers.zenodo.org/#entities">Entities</a>.</p>
+<section id="listing-depositions">
+<h3><a class="toc-backref" href="#id6" role="doc-backlink">Listing Depositions</a><a class="headerlink" href="#listing-depositions" title="Link to this heading">#</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">Deposition</span></code> class instance enables you to interact with your personal
+or organization depositions. For instance, you can
+<a class="reference external" href="https://developers.zenodo.org/#list">list</a> all existing depositions
+corresponding to your Zenodo account by calling the <code class="docutils literal notranslate"><span class="pre">list_depositions()</span></code>
+on the <code class="docutils literal notranslate"><span class="pre">depo</span></code> instance object</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">rec</span> <span class="o">=</span> <span class="n">depo</span><span class="o">.</span><span class="n">list_depositions</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rec</span>
+<span class="go">[&lt;zenopy.record.Record at 0x7fa129db0310&gt;]</span>
+</pre></div>
+</div>
+<p>As the function name indicates, the result is a list of <code class="docutils literal notranslate"><span class="pre">zenopy</span></code>’s <code class="docutils literal notranslate"><span class="pre">Record</span></code>
+object(s). In this case, the list consists of one record which mirrors the same
+construction the corresponding Zenodo accont. In order to access each
+record’s contents, simply call its <code class="docutils literal notranslate"><span class="pre">.data</span></code> attribute</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">rec</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">data</span>
+<span class="go">Output exceeds the size limit. Open the full output data in a text editor</span>
+<span class="go">{&#39;conceptdoi&#39;: &#39;10.5281/zenodo.5120242&#39;,</span>
+<span class="go"> &#39;conceptrecid&#39;: &#39;5120242&#39;,</span>
+<span class="go"> &#39;created&#39;: &#39;2021-07-21T18:10:05.154930&#39;,</span>
+<span class="go"> &#39;doi&#39;: &#39;10.5281/zenodo.5120243&#39;,</span>
+<span class="go"> &#39;doi_url&#39;: &#39;https://doi.org/10.5281/zenodo.5120243&#39;,</span>
+<span class="go"> &#39;files&#39;: [{&#39;checksum&#39;: &#39;b528606728a7dd0f38df17550c2773e2&#39;,</span>
+<span class="go">   &#39;filename&#39;: &#39;gpu_programming_beginner-gh-pages.zip&#39;,</span>
+<span class="go">   &#39;filesize&#39;: 3208145,</span>
+<span class="go">   &#39;id&#39;: &#39;b65d5454-44bf-486d-ba44-46be2ca72fc2&#39;,</span>
+<span class="go">   &#39;links&#39;: {&#39;download&#39;: &#39;https://zenodo.org/api/files/fcacb59c-ec78-4f39-95bf-e364069fb5fb/gpu_programming_beginner-gh-pages.zip&#39;,</span>
+<span class="go">    &#39;self&#39;: &#39;https://zenodo.org/api/deposit/depositions/5120243/files/b65d5454-44bf-486d-ba44-46be2ca72fc2&#39;}}],</span>
+<span class="go"> &#39;id&#39;: 5120243,</span>
+<span class="go"> &#39;links&#39;: {&#39;badge&#39;: &#39;https://zenodo.org/badge/doi/10.5281/zenodo.5120243.svg&#39;,</span>
+<span class="go">  &#39;bucket&#39;: &#39;https://zenodo.org/api/files/0a60bd71-a171-4196-b639-44cf5cde22dd&#39;,</span>
+<span class="go">  &#39;conceptbadge&#39;: &#39;https://zenodo.org/badge/doi/10.5281/zenodo.5120242.svg&#39;,</span>
+<span class="go">  &#39;conceptdoi&#39;: &#39;https://doi.org/10.5281/zenodo.5120242&#39;,</span>
+<span class="go">  &#39;discard&#39;: &#39;https://zenodo.org/api/deposit/depositions/5120243/actions/discard&#39;,</span>
+<span class="go">  &#39;doi&#39;: &#39;https://doi.org/10.5281/zenodo.5120243&#39;,</span>
+<span class="go">  &#39;edit&#39;: &#39;https://zenodo.org/api/deposit/depositions/5120243/actions/edit&#39;,</span>
+<span class="go">  &#39;files&#39;: &#39;https://zenodo.org/api/deposit/depositions/5120243/files&#39;,</span>
+<span class="go">  &#39;html&#39;: &#39;https://zenodo.org/deposit/5120243&#39;,</span>
+<span class="go">  &#39;latest&#39;: &#39;https://zenodo.org/api/records/5120243&#39;,</span>
+<span class="go">  &#39;latest_html&#39;: &#39;https://zenodo.org/record/5120243&#39;,</span>
+<span class="go">  &#39;publish&#39;: &#39;https://zenodo.org/api/deposit/depositions/5120243/actions/publish&#39;,</span>
+<span class="go">  &#39;record&#39;: &#39;https://zenodo.org/api/records/5120243&#39;,</span>
+<span class="go">...</span>
+<span class="go"> &#39;owner&#39;: 243844,</span>
+<span class="go"> &#39;record_id&#39;: 5120243,</span>
+<span class="go"> &#39;state&#39;: &#39;done&#39;,</span>
+<span class="go"> &#39;submitted&#39;: True,</span>
+<span class="go"> &#39;title&#39;: &#39;Fundamentals of Heterogeneous Parallel Programming with CUDA C/C++&#39;}</span>
+</pre></div>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>You can also represent your record data by passing the record object to a
+<code class="docutils literal notranslate"><span class="pre">print()</span></code> function.</p>
+</div>
+</section>
+<section id="creating-depositions">
+<h3><a class="toc-backref" href="#id7" role="doc-backlink">Creating Depositions</a><a class="headerlink" href="#creating-depositions" title="Link to this heading">#</a></h3>
+<p>You can <a class="reference external" href="https://developers.zenodo.org/#create">create</a> a new deposition
+draft on your Zenodo account by calling the <code class="docutils literal notranslate"><span class="pre">create_deposition()</span></code> on the
+<code class="docutils literal notranslate"><span class="pre">Deposition</span></code> class instance</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">draft_depo</span> <span class="o">=</span> <span class="n">depo</span><span class="o">.</span><span class="n">create_deposition</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">draft_depo</span>
+<span class="go">&lt;zenopy.record.Record at 0x7fbcc46bafb0&gt;</span>
+</pre></div>
+</div>
+<p>which returns a new <code class="docutils literal notranslate"><span class="pre">zenopy</span></code> <code class="docutils literal notranslate"><span class="pre">Record</span></code> object allowing you to inspect
+its contents</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">draft_depo</span><span class="o">.</span><span class="n">data</span>
+<span class="go">{&#39;conceptrecid&#39;: &#39;1104407&#39;,</span>
+<span class="go"> &#39;created&#39;: &#39;2022-09-14T13:38:57.183068+00:00&#39;,</span>
+<span class="go"> &#39;files&#39;: [],</span>
+<span class="go"> &#39;id&#39;: 1104408,</span>
+<span class="go"> &#39;links&#39;: {&#39;bucket&#39;: &#39;https://sandbox.zenodo.org/api/files/ab481ab2-45eb-44dc-96e8-65d06fed9d1b&#39;,</span>
+<span class="go">  &#39;discard&#39;: &#39;https://sandbox.zenodo.org/api/deposit/depositions/1104408/actions/discard&#39;,</span>
+<span class="go">  &#39;edit&#39;: &#39;https://sandbox.zenodo.org/api/deposit/depositions/1104408/actions/edit&#39;,</span>
+<span class="go">  &#39;files&#39;: &#39;https://sandbox.zenodo.org/api/deposit/depositions/1104408/files&#39;,</span>
+<span class="go">  &#39;html&#39;: &#39;https://sandbox.zenodo.org/deposit/1104408&#39;,</span>
+<span class="go">  &#39;latest_draft&#39;: &#39;https://sandbox.zenodo.org/api/deposit/depositions/1104408&#39;,</span>
+<span class="go">  &#39;latest_draft_html&#39;: &#39;https://sandbox.zenodo.org/deposit/1104408&#39;,</span>
+<span class="go">  &#39;publish&#39;: &#39;https://sandbox.zenodo.org/api/deposit/depositions/1104408/actions/publish&#39;,</span>
+<span class="go">  &#39;self&#39;: &#39;https://sandbox.zenodo.org/api/deposit/depositions/1104408&#39;},</span>
+<span class="go"> &#39;metadata&#39;: {&#39;prereserve_doi&#39;: {&#39;doi&#39;: &#39;10.5072/zenodo.1104408&#39;,</span>
+<span class="go">   &#39;recid&#39;: 1104408}},</span>
+<span class="go"> &#39;modified&#39;: &#39;2022-09-14T13:38:57.183080+00:00&#39;,</span>
+<span class="go"> &#39;owner&#39;: 123811,</span>
+<span class="go"> &#39;record_id&#39;: 1104408,</span>
+<span class="go"> &#39;state&#39;: &#39;unsubmitted&#39;,</span>
+<span class="go"> &#39;submitted&#39;: False,</span>
+<span class="go"> &#39;title&#39;: &#39;&#39;}</span>
+</pre></div>
+</div>
+<p>As you can see, there are multiple deposition fields such as <code class="docutils literal notranslate"><span class="pre">doi</span></code> that Zenodo server has already
+minted for you. Other (meta)data fields such as <code class="docutils literal notranslate"><span class="pre">title</span></code> and <code class="docutils literal notranslate"><span class="pre">files</span></code> are for you to populate.
+Looking at the <strong>Upload</strong> tab in your Zenodo account, you should be able to verify that the
+deposition draft container is created for you</p>
+<figure class="align-center" id="id2">
+<img alt="Creating a deposition draft container figure" src="_images/deposition_create.png" />
+<figcaption>
+<p><span class="caption-text">Creating a deposition draft container</span><a class="headerlink" href="#id2" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>You can think of the <code class="docutils literal notranslate"><span class="pre">Record</span></code> objects as dictionaries or JSON objects with each element being
+a <code class="docutils literal notranslate"><span class="pre">key</span> <span class="pre">:</span> <span class="pre">value</span></code> pair. Let’s edit the <code class="docutils literal notranslate"><span class="pre">title</span></code> field as an example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">draft_depo</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;title&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Using zenopy is super easy!&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">draft_depo</span><span class="o">.</span><span class="n">data</span>
+<span class="go">{&#39;conceptrecid&#39;: &#39;1104407&#39;,</span>
+<span class="go"> &#39;created&#39;: &#39;2022-09-14T13:38:57.183068+00:00&#39;,</span>
+<span class="go"> &#39;files&#39;: [],</span>
+<span class="go"> &#39;id&#39;: 1104408,</span>
+<span class="go"> &#39;links&#39;: {&#39;bucket&#39;: &#39;https://sandbox.zenodo.org/api/files/ab481ab2-45eb-44dc-96e8-65d06fed9d1b&#39;,</span>
+<span class="go">  &#39;discard&#39;: &#39;https://sandbox.zenodo.org/api/deposit/depositions/1104408/actions/discard&#39;,</span>
+<span class="go">  &#39;edit&#39;: &#39;https://sandbox.zenodo.org/api/deposit/depositions/1104408/actions/edit&#39;,</span>
+<span class="go">  &#39;files&#39;: &#39;https://sandbox.zenodo.org/api/deposit/depositions/1104408/files&#39;,</span>
+<span class="go">  &#39;html&#39;: &#39;https://sandbox.zenodo.org/deposit/1104408&#39;,</span>
+<span class="go">  &#39;latest_draft&#39;: &#39;https://sandbox.zenodo.org/api/deposit/depositions/1104408&#39;,</span>
+<span class="go">  &#39;latest_draft_html&#39;: &#39;https://sandbox.zenodo.org/deposit/1104408&#39;,</span>
+<span class="go">  &#39;publish&#39;: &#39;https://sandbox.zenodo.org/api/deposit/depositions/1104408/actions/publish&#39;,</span>
+<span class="go">  &#39;self&#39;: &#39;https://sandbox.zenodo.org/api/deposit/depositions/1104408&#39;},</span>
+<span class="go"> &#39;metadata&#39;: {&#39;prereserve_doi&#39;: {&#39;doi&#39;: &#39;10.5072/zenodo.1104408&#39;,</span>
+<span class="go">   &#39;recid&#39;: 1104408}},</span>
+<span class="go"> &#39;modified&#39;: &#39;2022-09-14T13:38:57.183080+00:00&#39;,</span>
+<span class="go"> &#39;owner&#39;: 123811,</span>
+<span class="go"> &#39;record_id&#39;: 1104408,</span>
+<span class="go"> &#39;state&#39;: &#39;unsubmitted&#39;,</span>
+<span class="go"> &#39;submitted&#39;: False,</span>
+<span class="go"> &#39;title&#39;: &#39;Using zenopy is super easy!&#39;}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Updating fields in the <code class="docutils literal notranslate"><span class="pre">Record</span></code> draft object(s) does not change the actual deposition(s)
+records on the Zenodo servers within your account. This is reflected in the <code class="docutils literal notranslate"><span class="pre">state:</span> <span class="pre">unsubmitted</span></code>
+and <code class="docutils literal notranslate"><span class="pre">submitted:</span> <span class="pre">False</span></code> fields in your record data. If you have ever worked with Git system,
+you can use the analogy of the local changes which do not affect your remote repository’s contents
+until you commit and push the local changes to the remote server.</p>
+</div>
+</section>
+<section id="updating-depositions">
+<h3><a class="toc-backref" href="#id8" role="doc-backlink">Updating Depositions</a><a class="headerlink" href="#updating-depositions" title="Link to this heading">#</a></h3>
+<p>In order to update your Zenodo deposition (commit your local changes to your record draft on
+the Zenodo server), you can simply pass the minimum required information as arguments to
+the <code class="docutils literal notranslate"><span class="pre">Deposition</span></code> class instance’s <code class="docutils literal notranslate"><span class="pre">update_deposition()</span></code>. First, let’s inspect its docstring
+by applying the <code class="docutils literal notranslate"><span class="pre">?</span></code> operator to the function name</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span>&gt;&gt;&gt; ?depo.update_deposition
+</pre></div>
+</div>
+<p>which returns the following response</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Signature</span><span class="p">:</span>
+<span class="n">depo</span><span class="o">.</span><span class="n">update_deposition</span><span class="p">(</span>
+    <span class="n">id_</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">url</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">upload_type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">publication_type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">image_type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">publication_date</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">title</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">creators</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">description</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">access_right</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">license</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">embargo_date</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">access_conditions</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">zenopy</span><span class="o">.</span><span class="n">record</span><span class="o">.</span><span class="n">Record</span>
+<span class="n">Docstring</span><span class="p">:</span> <span class="n">Update</span> <span class="n">an</span> <span class="n">existing</span> <span class="n">deposition</span> <span class="n">resource</span> <span class="p">(</span><span class="n">deposition</span> <span class="n">metadata</span><span class="p">)</span>
+<span class="n">File</span><span class="p">:</span>      <span class="o">~/</span><span class="n">Packages</span><span class="o">/</span><span class="n">anaconda3</span><span class="o">/</span><span class="n">envs</span><span class="o">/.../</span><span class="n">zenopy</span><span class="o">/</span><span class="n">depositions</span><span class="o">.</span><span class="n">py</span>
+<span class="n">Type</span><span class="p">:</span>      <span class="n">method</span>
+</pre></div>
+</div>
+<p>To get a complete list of required and optional fields for your deposition metadata
+refer to <a class="reference external" href="https://developers.zenodo.org/#representation">Zenodo Documentation</a>.</p>
+<p>Let’s go ahead and update (commit) a few changes in the data field values in our
+deposition container form on Zenodo</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span> <span class="n">draft_depo</span> <span class="o">=</span> <span class="n">depo</span><span class="o">.</span><span class="n">update_deposition</span><span class="p">(</span>
+<span class="go">     id_=1104408,</span>
+<span class="go">     upload_type=&quot;publication&quot;,</span>
+<span class="go">     publication_type=&quot;technicalnote&quot;,</span>
+<span class="go">     creators=[{&quot;name&quot;:&quot;Mostafanejad, Sina&quot;}],</span>
+<span class="go">     access_right=&quot;open&quot;,</span>
+<span class="go">     license=&quot;cc-by&quot;,</span>
+<span class="go">     title=&quot;Using zenopy is super easy!&quot;,</span>
+<span class="go">     description=&quot;zenopy is a user-friendly tool for productivity.&quot;</span>
+<span class="go">     )</span>
+</pre></div>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Instead of passing the record <code class="docutils literal notranslate"><span class="pre">id</span></code> directly, we could extract it from the record object
+via <code class="docutils literal notranslate"><span class="pre">draft_depo._id</span></code> attribute.</p>
+</div>
+<p>Now, let’s check the contents of the updated deposition object</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">draft_depo</span><span class="o">.</span><span class="n">data</span>
+<span class="go">Output exceeds the size limit. Open the full output data in a text editor</span>
+<span class="go">{&#39;conceptrecid&#39;: &#39;1104407&#39;,</span>
+<span class="go"> &#39;created&#39;: &#39;2022-09-14T13:38:57.183068+00:00&#39;,</span>
+<span class="go"> &#39;doi&#39;: &#39;&#39;,</span>
+<span class="go"> &#39;doi_url&#39;: &#39;https://doi.org/&#39;,</span>
+<span class="go"> &#39;files&#39;: [],</span>
+<span class="go"> &#39;id&#39;: 1104408,</span>
+<span class="go"> &#39;links&#39;: {&#39;bucket&#39;: &#39;https://sandbox.zenodo.org/api/files/ab481ab2-45eb-44dc-96e8-65d06fed9d1b&#39;,</span>
+<span class="go">  &#39;discard&#39;: &#39;https://sandbox.zenodo.org/api/deposit/depositions/1104408/actions/discard&#39;,</span>
+<span class="go">  &#39;edit&#39;: &#39;https://sandbox.zenodo.org/api/deposit/depositions/1104408/actions/edit&#39;,</span>
+<span class="go">  &#39;files&#39;: &#39;https://sandbox.zenodo.org/api/deposit/depositions/1104408/files&#39;,</span>
+<span class="go">  &#39;html&#39;: &#39;https://sandbox.zenodo.org/deposit/1104408&#39;,</span>
+<span class="go">  &#39;latest_draft&#39;: &#39;https://sandbox.zenodo.org/api/deposit/depositions/1104408&#39;,</span>
+<span class="go">  &#39;latest_draft_html&#39;: &#39;https://sandbox.zenodo.org/deposit/1104408&#39;,</span>
+<span class="go">  &#39;newversion&#39;: &#39;https://sandbox.zenodo.org/api/deposit/depositions/1104408/actions/newversion&#39;,</span>
+<span class="go">  &#39;publish&#39;: &#39;https://sandbox.zenodo.org/api/deposit/depositions/1104408/actions/publish&#39;,</span>
+<span class="go">  &#39;registerconceptdoi&#39;: &#39;https://sandbox.zenodo.org/api/deposit/depositions/1104408/actions/registerconceptdoi&#39;,</span>
+<span class="go">  &#39;self&#39;: &#39;https://sandbox.zenodo.org/api/deposit/depositions/1104408&#39;},</span>
+<span class="go"> &#39;metadata&#39;: {&#39;access_right&#39;: &#39;open&#39;,</span>
+<span class="go">  &#39;creators&#39;: [{&#39;name&#39;: &#39;Mostafanejad, Sina&#39;}],</span>
+<span class="go">  &#39;description&#39;: &#39;zenopy is a user-friendly tool for productivity.&#39;,</span>
+<span class="go">  &#39;doi&#39;: &#39;&#39;,</span>
+<span class="go">  &#39;license&#39;: &#39;CC-BY-4.0&#39;,</span>
+<span class="go">  &#39;prereserve_doi&#39;: {&#39;doi&#39;: &#39;10.5072/zenodo.1104408&#39;, &#39;recid&#39;: 1104408},</span>
+<span class="go">  &#39;publication_date&#39;: &#39;2022-09-14&#39;,</span>
+<span class="go">  &#39;publication_type&#39;: &#39;technicalnote&#39;,</span>
+<span class="go">...</span>
+<span class="go"> &#39;owner&#39;: 123811,</span>
+<span class="go"> &#39;record_id&#39;: 1104408,</span>
+<span class="go"> &#39;state&#39;: &#39;unsubmitted&#39;,</span>
+<span class="go"> &#39;submitted&#39;: False,</span>
+<span class="go"> &#39;title&#39;: &#39;Using zenopy is super easy!&#39;}</span>
+</pre></div>
+</div>
+<p>The changes are now reflected on the target deposition in our Zenodo account records as well</p>
+<figure class="align-center" id="id3">
+<img alt="Updating a deposition draft container figure" src="_images/deposition_update.png" />
+<figcaption>
+<p><span class="caption-text">Updating a deposition draft container</span><a class="headerlink" href="#id3" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>Although we have committed our changes to the Zenodo servers by updating the deposition
+object, we have not yet published our draft. The status of our record is stored in
+the <code class="docutils literal notranslate"><span class="pre">state:</span> <span class="pre">unsubmitted</span></code>  and <code class="docutils literal notranslate"><span class="pre">submitted:</span> <span class="pre">False</span></code> fields. The status implies two things:
+(i) We can further modify our record without the need to create a new version of our record,
+and (ii) the draft is not yet published and thus, not available/accessible to the public.</p>
+</div>
+</section>
+<section id="retrieving-depositions">
+<h3><a class="toc-backref" href="#id9" role="doc-backlink">Retrieving Depositions</a><a class="headerlink" href="#retrieving-depositions" title="Link to this heading">#</a></h3>
+<p>In order to <a class="reference external" href="https://developers.zenodo.org/#retrieve">retrieve</a> a deposition, simply pass its
+<code class="docutils literal notranslate"><span class="pre">id</span></code> to <code class="docutils literal notranslate"><span class="pre">retrieve_deposition()</span></code></p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fetched_depo</span> <span class="o">=</span> <span class="n">depo</span><span class="o">.</span><span class="n">retrieve_deposition</span><span class="p">(</span><span class="n">id_</span><span class="o">=</span><span class="mi">1104408</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">fetched_depo</span><span class="p">)</span>
+<span class="go">Output exceeds the size limit. Open the full output data in a text editor</span>
+<span class="go">{&#39;conceptrecid&#39;: &#39;1104407&#39;,</span>
+<span class="go"> &#39;created&#39;: &#39;2022-09-14T13:38:57.183068+00:00&#39;,</span>
+<span class="go"> &#39;doi&#39;: &#39;&#39;,</span>
+<span class="go"> &#39;doi_url&#39;: &#39;https://doi.org/&#39;,</span>
+<span class="go"> &#39;files&#39;: [],</span>
+<span class="go"> &#39;id&#39;: 1104408,</span>
+<span class="go"> &#39;links&#39;: {&#39;bucket&#39;: &#39;https://sandbox.zenodo.org/api/files/ab481ab2-45eb-44dc-96e8-65d06fed9d1b&#39;,</span>
+<span class="go">           &#39;discard&#39;: &#39;https://sandbox.zenodo.org/api/deposit/depositions/1104408/actions/discard&#39;,</span>
+<span class="go">           &#39;edit&#39;: &#39;https://sandbox.zenodo.org/api/deposit/depositions/1104408/actions/edit&#39;,</span>
+<span class="go">           &#39;files&#39;: &#39;https://sandbox.zenodo.org/api/deposit/depositions/1104408/files&#39;,</span>
+<span class="go">           &#39;html&#39;: &#39;https://sandbox.zenodo.org/deposit/1104408&#39;,</span>
+<span class="go">           &#39;latest_draft&#39;: &#39;https://sandbox.zenodo.org/api/deposit/depositions/1104408&#39;,</span>
+<span class="go">           &#39;latest_draft_html&#39;: &#39;https://sandbox.zenodo.org/deposit/1104408&#39;,</span>
+<span class="go">           &#39;newversion&#39;: &#39;https://sandbox.zenodo.org/api/deposit/depositions/1104408/actions/newversion&#39;,</span>
+<span class="go">           &#39;publish&#39;: &#39;https://sandbox.zenodo.org/api/deposit/depositions/1104408/actions/publish&#39;,</span>
+<span class="go">           &#39;registerconceptdoi&#39;: &#39;https://sandbox.zenodo.org/api/deposit/depositions/1104408/actions/registerconceptdoi&#39;,</span>
+<span class="go">           &#39;self&#39;: &#39;https://sandbox.zenodo.org/api/deposit/depositions/1104408&#39;},</span>
+<span class="go"> &#39;metadata&#39;: {&#39;access_right&#39;: &#39;open&#39;,</span>
+<span class="go">              &#39;creators&#39;: [{&#39;name&#39;: &#39;Mostafanejad, Sina&#39;}],</span>
+<span class="go">              &#39;description&#39;: &#39;zenopy is a user-friendly tool for productivity.&#39;,</span>
+<span class="go">              &#39;doi&#39;: &#39;&#39;,</span>
+<span class="go">              &#39;license&#39;: &#39;CC-BY-4.0&#39;,</span>
+<span class="go">              &#39;prereserve_doi&#39;: {&#39;doi&#39;: &#39;10.5072/zenodo.1104408&#39;,</span>
+<span class="go">                                 &#39;recid&#39;: 1104408},</span>
+<span class="go">              &#39;publication_date&#39;: &#39;2022-09-14&#39;,</span>
+<span class="go">...</span>
+<span class="go"> &#39;record_id&#39;: 1104408,</span>
+<span class="go"> &#39;state&#39;: &#39;unsubmitted&#39;,</span>
+<span class="go"> &#39;submitted&#39;: False,</span>
+<span class="go"> &#39;title&#39;: &#39;Using zenopy is super easy!&#39;}</span>
+</pre></div>
+</div>
+</section>
+<section id="deleting-depositions">
+<h3><a class="toc-backref" href="#id10" role="doc-backlink">Deleting Depositions</a><a class="headerlink" href="#deleting-depositions" title="Link to this heading">#</a></h3>
+<p>You can easily <a class="reference external" href="https://developers.zenodo.org/#delete">delete</a> a
+deposition <strong>draft</strong> from your Zenodo account using</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">depo</span><span class="o">.</span><span class="n">delete_deposition</span><span class="p">(</span><span class="n">id_</span><span class="o">=</span><span class="mi">1104408</span><span class="p">)</span>
+<span class="go">An unpublished deposition has been deleted at the following address:</span>
+<span class="go">        https://sandbox.zenodo.org/api/deposit/depositions/</span>
+</pre></div>
+</div>
+<p>Upon successful completion of this command, <code class="docutils literal notranslate"><span class="pre">zenopy</span></code> notifies you that
+the deposition has been deleted from your account. You can verify
+it by checking your Zenodo account from the web browser.</p>
+</section>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="installation.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Installation</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="howtos/index.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">How-To Guides</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#access-your-zenodo-account">Access your Zenodo Account</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#working-with-the-existing-depositions">Working with the Existing Depositions</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#listing-depositions">Listing Depositions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-depositions">Creating Depositions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#updating-depositions">Updating Depositions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#retrieving-depositions">Retrieving Depositions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#deleting-depositions">Deleting Depositions</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="_sources/quick_start.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.15.4.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

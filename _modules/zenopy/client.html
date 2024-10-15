@@ -1,0 +1,1115 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>zenopy.client &#8212; zenopy 2022.10.29-15-g4f93fcd documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=c224919a" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=68dfe5c2"></script>
+    <script src="../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/zenopy/client';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/molssi-zenopy_white_bg.png" class="logo__image only-light" alt="zenopy 2022.10.29-15-g4f93fcd documentation - Home"/>
+    <script>document.write(`<img src="../../_static/molssi-zenopy_white_bg.png" class="logo__image only-dark" alt="zenopy 2022.10.29-15-g4f93fcd documentation - Home"/>`);</script>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../installation.html">
+    Installation
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../quick_start.html">
+    Quick Start
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../howtos/index.html">
+    How-To Guides
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../tutorials/index.html">
+    Tutorials
+  </a>
+</li>
+
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../interactive.html">
+    Interactive Tutorials
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../manual/index.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../api/index.html">
+    API Reference
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../references.html">
+    References
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../dev_team.html">
+    zenopy Developers
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../acknowledgements.html">
+    Acknowledgements
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-external" href="https://molssi.org">
+    MolSSI
+  </a>
+</li>
+
+                </ul>
+            </li>
+            
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/MolSSI/zenopy" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://twitter.com/MolSSI_NSF" title="Twitter" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-twitter fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">Twitter</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../installation.html">
+    Installation
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../quick_start.html">
+    Quick Start
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../howtos/index.html">
+    How-To Guides
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../tutorials/index.html">
+    Tutorials
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../interactive.html">
+    Interactive Tutorials
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../manual/index.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../api/index.html">
+    API Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../references.html">
+    References
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../dev_team.html">
+    zenopy Developers
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../acknowledgements.html">
+    Acknowledgements
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://molssi.org">
+    MolSSI
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/MolSSI/zenopy" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://twitter.com/MolSSI_NSF" title="Twitter" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-twitter fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">Twitter</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../index.html" class="nav-link">Module code</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">zenopy.client</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for zenopy.client</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+
+<span class="sd">&quot;&quot;&quot;Zenodo client for credentials management</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">configparser</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">from</span> <span class="nn">zenopy.deposition_actions</span> <span class="kn">import</span> <span class="n">_DepositionActions</span>
+<span class="kn">from</span> <span class="nn">zenopy.deposition_files</span> <span class="kn">import</span> <span class="n">_DepositionFiles</span>
+<span class="kn">from</span> <span class="nn">zenopy.depositions</span> <span class="kn">import</span> <span class="n">_Depositions</span>
+<span class="kn">from</span> <span class="nn">zenopy.records</span> <span class="kn">import</span> <span class="n">_Records</span>
+<span class="kn">from</span> <span class="nn">zenopy.resources</span> <span class="kn">import</span> <span class="n">_Resources</span>
+
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="Zenodo">
+<a class="viewcode-back" href="../../api/api_client.html#zenopy.client.Zenodo">[docs]</a>
+<span class="k">class</span> <span class="nc">Zenodo</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;zenopy client class</span>
+
+<span class="sd">    The zenopy client class instance allows the users to connect to</span>
+<span class="sd">    their accounts on Zenodo server and communicate with it through</span>
+<span class="sd">    REST APIs.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; import zenopy</span>
+<span class="sd">    &gt;&gt;&gt; cli = zenopy.Zenodo()</span>
+<span class="sd">    WARNING: The config file (~/.zenodorc) is found.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">token</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">config_file_path</span><span class="p">:</span> <span class="p">(</span><span class="nb">str</span> <span class="o">|</span> <span class="n">Path</span><span class="p">)</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">use_sandbox</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;zenopy client class constructor</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        token : str, optional</span>
+<span class="sd">            Token created through a personal Zenodo account, by default empty</span>
+<span class="sd">        config_file_path : str  |  Path, optional</span>
+<span class="sd">            Path to the configuration file listing Zenodo (and Sandbox) account(s)&#39;</span>
+<span class="sd">            tokens. This file is usually located at ~/.zenodorc, by default None</span>
+<span class="sd">        use_sandbox : bool, optional</span>
+<span class="sd">            If True, the tokens will be read from the [SANDBOX] section of the</span>
+<span class="sd">            configuration file, by default False</span>
+
+
+<span class="sd">        See Also</span>
+<span class="sd">        --------</span>
+<span class="sd">        create_config_file</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_use_sandbox</span> <span class="o">=</span> <span class="n">use_sandbox</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_use_sandbox</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_base_url</span> <span class="o">=</span> <span class="s2">&quot;https://sandbox.zenodo.org/api&quot;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_base_url</span> <span class="o">=</span> <span class="s2">&quot;https://zenodo.org/api&quot;</span>
+        <span class="k">if</span> <span class="n">token</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_token</span> <span class="o">=</span> <span class="n">token</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_token</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_config_file_path</span> <span class="o">=</span> <span class="n">config_file_path</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_config_file_path</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">_config_file_path</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_config_file_path</span> <span class="o">=</span> <span class="s2">&quot;~/.zenodorc&quot;</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">Path</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_config_file_path</span><span class="p">)</span><span class="o">.</span><span class="n">expanduser</span><span class="p">()</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">create_config_file</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_config_file_path</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_config_obj</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">read_config_file</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_config_file_path</span><span class="p">)</span>
+                <span class="n">sec</span> <span class="o">=</span> <span class="s2">&quot;SANDBOX&quot;</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_use_sandbox</span> <span class="k">else</span> <span class="s2">&quot;ZENODO&quot;</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">write_token</span><span class="p">(</span><span class="n">section</span><span class="o">=</span><span class="n">sec</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="s2">&quot;token&quot;</span><span class="p">,</span> <span class="n">token</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_token</span><span class="p">,</span> <span class="n">force_rewrite</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">update_config_file</span><span class="p">()</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span>
+                    <span class="sa">f</span><span class="s2">&quot;WARNING: A new config file is automatically created in (</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_config_file_path</span><span class="si">}</span><span class="s2">).&quot;</span>
+                <span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span>
+                    <span class="sa">f</span><span class="s2">&quot;WARNING: The config file (</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_config_file_path</span><span class="si">}</span><span class="s2">) is found.&quot;</span>
+                <span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_config_obj</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">read_config_file</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_config_file_path</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_config_obj</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">read_config_file</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_config_file_path</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_headers</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;Authorization&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;Bearer </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">token</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Content-Type&quot;</span><span class="p">:</span> <span class="s2">&quot;application/json&quot;</span><span class="p">,</span>
+        <span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_params</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_params</span><span class="p">[</span><span class="s2">&quot;access_token&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">token</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">config_obj</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">configparser</span><span class="o">.</span><span class="n">ConfigParser</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Getter for the client&#39;s active ConfigParser object</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        _config_obj : configparser.ConfigParser</span>
+<span class="sd">            The client&#39;s active ``ConfigParser`` object which stores</span>
+<span class="sd">            all authentication tokens and credentials in memory.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_config_obj</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">read_config_file</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_config_file_path</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_config_obj</span>
+
+    <span class="nd">@config_obj</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">config_obj</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cfg_obj</span><span class="p">:</span> <span class="n">configparser</span><span class="o">.</span><span class="n">ConfigParser</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Setter for the client&#39;s active ConfigParser object</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        cfg_obj : configparser.ConfigParser</span>
+<span class="sd">            An instance of the ``ConfigParser`` object to be stored in</span>
+<span class="sd">            client class&#39; corresponding attribute.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_config_obj</span> <span class="o">=</span> <span class="n">cfg_obj</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">token</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Getter for the Zenodo class token attribute</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        _token : str</span>
+<span class="sd">            The first token from [ZENODO] (if ``_use_sandbox == False``) </span>
+<span class="sd">            or [SANDBOX] (if ``_use_sandbox == True``) sections listed </span>
+<span class="sd">            in the configuration file</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_token</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">_token</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
+            <span class="n">section</span> <span class="o">=</span> <span class="s2">&quot;SANDBOX&quot;</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_use_sandbox</span> <span class="k">else</span> <span class="s2">&quot;ZENODO&quot;</span>
+            <span class="k">if</span> <span class="n">section</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_config_obj</span><span class="o">.</span><span class="n">sections</span><span class="p">():</span>
+                <span class="k">raise</span> <span class="n">configparser</span><span class="o">.</span><span class="n">NoSectionError</span><span class="p">(</span>
+                    <span class="sa">f</span><span class="s2">&quot;Section [</span><span class="si">{</span><span class="n">section</span><span class="si">}</span><span class="s2">] does not exist in </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_config_file_path</span><span class="si">}</span><span class="s2">.&quot;</span>
+                <span class="p">)</span>
+            <span class="c1"># Check to see if the section is empty</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">list_tokens</span><span class="p">(</span><span class="n">section</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_token</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">list_tokens</span><span class="p">(</span><span class="n">section</span><span class="p">)[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">configparser</span><span class="o">.</span><span class="n">Error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The [</span><span class="si">{</span><span class="n">section</span><span class="si">}</span><span class="s2">] of the config parser is empty.&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_token</span>
+
+    <span class="nd">@token</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">token</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">token</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Setter for the Zenodo class token attribute</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        token : str</span>
+<span class="sd">            User-defined token to be stored in the ``_token`` attribute</span>
+<span class="sd">            of the Zenodo client class</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_token</span> <span class="o">=</span> <span class="n">token</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">use_sandbox</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Getter for the Zenodo class use_sandbox boolean attribute</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        _use_sandbox : str</span>
+<span class="sd">            Boolean attribute for switching between the SANDBOX and</span>
+<span class="sd">            ZENODO accounts</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_use_sandbox</span>
+
+    <span class="nd">@use_sandbox</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">use_sandbox</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Setter for the Zenodo class use_sandbox attribute</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        value : str</span>
+<span class="sd">            True if client should connect to SANDBOX, False</span>
+<span class="sd">            otherwise.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_use_sandbox</span> <span class="o">=</span> <span class="n">value</span>
+
+<div class="viewcode-block" id="Zenodo.create_config_file">
+<a class="viewcode-back" href="../../api/api_client.html#zenopy.client.Zenodo.create_config_file">[docs]</a>
+    <span class="k">def</span> <span class="nf">create_config_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">config_file_path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Creates an empty config file in the `config_file_path`</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        config_file_path : str, optional</span>
+<span class="sd">            A valid address for creating the config file, by default None</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        RuntimeError</span>
+<span class="sd">            If the provided ``config_file_path`` is None or an empty string</span>
+<span class="sd">        configparser.Error</span>
+<span class="sd">            If a config file does already exist in the target address</span>
+<span class="sd">            provided by ``config_file_path``</span>
+<span class="sd">        &quot;&quot;&quot;</span>        
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">config_file_path</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">config_file_path</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span>
+                <span class="s2">&quot;The file_path argument is None or empty. &quot;</span>
+                <span class="s2">&quot;Please provide a valid address for a config file.&quot;</span>
+            <span class="p">)</span>
+        <span class="n">path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">config_file_path</span><span class="p">)</span><span class="o">.</span><span class="n">expanduser</span><span class="p">()</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+            <span class="n">config_obj</span> <span class="o">=</span> <span class="n">configparser</span><span class="o">.</span><span class="n">ConfigParser</span><span class="p">()</span>
+            <span class="n">config_obj</span><span class="p">[</span><span class="s2">&quot;ZENODO&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+            <span class="n">config_obj</span><span class="p">[</span><span class="s2">&quot;SANDBOX&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+            <span class="n">section</span> <span class="o">=</span> <span class="s2">&quot;SANDBOX&quot;</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_use_sandbox</span> <span class="k">else</span> <span class="s2">&quot;ZENODO&quot;</span>
+            <span class="n">config_obj</span><span class="p">[</span><span class="n">section</span><span class="p">][</span><span class="s2">&quot;token&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;&lt;FIXME&gt;&quot;</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+                <span class="n">config_obj</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">configparser</span><span class="o">.</span><span class="n">Error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;A config file already exists in &#39;</span><span class="si">{</span><span class="n">path</span><span class="si">}</span><span class="s2">&#39;.&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Zenodo.init_deposition">
+<a class="viewcode-back" href="../../api/api_client.html#zenopy.client.Zenodo.init_deposition">[docs]</a>
+    <span class="k">def</span> <span class="nf">init_deposition</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Creates an instance of the _Depositions class</span>
+
+<span class="sd">        The returned object exposes all functionalities</span>
+<span class="sd">        pertinent to the ``_Depositions`` class.</span>
+<span class="sd">        </span>
+<span class="sd">        Examples</span>
+<span class="sd">        --------</span>
+<span class="sd">        &gt;&gt;&gt; import zenopy</span>
+<span class="sd">        &gt;&gt;&gt; cli = zenopy.Zenodo()</span>
+<span class="sd">        WARNING: The config file (~/.zenodorc) is found.</span>
+<span class="sd">        &gt;&gt;&gt; depo = cli.init_deposition()</span>
+<span class="sd">        &gt;&gt;&gt; depo</span>
+<span class="sd">        &lt;zenopy.depositions._Depositions at 0x7fad2e053790&gt;</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        : zenopy.depositions._Depositions</span>
+<span class="sd">            An instance of the ``zenopy.depositions._Depositions`` class</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">_Depositions</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Zenodo.init_deposition_actions">
+<a class="viewcode-back" href="../../api/api_client.html#zenopy.client.Zenodo.init_deposition_actions">[docs]</a>
+    <span class="k">def</span> <span class="nf">init_deposition_actions</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Creates an instance of the _DepositionActions class</span>
+
+<span class="sd">        The returned object exposes all functionalities</span>
+<span class="sd">        pertinent to the ``_DepositionActions`` class such as</span>
+<span class="sd">        editing, publishing, creating a new version and discarding</span>
+<span class="sd">        ongoing changes on the deposition draft.</span>
+<span class="sd">        </span>
+<span class="sd">        Examples</span>
+<span class="sd">        --------</span>
+<span class="sd">        &gt;&gt;&gt; import zenopy</span>
+<span class="sd">        &gt;&gt;&gt; cli = zenopy.Zenodo()</span>
+<span class="sd">        WARNING: The config file (~/.zenodorc) is found.</span>
+<span class="sd">        &gt;&gt;&gt; depo_act = cli.init_deposition_actions()</span>
+<span class="sd">        &gt;&gt;&gt; depo_act</span>
+<span class="sd">        &lt;zenopy.deposition_actions._DepositionActions at 0x7f2f77742a10&gt;</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        : zenopy.deposition_actions._DepositionActions</span>
+<span class="sd">            An instance of the ``zenopy.deposition_actions._DepositionActions``</span>
+<span class="sd">            class</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">_DepositionActions</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Zenodo.init_deposition_file">
+<a class="viewcode-back" href="../../api/api_client.html#zenopy.client.Zenodo.init_deposition_file">[docs]</a>
+    <span class="k">def</span> <span class="nf">init_deposition_file</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Creates an instance of the _DepositionFiles class</span>
+
+<span class="sd">        The returned object exposes all functionalities</span>
+<span class="sd">        of the ``_DepositionFiles`` class such as creating, listing,</span>
+<span class="sd">        retrieving, sorting, etc. of files in a deposition draft.</span>
+<span class="sd">        </span>
+<span class="sd">        Examples</span>
+<span class="sd">        --------</span>
+<span class="sd">        &gt;&gt;&gt; import zenopy</span>
+<span class="sd">        &gt;&gt;&gt; cli = zenopy.Zenodo()</span>
+<span class="sd">        WARNING: The config file (~/.zenodorc) is found.</span>
+<span class="sd">        &gt;&gt;&gt; depo_file = cli.init_deposition_file()</span>
+<span class="sd">        &gt;&gt;&gt; depo_file</span>
+<span class="sd">        &lt;zenopy.deposition_files._DepositionFiles at 0x7fad2e0533a0&gt;</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        : zenopy.deposition_files._DepositionFiles</span>
+<span class="sd">            An instance of the ``zenopy.deposition_files._DepositionFiles``</span>
+<span class="sd">            class</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">_DepositionFiles</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Zenodo.init_records">
+<a class="viewcode-back" href="../../api/api_client.html#zenopy.client.Zenodo.init_records">[docs]</a>
+    <span class="k">def</span> <span class="nf">init_records</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Creates an instance of the _Records class</span>
+
+<span class="sd">        The returned object exposes all functionalities</span>
+<span class="sd">        of the ``_Records`` class such as retrieving the records</span>
+<span class="sd">        and performing elastic search among them.</span>
+<span class="sd">        </span>
+<span class="sd">        Examples</span>
+<span class="sd">        --------</span>
+<span class="sd">        &gt;&gt;&gt; import zenopy</span>
+<span class="sd">        &gt;&gt;&gt; cli = zenopy.Zenodo()</span>
+<span class="sd">        WARNING: The config file (~/.zenodorc) is found.</span>
+<span class="sd">        &gt;&gt;&gt; rec_obj = cli.init_records()</span>
+<span class="sd">        &gt;&gt;&gt; rec_obj</span>
+<span class="sd">        &lt;zenopy.records._Records at 0x7fb020d5b760&gt;</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        : zenopy.depositions._Records</span>
+<span class="sd">            An instance of the ``zenopy.records._Records`` class</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">_Records</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Zenodo.init_resources">
+<a class="viewcode-back" href="../../api/api_client.html#zenopy.client.Zenodo.init_resources">[docs]</a>
+    <span class="k">def</span> <span class="nf">init_resources</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">resource</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Creates an instance of the _Resources class</span>
+
+<span class="sd">        The returned object provides users with search</span>
+<span class="sd">        capabilities through the created resources type</span>
+<span class="sd">        objects. The resource type can be ``communities``,</span>
+<span class="sd">        ``licenses``, ``grants``, or ``funders``.</span>
+<span class="sd">        </span>
+<span class="sd">        Examples</span>
+<span class="sd">        --------</span>
+<span class="sd">        &gt;&gt;&gt; import zenopy</span>
+<span class="sd">        &gt;&gt;&gt; cli = zenopy.Zenodo()</span>
+<span class="sd">        WARNING: The config file (~/.zenodorc) is found.</span>
+<span class="sd">        &gt;&gt;&gt; resrc_obj = cli.init_resources(resource=&quot;communities&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; resrc_obj</span>
+<span class="sd">        &lt;zenopy.resources._Resources at 0x7f51ad3e58d0&gt;</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        : zenopy.resources._Resources</span>
+<span class="sd">            An instance of the ``zenopy.resources._Resources``</span>
+<span class="sd">            class</span>
+<span class="sd">        &quot;&quot;&quot;</span>        
+        <span class="k">return</span> <span class="n">_Resources</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">resource</span><span class="o">=</span><span class="n">resource</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Zenodo.list_sections">
+<a class="viewcode-back" href="../../api/api_client.html#zenopy.client.Zenodo.list_sections">[docs]</a>
+    <span class="k">def</span> <span class="nf">list_sections</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;List all sections in a config file</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        _config_obj.sections() : list[str]</span>
+<span class="sd">            A list of section titles in the instance&#39;s active </span>
+<span class="sd">            ``_config_obj`` attribute</span>
+
+<span class="sd">        Examples</span>
+<span class="sd">        --------</span>
+<span class="sd">        &gt;&gt;&gt; import zenopy</span>
+<span class="sd">        &gt;&gt;&gt; cli = zenopy.Zenodo()</span>
+<span class="sd">        WARNING: The config file (~/.zenodorc) is found.</span>
+<span class="sd">        # equivalent to `cli.config_obj.sections()`</span>
+<span class="sd">        &gt;&gt;&gt; cli.list_sections()</span>
+<span class="sd">        [&#39;ZENODO&#39;, &#39;SANDBOX&#39;]</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_config_obj</span><span class="o">.</span><span class="n">sections</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="Zenodo.list_tokens">
+<a class="viewcode-back" href="../../api/api_client.html#zenopy.client.Zenodo.list_tokens">[docs]</a>
+    <span class="k">def</span> <span class="nf">list_tokens</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">section</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;List all tokens in a specific section</span>
+<span class="sd">        </span>
+<span class="sd">        Lists all tokens in a specific section in the client instance&#39;s</span>
+<span class="sd">        active ``_config_obj`` attribute.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        _config_obj[section].items() : list[tuple[str, str]]</span>
+<span class="sd">            A list of all available token labels and values</span>
+<span class="sd">            formatted as doubles (key-value pairs as tuples)</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        configparser.NoSectionError</span>
+<span class="sd">            if the provided argument (section) is None or does not</span>
+<span class="sd">            exist in the client instance&#39;s active ``_config_obj``</span>
+<span class="sd">            attribute.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">section</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">configparser</span><span class="o">.</span><span class="n">NoSectionError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;A section name is needed as an argument.&quot;</span>
+            <span class="p">)</span>
+        <span class="n">section</span> <span class="o">=</span> <span class="n">section</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">section</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_config_obj</span><span class="o">.</span><span class="n">sections</span><span class="p">():</span>
+            <span class="k">raise</span> <span class="n">configparser</span><span class="o">.</span><span class="n">NoSectionError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;Section [</span><span class="si">{</span><span class="n">section</span><span class="si">}</span><span class="s2">] does not exist in </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_config_file_path</span><span class="si">}</span><span class="s2">.&quot;</span>
+            <span class="p">)</span>
+        <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_config_obj</span><span class="p">[</span><span class="n">section</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">())</span></div>
+
+
+<div class="viewcode-block" id="Zenodo.read_config_file">
+<a class="viewcode-back" href="../../api/api_client.html#zenopy.client.Zenodo.read_config_file">[docs]</a>
+    <span class="k">def</span> <span class="nf">read_config_file</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">config_file_path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">configparser</span><span class="o">.</span><span class="n">ConfigParser</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Reads the config file from disk</span>
+<span class="sd">        </span>
+<span class="sd">        Reads the config file from a path pointed to by</span>
+<span class="sd">        the ``config_file_path`` argument and returns a</span>
+<span class="sd">        ``configparser.ConfigParser`` object constructed from</span>
+<span class="sd">        it.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        configparser.ConfigParser().read(path) : configparser.ConfigParser</span>
+<span class="sd">            a ``configparser.ConfigParser`` object the contents of which</span>
+<span class="sd">            is read from disk</span>
+<span class="sd">        </span>
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        RuntimeError</span>
+<span class="sd">            If ``config_file_path`` is None or refers to a non-existent config</span>
+<span class="sd">            file</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">config_file_path</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span>
+                <span class="s2">&quot;The file_path argument is None. &quot;</span>
+                <span class="s2">&quot;Please provide a valid address for a config_file.&quot;</span>
+            <span class="p">)</span>
+        <span class="n">path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">config_file_path</span><span class="p">)</span><span class="o">.</span><span class="n">expanduser</span><span class="p">()</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;You need a config file to publish to Zenodo. &quot;</span>
+                <span class="s2">&quot;See the documentation for more details.&quot;</span>
+            <span class="p">)</span>
+        <span class="n">config_obj</span> <span class="o">=</span> <span class="n">configparser</span><span class="o">.</span><span class="n">ConfigParser</span><span class="p">()</span>
+        <span class="n">config_obj</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">config_obj</span></div>
+
+
+<div class="viewcode-block" id="Zenodo.read_token">
+<a class="viewcode-back" href="../../api/api_client.html#zenopy.client.Zenodo.read_token">[docs]</a>
+    <span class="k">def</span> <span class="nf">read_token</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">section</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Reading a specific token from a selected section</span>
+<span class="sd">        </span>
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        configparser.NoSectionError</span>
+<span class="sd">            If the section argument does not exist in the client</span>
+<span class="sd">            instance&#39;s active ``_config_obj`` attribute</span>
+<span class="sd">        configparser.NoOptionError</span>
+<span class="sd">            If the key argument does not exist in the client</span>
+<span class="sd">            instance&#39;s active ``_config_obj`` attribute</span>
+<span class="sd">        </span>
+<span class="sd">        Notes</span>
+<span class="sd">        -----</span>
+<span class="sd">        The ``read_token()`` is case insensitive with respect to the</span>
+<span class="sd">        entered section argument and automatically turns it to</span>
+<span class="sd">        upper case.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">section</span> <span class="o">=</span> <span class="n">section</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_config_obj</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">section</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Zenodo.update_config_file">
+<a class="viewcode-back" href="../../api/api_client.html#zenopy.client.Zenodo.update_config_file">[docs]</a>
+    <span class="k">def</span> <span class="nf">update_config_file</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Commit the current contents of the config object to config file on disk </span>
+<span class="sd">        </span>
+<span class="sd">        Commits the current contents of the client instance&#39;s active ``_config_obj`` </span>
+<span class="sd">        attribute to the config file located at ``_config_file_path`` on disk.</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        configparser.Error</span>
+<span class="sd">            If the client instance&#39;s ``_config_file_path`` points to a non-existent</span>
+<span class="sd">            config file</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_config_file_path</span><span class="p">)</span><span class="o">.</span><span class="n">expanduser</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_config_obj</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">configparser</span><span class="o">.</span><span class="n">Error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;No config file exists in &#39;</span><span class="si">{</span><span class="n">path</span><span class="si">}</span><span class="s2">&#39;.&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Zenodo.write_token">
+<a class="viewcode-back" href="../../api/api_client.html#zenopy.client.Zenodo.write_token">[docs]</a>
+    <span class="k">def</span> <span class="nf">write_token</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">section</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">key</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">token</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">force_rewrite</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Setting the appropriate token within a specific section</span>
+
+<span class="sd">        Setting the passed token-key pair arguments in the corresponding</span>
+<span class="sd">        designated config file section.</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        configparser.NoSectionError</span>
+<span class="sd">            If the section argument does not exist in the client</span>
+<span class="sd">            instance&#39;s active ``_config_obj`` attribute</span>
+<span class="sd">        configparser.NoOptionError</span>
+<span class="sd">            If the key argument does not exist in the client</span>
+<span class="sd">            instance&#39;s active ``_config_obj`` attribute</span>
+<span class="sd">        configparser.Error</span>
+<span class="sd">            If the passed token already exists in the section selected by the user.</span>
+<span class="sd">        </span>
+<span class="sd">        Notes</span>
+<span class="sd">        -----</span>
+<span class="sd">        Set ``force_rewrite = True`` if you want to overwrite an existing token in </span>
+<span class="sd">        a config file section</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">key</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">configparser</span><span class="o">.</span><span class="n">NoOptionError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;A token name is needed as an argument.&quot;</span><span class="p">)</span>
+        <span class="n">section</span> <span class="o">=</span> <span class="n">section</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_config_obj</span><span class="o">.</span><span class="n">has_section</span><span class="p">(</span><span class="n">section</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="n">configparser</span><span class="o">.</span><span class="n">NoSectionError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;Section [</span><span class="si">{</span><span class="n">section</span><span class="si">}</span><span class="s2">] does not exist in </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_config_file_path</span><span class="si">}</span><span class="s2">.&quot;</span>
+            <span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_config_obj</span><span class="o">.</span><span class="n">has_option</span><span class="p">(</span><span class="n">section</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">force_rewrite</span><span class="p">:</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span>
+                    <span class="sa">f</span><span class="s2">&quot;WARNING: Rewriting the existing token (</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">) &quot;</span>
+                    <span class="sa">f</span><span class="s2">&quot;in section [</span><span class="si">{</span><span class="n">section</span><span class="si">}</span><span class="s2">]...&quot;</span>
+                <span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_config_obj</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">section</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">token</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">configparser</span><span class="o">.</span><span class="n">Error</span><span class="p">(</span>
+                    <span class="sa">f</span><span class="s2">&quot;The token (</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">) already exists in section [</span><span class="si">{</span><span class="n">section</span><span class="si">}</span><span class="s2">].</span><span class="se">\n</span><span class="s2">&quot;</span>
+                    <span class="s2">&quot;Set &#39;force_rewrite = True&#39; if you want to overwrite the token.&quot;</span>
+                <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_config_obj</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">section</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">token</span><span class="p">)</span></div>
+</div>
+
+</pre></div>
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.15.4.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

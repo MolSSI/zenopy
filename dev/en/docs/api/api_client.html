@@ -1,0 +1,1050 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Zenodo Client Module &#8212; zenopy 2022.10.29-15-g4f93fcd documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=c224919a" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=68dfe5c2"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'api/api_client';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="References" href="../references.html" />
+    <link rel="prev" title="API Reference" href="index.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/molssi-zenopy_white_bg.png" class="logo__image only-light" alt="zenopy 2022.10.29-15-g4f93fcd documentation - Home"/>
+    <script>document.write(`<img src="../_static/molssi-zenopy_white_bg.png" class="logo__image only-dark" alt="zenopy 2022.10.29-15-g4f93fcd documentation - Home"/>`);</script>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../installation.html">
+    Installation
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../quick_start.html">
+    Quick Start
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../howtos/index.html">
+    How-To Guides
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../tutorials/index.html">
+    Tutorials
+  </a>
+</li>
+
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../interactive.html">
+    Interactive Tutorials
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../manual/index.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class=" current active">
+  <a class="nav-link dropdown-item nav-internal" href="index.html">
+    API Reference
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../references.html">
+    References
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../dev_team.html">
+    zenopy Developers
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../acknowledgements.html">
+    Acknowledgements
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-external" href="https://molssi.org">
+    MolSSI
+  </a>
+</li>
+
+                </ul>
+            </li>
+            
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/MolSSI/zenopy" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://twitter.com/MolSSI_NSF" title="Twitter" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-twitter fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">Twitter</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../installation.html">
+    Installation
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../quick_start.html">
+    Quick Start
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../howtos/index.html">
+    How-To Guides
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../tutorials/index.html">
+    Tutorials
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../interactive.html">
+    Interactive Tutorials
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../manual/index.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="index.html">
+    API Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../references.html">
+    References
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../dev_team.html">
+    zenopy Developers
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../acknowledgements.html">
+    Acknowledgements
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://molssi.org">
+    MolSSI
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/MolSSI/zenopy" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://twitter.com/MolSSI_NSF" title="Twitter" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-twitter fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">Twitter</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Zenodo Client Module</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">API Reference</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">Zenodo Client Module</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="zenodo-client-module">
+<span id="api-client"></span><h1>Zenodo Client Module<a class="headerlink" href="#zenodo-client-module" title="Link to this heading">#</a></h1>
+<section id="class-signature">
+<h2>Class Signature<a class="headerlink" href="#class-signature" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#zenopy.client.Zenodo" title="zenopy.client.Zenodo"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Zenodo</span></code></a>([token, config_file_path, use_sandbox])</p></td>
+<td><p>zenopy client class</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="member-functions">
+<h2>Member Functions<a class="headerlink" href="#member-functions" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#zenopy.client.Zenodo.create_config_file" title="zenopy.client.Zenodo.create_config_file"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Zenodo.create_config_file</span></code></a></p></td>
+<td><p>Creates an empty config file in the <cite>config_file_path</cite></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#zenopy.client.Zenodo.init_deposition_actions" title="zenopy.client.Zenodo.init_deposition_actions"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Zenodo.init_deposition_actions</span></code></a></p></td>
+<td><p>Creates an instance of the _DepositionActions class</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#zenopy.client.Zenodo.init_deposition_file" title="zenopy.client.Zenodo.init_deposition_file"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Zenodo.init_deposition_file</span></code></a></p></td>
+<td><p>Creates an instance of the _DepositionFiles class</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#zenopy.client.Zenodo.init_records" title="zenopy.client.Zenodo.init_records"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Zenodo.init_records</span></code></a></p></td>
+<td><p>Creates an instance of the _Records class</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#zenopy.client.Zenodo.init_resources" title="zenopy.client.Zenodo.init_resources"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Zenodo.init_resources</span></code></a></p></td>
+<td><p>Creates an instance of the _Resources class</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#zenopy.client.Zenodo.list_sections" title="zenopy.client.Zenodo.list_sections"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Zenodo.list_sections</span></code></a></p></td>
+<td><p>List all sections in a config file</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#zenopy.client.Zenodo.list_tokens" title="zenopy.client.Zenodo.list_tokens"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Zenodo.list_tokens</span></code></a></p></td>
+<td><p>List all tokens in a specific section</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#zenopy.client.Zenodo.read_config_file" title="zenopy.client.Zenodo.read_config_file"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Zenodo.read_config_file</span></code></a></p></td>
+<td><p>Reads the config file from disk</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#zenopy.client.Zenodo.read_token" title="zenopy.client.Zenodo.read_token"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Zenodo.read_token</span></code></a></p></td>
+<td><p>Reading a specific token from a selected section</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#zenopy.client.Zenodo.update_config_file" title="zenopy.client.Zenodo.update_config_file"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Zenodo.update_config_file</span></code></a></p></td>
+<td><p>Commit the current contents of the config object to config file on disk</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#zenopy.client.Zenodo.write_token" title="zenopy.client.Zenodo.write_token"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Zenodo.write_token</span></code></a></p></td>
+<td><p>Setting the appropriate token within a specific section</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="specifications">
+<h2>Specifications<a class="headerlink" href="#specifications" title="Link to this heading">#</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="zenopy.client.Zenodo">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">zenopy.client.</span></span><span class="sig-name descname"><span class="pre">Zenodo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">token</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">config_file_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Path</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_sandbox</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zenopy/client.html#Zenodo"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zenopy.client.Zenodo" title="Link to this definition">#</a></dt>
+<dd><p>zenopy client class</p>
+<p>The zenopy client class instance allows the users to connect to
+their accounts on Zenodo server and communicate with it through
+REST APIs.</p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">zenopy</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cli</span> <span class="o">=</span> <span class="n">zenopy</span><span class="o">.</span><span class="n">Zenodo</span><span class="p">()</span>
+<span class="go">WARNING: The config file (~/.zenodorc) is found.</span>
+</pre></div>
+</div>
+<dl class="py property">
+<dt class="sig sig-object py" id="zenopy.client.Zenodo.config_obj">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">config_obj</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">ConfigParser</span></em><a class="headerlink" href="#zenopy.client.Zenodo.config_obj" title="Link to this definition">#</a></dt>
+<dd><p>Getter for the client’s active ConfigParser object</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>_config_obj</strong> – The client’s active <code class="docutils literal notranslate"><span class="pre">ConfigParser</span></code> object which stores
+all authentication tokens and credentials in memory.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>configparser.ConfigParser</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="zenopy.client.Zenodo.create_config_file">
+<span class="sig-name descname"><span class="pre">create_config_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config_file_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/zenopy/client.html#Zenodo.create_config_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zenopy.client.Zenodo.create_config_file" title="Link to this definition">#</a></dt>
+<dd><p>Creates an empty config file in the <cite>config_file_path</cite></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>config_file_path</strong> (<em>str, optional</em>) – A valid address for creating the config file, by default None</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>RuntimeError</strong> – If the provided <code class="docutils literal notranslate"><span class="pre">config_file_path</span></code> is None or an empty string</p></li>
+<li><p><strong>configparser.Error</strong> – If a config file does already exist in the target address
+    provided by <code class="docutils literal notranslate"><span class="pre">config_file_path</span></code></p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="zenopy.client.Zenodo.init_deposition">
+<span class="sig-name descname"><span class="pre">init_deposition</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zenopy/client.html#Zenodo.init_deposition"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zenopy.client.Zenodo.init_deposition" title="Link to this definition">#</a></dt>
+<dd><p>Creates an instance of the _Depositions class</p>
+<p>The returned object exposes all functionalities
+pertinent to the <code class="docutils literal notranslate"><span class="pre">_Depositions</span></code> class.</p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">zenopy</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cli</span> <span class="o">=</span> <span class="n">zenopy</span><span class="o">.</span><span class="n">Zenodo</span><span class="p">()</span>
+<span class="go">WARNING: The config file (~/.zenodorc) is found.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">depo</span> <span class="o">=</span> <span class="n">cli</span><span class="o">.</span><span class="n">init_deposition</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">depo</span>
+<span class="go">&lt;zenopy.depositions._Depositions at 0x7fad2e053790&gt;</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>An instance of the <code class="docutils literal notranslate"><span class="pre">zenopy.depositions._Depositions</span></code> class</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>zenopy.depositions._Depositions</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="zenopy.client.Zenodo.init_deposition_actions">
+<span class="sig-name descname"><span class="pre">init_deposition_actions</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zenopy/client.html#Zenodo.init_deposition_actions"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zenopy.client.Zenodo.init_deposition_actions" title="Link to this definition">#</a></dt>
+<dd><p>Creates an instance of the _DepositionActions class</p>
+<p>The returned object exposes all functionalities
+pertinent to the <code class="docutils literal notranslate"><span class="pre">_DepositionActions</span></code> class such as
+editing, publishing, creating a new version and discarding
+ongoing changes on the deposition draft.</p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">zenopy</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cli</span> <span class="o">=</span> <span class="n">zenopy</span><span class="o">.</span><span class="n">Zenodo</span><span class="p">()</span>
+<span class="go">WARNING: The config file (~/.zenodorc) is found.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">depo_act</span> <span class="o">=</span> <span class="n">cli</span><span class="o">.</span><span class="n">init_deposition_actions</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">depo_act</span>
+<span class="go">&lt;zenopy.deposition_actions._DepositionActions at 0x7f2f77742a10&gt;</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>An instance of the <code class="docutils literal notranslate"><span class="pre">zenopy.deposition_actions._DepositionActions</span></code>
+class</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>zenopy.deposition_actions._DepositionActions</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="zenopy.client.Zenodo.init_deposition_file">
+<span class="sig-name descname"><span class="pre">init_deposition_file</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zenopy/client.html#Zenodo.init_deposition_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zenopy.client.Zenodo.init_deposition_file" title="Link to this definition">#</a></dt>
+<dd><p>Creates an instance of the _DepositionFiles class</p>
+<p>The returned object exposes all functionalities
+of the <code class="docutils literal notranslate"><span class="pre">_DepositionFiles</span></code> class such as creating, listing,
+retrieving, sorting, etc. of files in a deposition draft.</p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">zenopy</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cli</span> <span class="o">=</span> <span class="n">zenopy</span><span class="o">.</span><span class="n">Zenodo</span><span class="p">()</span>
+<span class="go">WARNING: The config file (~/.zenodorc) is found.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">depo_file</span> <span class="o">=</span> <span class="n">cli</span><span class="o">.</span><span class="n">init_deposition_file</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">depo_file</span>
+<span class="go">&lt;zenopy.deposition_files._DepositionFiles at 0x7fad2e0533a0&gt;</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>An instance of the <code class="docutils literal notranslate"><span class="pre">zenopy.deposition_files._DepositionFiles</span></code>
+class</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>zenopy.deposition_files._DepositionFiles</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="zenopy.client.Zenodo.init_records">
+<span class="sig-name descname"><span class="pre">init_records</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zenopy/client.html#Zenodo.init_records"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zenopy.client.Zenodo.init_records" title="Link to this definition">#</a></dt>
+<dd><p>Creates an instance of the _Records class</p>
+<p>The returned object exposes all functionalities
+of the <code class="docutils literal notranslate"><span class="pre">_Records</span></code> class such as retrieving the records
+and performing elastic search among them.</p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">zenopy</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cli</span> <span class="o">=</span> <span class="n">zenopy</span><span class="o">.</span><span class="n">Zenodo</span><span class="p">()</span>
+<span class="go">WARNING: The config file (~/.zenodorc) is found.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rec_obj</span> <span class="o">=</span> <span class="n">cli</span><span class="o">.</span><span class="n">init_records</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rec_obj</span>
+<span class="go">&lt;zenopy.records._Records at 0x7fb020d5b760&gt;</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>An instance of the <code class="docutils literal notranslate"><span class="pre">zenopy.records._Records</span></code> class</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>zenopy.depositions._Records</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="zenopy.client.Zenodo.init_resources">
+<span class="sig-name descname"><span class="pre">init_resources</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">resource</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zenopy/client.html#Zenodo.init_resources"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zenopy.client.Zenodo.init_resources" title="Link to this definition">#</a></dt>
+<dd><p>Creates an instance of the _Resources class</p>
+<p>The returned object provides users with search
+capabilities through the created resources type
+objects. The resource type can be <code class="docutils literal notranslate"><span class="pre">communities</span></code>,
+<code class="docutils literal notranslate"><span class="pre">licenses</span></code>, <code class="docutils literal notranslate"><span class="pre">grants</span></code>, or <code class="docutils literal notranslate"><span class="pre">funders</span></code>.</p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">zenopy</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cli</span> <span class="o">=</span> <span class="n">zenopy</span><span class="o">.</span><span class="n">Zenodo</span><span class="p">()</span>
+<span class="go">WARNING: The config file (~/.zenodorc) is found.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">resrc_obj</span> <span class="o">=</span> <span class="n">cli</span><span class="o">.</span><span class="n">init_resources</span><span class="p">(</span><span class="n">resource</span><span class="o">=</span><span class="s2">&quot;communities&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">resrc_obj</span>
+<span class="go">&lt;zenopy.resources._Resources at 0x7f51ad3e58d0&gt;</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>An instance of the <code class="docutils literal notranslate"><span class="pre">zenopy.resources._Resources</span></code>
+class</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>zenopy.resources._Resources</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="zenopy.client.Zenodo.list_sections">
+<span class="sig-name descname"><span class="pre">list_sections</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zenopy/client.html#Zenodo.list_sections"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zenopy.client.Zenodo.list_sections" title="Link to this definition">#</a></dt>
+<dd><p>List all sections in a config file</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>_config_obj.sections()</strong> – A list of section titles in the instance’s active
+<code class="docutils literal notranslate"><span class="pre">_config_obj</span></code> attribute</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>list[str]</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">zenopy</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cli</span> <span class="o">=</span> <span class="n">zenopy</span><span class="o">.</span><span class="n">Zenodo</span><span class="p">()</span>
+<span class="go">WARNING: The config file (~/.zenodorc) is found.</span>
+<span class="go"># equivalent to `cli.config_obj.sections()`</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cli</span><span class="o">.</span><span class="n">list_sections</span><span class="p">()</span>
+<span class="go">[&#39;ZENODO&#39;, &#39;SANDBOX&#39;]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="zenopy.client.Zenodo.list_tokens">
+<span class="sig-name descname"><span class="pre">list_tokens</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">section</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/zenopy/client.html#Zenodo.list_tokens"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zenopy.client.Zenodo.list_tokens" title="Link to this definition">#</a></dt>
+<dd><p>List all tokens in a specific section</p>
+<p>Lists all tokens in a specific section in the client instance’s
+active <code class="docutils literal notranslate"><span class="pre">_config_obj</span></code> attribute.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>_config_obj[section].items()</strong> – A list of all available token labels and values
+formatted as doubles (key-value pairs as tuples)</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>list[tuple[str, str]]</p>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>configparser.NoSectionError</strong> – if the provided argument (section) is None or does not
+    exist in the client instance’s active <code class="docutils literal notranslate"><span class="pre">_config_obj</span></code>
+    attribute.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="zenopy.client.Zenodo.read_config_file">
+<span class="sig-name descname"><span class="pre">read_config_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config_file_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ConfigParser</span></span></span><a class="reference internal" href="../_modules/zenopy/client.html#Zenodo.read_config_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zenopy.client.Zenodo.read_config_file" title="Link to this definition">#</a></dt>
+<dd><p>Reads the config file from disk</p>
+<p>Reads the config file from a path pointed to by
+the <code class="docutils literal notranslate"><span class="pre">config_file_path</span></code> argument and returns a
+<code class="docutils literal notranslate"><span class="pre">configparser.ConfigParser</span></code> object constructed from
+it.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>configparser.ConfigParser().read(path)</strong> – a <code class="docutils literal notranslate"><span class="pre">configparser.ConfigParser</span></code> object the contents of which
+is read from disk</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>configparser.ConfigParser</p>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>RuntimeError</strong> – If <code class="docutils literal notranslate"><span class="pre">config_file_path</span></code> is None or refers to a non-existent config
+    file</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="zenopy.client.Zenodo.read_token">
+<span class="sig-name descname"><span class="pre">read_token</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">section</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="../_modules/zenopy/client.html#Zenodo.read_token"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zenopy.client.Zenodo.read_token" title="Link to this definition">#</a></dt>
+<dd><p>Reading a specific token from a selected section</p>
+<dl class="field-list simple">
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>configparser.NoSectionError</strong> – If the section argument does not exist in the client
+    instance’s active <code class="docutils literal notranslate"><span class="pre">_config_obj</span></code> attribute</p></li>
+<li><p><strong>configparser.NoOptionError</strong> – If the key argument does not exist in the client
+    instance’s active <code class="docutils literal notranslate"><span class="pre">_config_obj</span></code> attribute</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">read_token()</span></code> is case insensitive with respect to the
+entered section argument and automatically turns it to
+upper case.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="zenopy.client.Zenodo.token">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">token</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#zenopy.client.Zenodo.token" title="Link to this definition">#</a></dt>
+<dd><p>Getter for the Zenodo class token attribute</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>_token</strong> – The first token from [ZENODO] (if <code class="docutils literal notranslate"><span class="pre">_use_sandbox</span> <span class="pre">==</span> <span class="pre">False</span></code>)
+or [SANDBOX] (if <code class="docutils literal notranslate"><span class="pre">_use_sandbox</span> <span class="pre">==</span> <span class="pre">True</span></code>) sections listed
+in the configuration file</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="zenopy.client.Zenodo.update_config_file">
+<span class="sig-name descname"><span class="pre">update_config_file</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/zenopy/client.html#Zenodo.update_config_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zenopy.client.Zenodo.update_config_file" title="Link to this definition">#</a></dt>
+<dd><p>Commit the current contents of the config object to config file on disk</p>
+<p>Commits the current contents of the client instance’s active <code class="docutils literal notranslate"><span class="pre">_config_obj</span></code>
+attribute to the config file located at <code class="docutils literal notranslate"><span class="pre">_config_file_path</span></code> on disk.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>configparser.Error</strong> – If the client instance’s <code class="docutils literal notranslate"><span class="pre">_config_file_path</span></code> points to a non-existent
+    config file</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="zenopy.client.Zenodo.use_sandbox">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">use_sandbox</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><a class="headerlink" href="#zenopy.client.Zenodo.use_sandbox" title="Link to this definition">#</a></dt>
+<dd><p>Getter for the Zenodo class use_sandbox boolean attribute</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>_use_sandbox</strong> – Boolean attribute for switching between the SANDBOX and
+ZENODO accounts</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="zenopy.client.Zenodo.write_token">
+<span class="sig-name descname"><span class="pre">write_token</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">section</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">token</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">force_rewrite</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/zenopy/client.html#Zenodo.write_token"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zenopy.client.Zenodo.write_token" title="Link to this definition">#</a></dt>
+<dd><p>Setting the appropriate token within a specific section</p>
+<p>Setting the passed token-key pair arguments in the corresponding
+designated config file section.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>configparser.NoSectionError</strong> – If the section argument does not exist in the client
+    instance’s active <code class="docutils literal notranslate"><span class="pre">_config_obj</span></code> attribute</p></li>
+<li><p><strong>configparser.NoOptionError</strong> – If the key argument does not exist in the client
+    instance’s active <code class="docutils literal notranslate"><span class="pre">_config_obj</span></code> attribute</p></li>
+<li><p><strong>configparser.Error</strong> – If the passed token already exists in the section selected by the user.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>Set <code class="docutils literal notranslate"><span class="pre">force_rewrite</span> <span class="pre">=</span> <span class="pre">True</span></code> if you want to overwrite an existing token in
+a config file section</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="index.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">API Reference</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../references.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">References</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#class-signature">Class Signature</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#member-functions">Member Functions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#specifications">Specifications</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#zenopy.client.Zenodo"><code class="docutils literal notranslate"><span class="pre">Zenodo</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#zenopy.client.Zenodo.config_obj"><code class="docutils literal notranslate"><span class="pre">Zenodo.config_obj</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#zenopy.client.Zenodo.create_config_file"><code class="docutils literal notranslate"><span class="pre">Zenodo.create_config_file()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#zenopy.client.Zenodo.init_deposition"><code class="docutils literal notranslate"><span class="pre">Zenodo.init_deposition()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#zenopy.client.Zenodo.init_deposition_actions"><code class="docutils literal notranslate"><span class="pre">Zenodo.init_deposition_actions()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#zenopy.client.Zenodo.init_deposition_file"><code class="docutils literal notranslate"><span class="pre">Zenodo.init_deposition_file()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#zenopy.client.Zenodo.init_records"><code class="docutils literal notranslate"><span class="pre">Zenodo.init_records()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#zenopy.client.Zenodo.init_resources"><code class="docutils literal notranslate"><span class="pre">Zenodo.init_resources()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#zenopy.client.Zenodo.list_sections"><code class="docutils literal notranslate"><span class="pre">Zenodo.list_sections()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#zenopy.client.Zenodo.list_tokens"><code class="docutils literal notranslate"><span class="pre">Zenodo.list_tokens()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#zenopy.client.Zenodo.read_config_file"><code class="docutils literal notranslate"><span class="pre">Zenodo.read_config_file()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#zenopy.client.Zenodo.read_token"><code class="docutils literal notranslate"><span class="pre">Zenodo.read_token()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#zenopy.client.Zenodo.token"><code class="docutils literal notranslate"><span class="pre">Zenodo.token</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#zenopy.client.Zenodo.update_config_file"><code class="docutils literal notranslate"><span class="pre">Zenodo.update_config_file()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#zenopy.client.Zenodo.use_sandbox"><code class="docutils literal notranslate"><span class="pre">Zenodo.use_sandbox</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#zenopy.client.Zenodo.write_token"><code class="docutils literal notranslate"><span class="pre">Zenodo.write_token()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../_sources/api/api_client.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.15.4.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>
